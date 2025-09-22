@@ -1,7 +1,7 @@
 import "~/styles/globals.css";
 
 import { type Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Inter } from "next/font/google";
 import { ThemeProvider } from "~/components/theme-provider";
 import { MaxWidthWrapper } from "~/components/max-width-wrapper";
 import { Header } from "~/components/header";
@@ -15,12 +15,12 @@ export const metadata: Metadata = {
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
-  variable: "--font-geist-mono",
+  variable: "--font-mono",
 });
 
-const geist = Geist({
+const geist = Inter({
   subsets: ["latin"],
-  variable: "--font-geist-sans",
+  variable: "--font-sans",
 });
 
 export default function RootLayout({
@@ -32,7 +32,7 @@ export default function RootLayout({
       className={`${geist.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="font-mono">
+      <body className="font-sans">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -41,7 +41,7 @@ export default function RootLayout({
         >
           <MaxWidthWrapper className="flex min-h-screen flex-col">
             <Header />
-            <main className="flex-1">{children}</main>
+            <main className="flex flex-1 flex-col">{children}</main>
             <Footer />
           </MaxWidthWrapper>
         </ThemeProvider>
