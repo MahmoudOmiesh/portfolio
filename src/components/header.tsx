@@ -29,7 +29,7 @@ export function Header() {
   });
 
   return (
-    <header className="supports-[backdrop-filter]:bg-card/50 bg-card sticky top-2 z-50 mb-2 flex items-center justify-between border p-5 py-4 backdrop-blur">
+    <header className="supports-[backdrop-filter]:bg-card/80 bg-card sticky top-2 z-50 mb-2 flex items-center justify-between border p-5 py-4 backdrop-blur">
       <Tooltip delayDuration={200}>
         <TooltipTrigger asChild>
           <Link
@@ -79,7 +79,7 @@ export function Header() {
                   variant="link"
                   size="sm"
                   className={cn(
-                    "text-secondary-foreground",
+                    "text-card-foreground",
                     pathname === link.href && "text-primary",
                   )}
                   asChild

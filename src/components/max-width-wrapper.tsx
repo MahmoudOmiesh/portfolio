@@ -8,7 +8,7 @@ export function MaxWidthWrapper({
   className?: string;
 }) {
   return (
-    <div className={cn("mx-auto w-full max-w-5xl px-2", className)}>
+    <div className={cn("mx-auto w-full max-w-4xl px-2", className)}>
       {children}
     </div>
   );

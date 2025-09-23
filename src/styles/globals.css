@@ -182,3 +182,66 @@
     @apply bg-background text-foreground;
   }
 }
+
+.animated-cat {
+  z-index: -1;
+  display: inline-block;
+}
+
+.whisker-animation {
+  d: path(
+    "M483.59,271.66C490.68,272.45,498.59,271.84,498.59,260.95C498.59,246.4,506.59,244.88,511.41,247.16"
+  );
+  transition: d 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animated-cat-container:hover .whisker-animation {
+  d: path(
+    "M483.59,271.66C490.68,272.45,496.549162,270.286312,500.627933,261.35186C503.887001,254.212949,501.869483,245.677295,509.784363,238.072802"
+  );
+}
+
+.ear-animation {
+  transform: translate(444.334992px, 239.720001px);
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animated-cat-container:hover .ear-animation {
+  transform: translate(444.334992px, 214.059152px);
+}
+
+.tail-animation {
+  stroke-dashoffset: 25.690696;
+  transition: stroke-dashoffset 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animated-cat-container:hover .tail-animation {
+  stroke-dashoffset: 51.38;
+}
+
+.eyes-animation {
+  transform: translate(444.345001px, 249.885002px);
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animated-cat-container:hover .eyes-animation {
+  transform: translate(444.345001px, 224.22416px);
+}
+
+.pupil-left-animation {
+  transform: scale(1, 1) translate(0px, 0px);
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animated-cat-container:hover .pupil-left-animation {
+  transform: scale(1.2, 1.2) translate(0px, 0px);
+}
+
+.pupil-right-animation {
+  transform: scale(1, 1) translate(0px, 0px);
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animated-cat-container:hover .pupil-right-animation {
+  transform: scale(1.2, 1.2) translate(0px, 0px);
+}
