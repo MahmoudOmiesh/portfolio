@@ -47,13 +47,13 @@ export function Projects() {
       <CardContent className="space-y-6">
         {PROJECTS.map((project) => (
           <div key={project.title} className="grid grid-cols-2 gap-6">
-            <Image
-              src={project.image ?? ""}
+            {/* <Image
+              src={project.image ?? null}
               alt={project.title}
               width={500}
               height={500}
               className="border"
-            />
+            /> */}
             <div className="self-center">
               <p className="text-lg font-bold">{project.title}</p>
               <p className="mt-2">{project.description}</p>
