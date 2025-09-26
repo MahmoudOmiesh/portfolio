@@ -15,13 +15,13 @@ const PROJECTS = [
     title: "Sputnik",
     description:
       "An online learning platform for kids I worked on during my internship at Sputnik Academy.",
-    image: "/sputnik-landing-page.png",
+    image: "/sputnik/landing-page.png",
     link: "/projects/sputnik",
   },
   {
     title: "Inscribe",
     description: "A local first note-taking app, with a custom text editor",
-    image: "/inscribe-landing-page.png",
+    image: "/inscribe/landing-page.png",
     link: "/projects/inscribe",
   },
   {

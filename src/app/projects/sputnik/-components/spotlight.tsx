@@ -30,12 +30,12 @@ export function SpuntikSpotlight() {
             </h3>
             <ul className="mt-4 space-y-1.5 text-sm">
               <li>
-                • <code className="bg-muted rounded px-1 text-xs">UpChunk</code>{" "}
+                • <code className="bg-muted px-1 py-0.5 text-xs">UpChunk</code>{" "}
                 streaming uploads with live progress & cancel support
               </li>
               <li>
                 • Backend manages upload intents with{" "}
-                <code className="bg-muted rounded px-1 text-xs">
+                <code className="bg-muted px-1 py-0.5 text-xs">
                   passthroughId
                 </code>{" "}
                 tracking
@@ -53,7 +53,6 @@ export function SpuntikSpotlight() {
             </ul>
           </div>
 
-          {/* Student Experience Section */}
           <div>
             <Badge variant="outline">
               <User2Icon className="text-primary" />
@@ -71,14 +70,13 @@ export function SpuntikSpotlight() {
           </div>
         </div>
 
-        {/* Key Highlight */}
         <div className="bg-primary/5 border-primary/10 mt-4 rounded-lg border p-4">
           <p className="text-muted-foreground text-sm">
             <span className="text-primary font-semibold">
-              Production-grade result:
+              What it delivers:
             </span>{" "}
-            Secure by default, responsive, and smooth for both admins and
-            students.
+            Everything stays secure while providing a fast, smooth experience
+            for both admins and students.
           </p>
         </div>
       </CardContent>

@@ -285,3 +285,150 @@ export function PaymobIcon({ className }: { className?: string }) {
     </svg>
   );
 }
+
+export function NextjsIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 128 128"
+      className={cn("size-4", className)}
+    >
+      <path d="M64 0C28.7 0 0 28.7 0 64s28.7 64 64 64c11.2 0 21.7-2.9 30.8-7.9L48.4 55.3v36.6h-6.8V41.8h6.8l50.5 75.8C116.4 106.2 128 86.5 128 64c0-35.3-28.7-64-64-64zm22.1 84.6l-7.5-11.3V41.8h7.5v42.8z" />
+    </svg>
+  );
+}
+
+export function FloatingUiIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 373 558"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={cn("size-4", className)}
+    >
+      <path
+        d="M179.419 440c-1.223 15.92-.489 52.536 12.232 71.639C207.554 535.519 210 545.574 210 555"
+        stroke="#000"
+        strokeWidth="6"
+        strokeLinecap="round"
+      ></path>
+      <path
+        d="M176.402 427.5c1.155-2 4.041-2 5.196 0l7.794 13.5c1.155 2-.288 4.5-2.598 4.5h-15.588c-2.31 0-3.753-2.5-2.598-4.5l7.794-13.5z"
+        fill="#AD3A56"
+      ></path>
+      <path
+        d="M372.5 203c-5 108.921-96.616 211.092-192.576 230C83.334 415.352 5.051 308.836 0 199.798 0 81.936 95.273 0 192.551 0 289.828 0 377.92 84.92 372.5 203z"
+        fill="url(#logo_svg__paint0_radial_112_6)"
+      ></path>
+      <circle
+        cx="95.5"
+        cy="233.5"
+        r="31.5"
+        fill="#CD0031"
+        fillOpacity="0.5"
+      ></circle>
+      <circle
+        cx="267.5"
+        cy="233.5"
+        r="31.5"
+        fill="#CD0031"
+        fillOpacity="0.4"
+      ></circle>
+      <ellipse cx="239.5" cy="207" rx="16.5" ry="16" fill="#222"></ellipse>
+      <ellipse cx="123.5" cy="207" rx="16.5" ry="16" fill="#222"></ellipse>
+      <mask
+        id="logo_svg__a"
+        maskUnits="userSpaceOnUse"
+        x="153"
+        y="228"
+        width="58"
+        height="40"
+        style={{ maskType: "alpha" }}
+      >
+        <path
+          d="M153.886 231.307a3 3 0 013-3h50.762a3 3 0 013 3v33.102a3 3 0 01-3 3h-50.762a3 3 0 01-3-3v-33.102z"
+          fill="#C4C4C4"
+        ></path>
+      </mask>
+      <g mask="url(#logo_svg__a)">
+        <path
+          d="M210.648 230.199c0 15.674-12.707 28.381-28.381 28.381s-28.381-12.707-28.381-28.381 12.707-28.381 28.381-28.381 28.381 12.707 28.381 28.381z"
+          fill="#222"
+        ></path>
+      </g>
+      <defs>
+        <radialGradient
+          id="logo_svg__paint0_radial_112_6"
+          cx="0"
+          cy="0"
+          r="1"
+          gradientUnits="userSpaceOnUse"
+          gradientTransform="matrix(304.92375 -182.14993 158.89875 266.00066 40.404 279.843)"
+        >
+          <stop stopColor="#FF3767"></stop>
+          <stop offset="0.807" stopColor="#F36D76"></stop>
+          <stop offset="1" stopColor="#FFE1DA"></stop>
+        </radialGradient>
+      </defs>
+    </svg>
+  );
+}
+
+export function TrpcIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+      fill="none"
+      className={cn("size-4", className)}
+    >
+      <rect width="512" height="512" rx="150" fill="#398CCB" />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M255.446 75L326.523 116.008V138.556L412.554 188.238V273.224L435.631 286.546V368.608L364.6 409.615L333.065 391.378L256.392 435.646L180.178 391.634L149.085 409.615L78.0538 368.538V286.546L100.231 273.743V188.238L184.415 139.638L184.462 139.636V116.008L255.446 75ZM326.523 159.879V198.023L255.492 239.031L184.462 198.023V160.936L184.415 160.938L118.692 198.9V263.084L149.085 245.538L220.115 286.546V368.538L198.626 380.965L256.392 414.323L314.618 380.712L293.569 368.538V286.546L364.6 245.538L394.092 262.565V198.9L326.523 159.879ZM312.031 357.969V307.915L355.369 332.931V382.985L312.031 357.969ZM417.169 307.846L373.831 332.862V382.985L417.169 357.9V307.846ZM96.5154 357.9V307.846L139.854 332.862V382.915L96.5154 357.9ZM201.654 307.846L158.315 332.862V382.915L201.654 357.9V307.846ZM321.262 291.923L364.6 266.908L407.938 291.923L364.6 316.962L321.262 291.923ZM149.085 266.838L105.746 291.923L149.085 316.892L192.423 291.923L149.085 266.838ZM202.923 187.362V137.308L246.215 162.346V212.377L202.923 187.362ZM308.015 137.308L264.723 162.346V212.354L308.015 187.362V137.308ZM212.154 121.338L255.446 96.3231L298.785 121.338L255.446 146.354L212.154 121.338Z"
+        fill="white"
+      />
+    </svg>
+  );
+}
+
+export function BetterAuthIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 60 45"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={cn("size-4", className)}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M0 0H15V15H30V30H15V45H0V30V15V0ZM45 30V15H30V0H45H60V15V30V45H45H30V30H45Z"
+        className="fill-black dark:fill-white"
+      ></path>
+    </svg>
+  );
+}
+
+export function DexieIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.0"
+      viewBox="0 0 57.000000 57.000000"
+      preserveAspectRatio="xMidYMid meet"
+      className={cn("size-4", className)}
+    >
+      <g
+        transform="translate(0.000000,57.000000) scale(0.100000,-0.100000)"
+        fill="#FFFFFF"
+        stroke="none"
+      >
+        <path d="M97 506 c-66 -18 -87 -40 -87 -92 0 -34 5 -47 25 -63 26 -19 104 -41 150 -41 23 0 25 4 25 43 l0 43 -70 11 c-127 20 -127 56 -1 76 45 7 71 16 71 24 0 16 -49 16 -113 -1z" />
+        <path d="M10 299 c0 -24 4 -49 8 -56 12 -19 75 -42 136 -49 l56 -7 0 47 c0 41 -2 46 -23 46 -39 0 -140 30 -159 47 -17 15 -18 14 -18 -28z" />
+        <path d="M10 179 c0 -24 4 -49 8 -56 12 -19 75 -42 136 -49 l56 -7 0 47 c0 41 -2 46 -23 46 -39 0 -140 30 -159 47 -17 15 -18 14 -18 -28z" />
+      </g>
+    </svg>
+  );
+}
