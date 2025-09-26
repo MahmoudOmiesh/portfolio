@@ -1,4 +1,5 @@
 import { ChevronsRight } from "lucide-react";
+import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import Image from "next/image";
 import {
@@ -15,22 +16,25 @@ const PROJECTS = [
     description:
       "An online learning platform for kids I worked on during my internship at Sputnik Academy.",
     image: "/sputnik-landing-page.png",
+    link: "/projects/sputnik",
   },
   {
     title: "Inscribe",
     description: "A local first note-taking app, with a custom text editor",
     image: "/inscribe-landing-page.png",
+    link: "/projects/inscribe",
   },
   {
     title: "Sorting Visualizer",
     description:
       "A visualizer for popular sorting alogrithms, with step-by-step demonstrations.",
+    link: "/projects/sorting-visualizer",
   },
 ];
 
 export function Projects() {
   return (
-    <Card className="rounded-0 animated-cat-container relative isolate gap-12 font-mono">
+    <Card className="gap-12 font-mono">
       <CardHeader className="text-center">
         <CardTitle className="text-3xl">
           What I&apos;ve been working on
@@ -44,7 +48,7 @@ export function Projects() {
         {PROJECTS.map((project) => (
           <div key={project.title} className="grid grid-cols-2 gap-6">
             <Image
-              src={project.image}
+              src={project.image ?? ""}
               alt={project.title}
               width={500}
               height={500}
@@ -53,9 +57,11 @@ export function Projects() {
             <div className="self-center">
               <p className="text-lg font-bold">{project.title}</p>
               <p className="mt-2">{project.description}</p>
-              <Button variant="link" className="group mt-4 !pl-0">
-                Learn More{" "}
-                <ChevronsRight className="size-4 transition-transform group-hover:translate-x-1" />
+              <Button variant="link" className="group mt-4 !pl-0" asChild>
+                <Link href={project.link}>
+                  Learn More{" "}
+                  <ChevronsRight className="size-4 transition-transform group-hover:translate-x-1" />
+                </Link>
               </Button>
             </div>
           </div>
