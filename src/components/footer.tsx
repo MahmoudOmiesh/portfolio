@@ -8,7 +8,7 @@ export function Footer() {
       <ul className="flex gap-2">
         <li>
           <Button variant="link" asChild>
-            <a href="https://github.com/MahmoudOmiesh">
+            <a href="https://github.com/MahmoudOmiesh" target="_blank">
               <GithubIcon />
               GitHub
             </a>
@@ -16,7 +16,7 @@ export function Footer() {
         </li>
         <li>
           <Button variant="link" asChild>
-            <a href="https://linkedin.com/in/mahmoud-omiesh">
+            <a href="https://linkedin.com/in/mahmoud-omiesh" target="_blank">
               <LinkedinIcon />
               LinkedIn
             </a>

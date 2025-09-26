@@ -28,6 +28,7 @@ const PROJECTS = [
     title: "Sorting Visualizer",
     description:
       "A visualizer for popular sorting alogrithms, with step-by-step demonstrations.",
+    image: "/visualizer/base.png",
     link: "/projects/sorting-visualizer",
   },
 ];
@@ -47,13 +48,13 @@ export function Projects() {
       <CardContent className="space-y-6">
         {PROJECTS.map((project) => (
           <div key={project.title} className="grid grid-cols-2 gap-6">
-            {/* <Image
+            <Image
               src={project.image ?? null}
               alt={project.title}
               width={500}
               height={500}
               className="border"
-            /> */}
+            />
             <div className="self-center">
               <p className="text-lg font-bold">{project.title}</p>
               <p className="mt-2">{project.description}</p>
