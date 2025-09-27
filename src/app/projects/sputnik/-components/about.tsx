@@ -86,16 +86,16 @@ export function SputnikAbout() {
   return (
     <Card className="font-mono">
       <CardHeader className="gap-4">
-        <div className="flex items-baseline justify-between">
-          <CardTitle className="text-3xl">Sputnik</CardTitle>
-          <Button variant="link" asChild className="group">
+        <div className="flex flex-col items-baseline justify-between sm:flex-row">
+          <CardTitle className="text-2xl md:text-3xl">Sputnik</CardTitle>
+          <Button variant="link" asChild className="group !pl-0">
             <a href="https://github.com/abdalrahmanf2/sputnik" target="_blank">
               Source Code{" "}
               <ExternalLinkIcon className="size-4 transition-transform group-hover:-translate-y-0.5" />
             </a>
           </Button>
         </div>
-        <CardDescription className="text-base">
+        <CardDescription className="text-sm md:text-base">
           Sputnik is a space-themed online learning platform for kids, I built
           this during my internship at Sputnik Academy alongside a team of 3
           other interns with React, Hono and TypeScript. This application
@@ -104,7 +104,7 @@ export function SputnikAbout() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <p className="text-lg font-semibold">Technologies:</p>
+        <p className="text-base font-semibold md:text-lg">Technologies:</p>
         <div className="mt-3 flex flex-wrap gap-2">
           {FRONTEND_TECHNOLOGIES.concat(BACKEND_TECHNOLOGIES).map(
             (technology) => (

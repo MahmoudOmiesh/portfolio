@@ -8,12 +8,12 @@ import Image from "next/image";
 
 export default function SputnikPage() {
   return (
-    <div className="min-h-screen flex-1 space-y-20 py-8">
+    <div className="min-h-screen flex-1 space-y-10 py-8 md:space-y-20">
       <SputnikAbout />
 
-      <div className="group relative aspect-[16/9] overflow-hidden rounded-sm shadow-2xl dark:shadow-lg">
+      <div className="group relative hidden aspect-[16/9] overflow-hidden rounded-sm shadow-2xl md:block dark:shadow-lg">
         <Image
-          src="/sputnik/sputnik-landing-page.png"
+          src="/sputnik/landing-page.png"
           alt="Sputnik"
           fill
           className="transition-transform group-hover:scale-107"

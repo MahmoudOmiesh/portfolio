@@ -25,9 +25,11 @@ export function VisualizerAbout() {
   return (
     <Card className="font-mono">
       <CardHeader className="gap-4">
-        <div className="flex items-baseline justify-between">
-          <CardTitle className="text-3xl">Sorting Visualizer</CardTitle>
-          <Button variant="link" asChild className="group">
+        <div className="flex flex-col items-baseline justify-between sm:flex-row">
+          <CardTitle className="text-2xl md:text-3xl">
+            Sorting Visualizer
+          </CardTitle>
+          <Button variant="link" asChild className="group !pl-0">
             <a
               href="https://github.com/MahmoudOmiesh/Sorting-Visualizer"
               target="_blank"
@@ -37,7 +39,7 @@ export function VisualizerAbout() {
             </a>
           </Button>
         </div>
-        <CardDescription className="text-base">
+        <CardDescription className="text-sm md:text-base">
           I built this interactive desktop application in C++ using the Qt6
           framework to help people understand how different sorting algorithms
           actually work behind the scenes. The app visualizes six classic
@@ -48,7 +50,7 @@ export function VisualizerAbout() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <p className="text-lg font-semibold">Technologies:</p>
+        <p className="text-base font-semibold md:text-lg">Technologies:</p>
         <div className="mt-3 flex flex-wrap gap-2">
           {TECHNOLOGIES.map((technology) => (
             <Badge variant="outline" key={technology.name}>

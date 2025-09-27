@@ -6,13 +6,13 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import { Badge } from "~/components/ui/badge";
-import { DatabaseIcon, RefreshCwIcon } from "lucide-react";
+import { CloudDownloadIcon, DatabaseIcon, RefreshCwIcon } from "lucide-react";
 
 export function InscribeSpotlight() {
   return (
     <Card className="font-mono">
       <CardHeader>
-        <CardTitle className="text-2xl">Spotlight</CardTitle>
+        <CardTitle className="text-xl md:text-2xl">Spotlight</CardTitle>
         <CardDescription>
           Don&apos;t get me wrong, I really like the custom rich text editor I
           built from scratch, but honestly what I want to talk about is the sync
@@ -23,10 +23,10 @@ export function InscribeSpotlight() {
         <div className="space-y-8">
           <div>
             <Badge variant="outline">
-              <DatabaseIcon className="text-primary" />
-              Operation Queue & Offline-First
+              <CloudDownloadIcon className="text-primary" />
+              Offline-First
             </Badge>
-            <h3 className="mt-1 text-lg font-semibold">
+            <h3 className="mt-1 text-base font-semibold md:text-lg">
               Local-First Architecture
             </h3>
             <ul className="mt-4 space-y-1.5 text-sm">
@@ -51,9 +51,11 @@ export function InscribeSpotlight() {
           <div>
             <Badge variant="outline">
               <RefreshCwIcon className="text-primary" />
-              Conflict Resolution & Real-Time Sync
+              Real-Time Sync
             </Badge>
-            <h3 className="mt-1 text-lg font-semibold">Multi-Device Harmony</h3>
+            <h3 className="mt-1 text-base font-semibold md:text-lg">
+              Multi-Device Harmony
+            </h3>
             <ul className="mt-4 space-y-1.5 text-sm">
               <li>
                 • Incremental sync only pulls changes from the server since last

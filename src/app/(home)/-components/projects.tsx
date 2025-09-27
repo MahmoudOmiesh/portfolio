@@ -37,7 +37,7 @@ export function Projects() {
   return (
     <Card className="gap-12 font-mono">
       <CardHeader className="text-center">
-        <CardTitle className="text-3xl">
+        <CardTitle className="text-2xl md:text-3xl">
           What I&apos;ve been working on
         </CardTitle>
         <CardDescription className="mx-auto max-w-[60ch]">
@@ -45,9 +45,12 @@ export function Projects() {
           of the projects I&apos;ve dedicated my time to.
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-12">
         {PROJECTS.map((project) => (
-          <div key={project.title} className="grid grid-cols-2 gap-6">
+          <div
+            key={project.title}
+            className="grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2"
+          >
             <Image
               src={project.image ?? null}
               alt={project.title}
@@ -56,8 +59,8 @@ export function Projects() {
               className="border"
             />
             <div className="self-center">
-              <p className="text-lg font-bold">{project.title}</p>
-              <p className="mt-2">{project.description}</p>
+              <p className="text-base font-bold md:text-lg">{project.title}</p>
+              <p className="mt-2 text-sm md:text-base">{project.description}</p>
               <Button variant="link" className="group mt-4 !pl-0" asChild>
                 <Link href={project.link}>
                   Learn More{" "}

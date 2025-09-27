@@ -4,7 +4,7 @@ export function SputnikLessons() {
   return (
     <Card className="font-mono">
       <CardHeader>
-        <CardTitle className="text-2xl">Lessons Learned</CardTitle>
+        <CardTitle className="text-xl md:text-2xl">Lessons Learned</CardTitle>
       </CardHeader>
       <CardContent className="text-sm">
         <p>

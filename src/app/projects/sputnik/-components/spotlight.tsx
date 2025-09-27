@@ -12,7 +12,7 @@ export function SpuntikSpotlight() {
   return (
     <Card className="font-mono">
       <CardHeader>
-        <CardTitle className="text-2xl">Spotlight</CardTitle>
+        <CardTitle className="text-xl md:text-2xl">Spotlight</CardTitle>
         <CardDescription>
           What I&apos;m most proud of in this project is the end-to-end video
           pipeline built using Mux.
@@ -25,7 +25,7 @@ export function SpuntikSpotlight() {
               <LockIcon className="text-primary" />
               Admin Experience
             </Badge>
-            <h3 className="mt-1 text-lg font-semibold">
+            <h3 className="mt-1 text-base font-semibold md:text-lg">
               End-to-End Video Pipeline
             </h3>
             <ul className="mt-4 space-y-1.5 text-sm">
@@ -58,7 +58,7 @@ export function SpuntikSpotlight() {
               <User2Icon className="text-primary" />
               Student Experience
             </Badge>
-            <h3 className="mt-1 text-lg font-semibold">
+            <h3 className="mt-1 text-base font-semibold md:text-lg">
               Secure Video Streaming
             </h3>
             <ul className="mt-4 space-y-1.5 text-sm">

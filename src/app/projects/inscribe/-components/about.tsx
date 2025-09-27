@@ -76,10 +76,10 @@ export function InscribeAbout() {
   return (
     <Card className="font-mono">
       <CardHeader className="gap-4">
-        <div className="flex items-baseline justify-between">
-          <CardTitle className="text-3xl">Inscribe</CardTitle>
+        <div className="flex flex-col items-baseline justify-between sm:flex-row">
+          <CardTitle className="text-2xl md:text-3xl">Inscribe</CardTitle>
           <div className="space-x-2">
-            <Button variant="link" asChild className="group">
+            <Button variant="link" asChild className="group !pl-0">
               <a
                 href="https://github.com/MahmoudOmiesh/Inscribe"
                 target="_blank"
@@ -97,7 +97,7 @@ export function InscribeAbout() {
             </Button>
           </div>
         </div>
-        <CardDescription className="text-base">
+        <CardDescription className="text-sm md:text-base">
           Inscribe is a modern, local-first note-taking application with
           AI-powered writing assistance that I built as a solo personal project
           using Next.js, and tRPC. This application features a completely
@@ -106,7 +106,7 @@ export function InscribeAbout() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <p className="text-lg font-semibold">Technologies:</p>
+        <p className="text-base font-semibold md:text-lg">Technologies:</p>
         <div className="mt-3 flex flex-wrap gap-2">
           {FRONTEND_TECHNOLOGIES.concat(BACKEND_TECHNOLOGIES).map(
             (technology) => (

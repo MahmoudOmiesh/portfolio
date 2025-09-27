@@ -5,7 +5,7 @@ export function SputnikOverview() {
   return (
     <Card className="font-mono">
       <CardHeader>
-        <CardTitle className="text-2xl">Project Overview</CardTitle>
+        <CardTitle className="text-xl md:text-2xl">Project Overview</CardTitle>
       </CardHeader>
       <CardContent>
         <div>
@@ -15,7 +15,9 @@ export function SputnikOverview() {
               1
             </span>
           </Badge>
-          <h3 className="mt-1 text-lg font-semibold">Admin Dashboard & CMS</h3>
+          <h3 className="mt-1 text-base font-semibold md:text-lg">
+            Admin Dashboard & CMS
+          </h3>
           <p className="text-muted-foreground text-sm">
             This phase focused on building a comprehensive admin dashboard to
             support business operations and content management.
@@ -53,7 +55,7 @@ export function SputnikOverview() {
               2
             </span>
           </Badge>
-          <h3 className="mt-1 text-lg font-semibold">
+          <h3 className="mt-1 text-base font-semibold md:text-lg">
             User Platform & Features
           </h3>
           <p className="text-muted-foreground text-sm">

@@ -1,6 +1,12 @@
 import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
-import { Github, Linkedin, FileText, MapPinIcon } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  FileText,
+  MapPinIcon,
+  Briefcase,
+} from "lucide-react";
 import AnimatedCat from "./animated-cat";
 import { Badge } from "~/components/ui/badge";
 
@@ -8,14 +14,19 @@ export function About() {
   return (
     <Card className="rounded-0 animated-cat-container relative isolate gap-4 font-mono">
       <CardHeader>
-        <div className="flex items-start justify-between">
+        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row">
           <div className="space-y-1">
-            <CardTitle className="text-3xl font-bold">
+            <CardTitle className="text-2xl font-bold md:text-3xl">
               Hello, I&apos;m Mahmoud
             </CardTitle>
-            <Badge variant="outline">
-              <MapPinIcon /> Egypt
-            </Badge>
+            <div className="flex gap-2">
+              <Badge variant="outline">
+                <MapPinIcon /> Egypt
+              </Badge>
+              <Badge variant="outline">
+                <Briefcase /> Open to Work
+              </Badge>
+            </div>
           </div>
           <div className="flex gap-2">
             <Button size="icon" variant="outline" asChild>
@@ -41,7 +52,7 @@ export function About() {
       </CardHeader>
 
       <CardContent className="grid md:grid-cols-[2fr_1fr]">
-        <div className="space-y-4">
+        <div className="space-y-4 text-sm md:text-base">
           <p>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic
             doloremque, id minima earum saepe ut nostrum mollitia perferendis
@@ -53,7 +64,7 @@ export function About() {
           </p>
         </div>
 
-        <div className="flex justify-center">
+        <div className="hidden justify-center md:block">
           <AnimatedCat
             width={200}
             className="pointer-events-none scale-x-[-1]"

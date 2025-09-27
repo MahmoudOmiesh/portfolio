@@ -30,12 +30,12 @@ export function InscribeCarousel() {
   return (
     <Card className="font-mono">
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl">Take a Peek</CardTitle>
-        <CardDescription>
+        <CardTitle className="text-xl md:text-2xl">Take a Peek</CardTitle>
+        <CardDescription className="hidden md:block">
           Here are some screenshots of the project.
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-2 md:px-6">
         <Carousel className="group w-full" opts={{ loop: true }}>
           <CarouselContent>
             {SCREENSHOTS.map((screenshot, index) => (

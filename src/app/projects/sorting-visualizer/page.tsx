@@ -4,7 +4,7 @@ import { VisualizerCarousel } from "./-components/carousel";
 
 export default function VisualizerPage() {
   return (
-    <div className="min-h-screen flex-1 space-y-20 py-8">
+    <div className="min-h-screen flex-1 space-y-10 py-8 md:space-y-20">
       <VisualizerAbout />
 
       <VisualizerOverview />
