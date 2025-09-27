@@ -37,7 +37,7 @@ export function Projects() {
   return (
     <Card className="gap-12 font-mono">
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl md:text-3xl">
+        <CardTitle className="text-xl md:text-2xl">
           What I&apos;ve been working on
         </CardTitle>
         <CardDescription className="mx-auto max-w-[60ch]">

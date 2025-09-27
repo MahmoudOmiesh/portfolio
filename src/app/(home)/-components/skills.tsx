@@ -70,7 +70,7 @@ export function Skills() {
   return (
     <Card className="font-mono">
       <CardHeader>
-        <CardTitle className="text-2xl md:text-3xl">Skills</CardTitle>
+        <CardTitle className="text-xl md:text-2xl">Skills</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex flex-wrap gap-2">
