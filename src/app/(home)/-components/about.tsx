@@ -64,7 +64,7 @@ export function About() {
           </p>
         </div>
 
-        <div className="hidden justify-center md:block">
+        <div className="hidden justify-center md:flex">
           <AnimatedCat
             width={200}
             className="pointer-events-none scale-x-[-1]"

@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import { Badge } from "~/components/ui/badge";
-import { CloudDownloadIcon, DatabaseIcon, RefreshCwIcon } from "lucide-react";
+import { CloudDownloadIcon, RefreshCwIcon } from "lucide-react";
 
 export function InscribeSpotlight() {
   return (

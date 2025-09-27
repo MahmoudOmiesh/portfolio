@@ -1,6 +1,7 @@
 import { AuroraBackground } from "~/components/ui/aurora-background";
 import { About } from "./-components/about";
 import { Projects } from "./-components/projects";
+import { Skills } from "./-components/skills";
 
 export default function HomePage() {
   return (
@@ -10,6 +11,8 @@ export default function HomePage() {
       <About />
 
       <Projects />
+
+      <Skills />
     </div>
   );
 }
