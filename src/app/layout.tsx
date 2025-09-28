@@ -9,8 +9,8 @@ import { Footer } from "~/components/footer";
 
 export const metadata: Metadata = {
   title: "Mahmoud Omiesh | Full Stack Web Developer",
-  description: "Mahmoud Omiesh | Full Stack Web Developer",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  description:
+    "I am a computer science student who enjoys challenges that blend problem-solving with creativity. Programming hooked me for that reason, and I have grown through both personal projects and team experiences. I am still early in my journey, but I value learning as much as building, and I am excited to keep improving while contributing to teams where I can share ideas and learn from others.",
 };
 
 const geistMono = Geist_Mono({

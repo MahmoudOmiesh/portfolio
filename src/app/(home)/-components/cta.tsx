@@ -14,9 +14,10 @@ export function CTA() {
           together.
         </p>
 
-        <Button className="mt-8" size="lg" asChild>
+        <Button className="group mt-8" size="lg" asChild>
           <a href="mailto:mahmoud.a.omiesh@gmail.com" target="_blank">
-            Contact Me <ArrowUpRightIcon />
+            Contact Me{" "}
+            <ArrowUpRightIcon className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </Button>
       </CardContent>

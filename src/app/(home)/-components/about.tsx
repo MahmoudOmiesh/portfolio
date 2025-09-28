@@ -54,13 +54,12 @@ export function About() {
       <CardContent className="grid md:grid-cols-[2fr_1fr]">
         <div className="space-y-4 text-sm md:text-base">
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic
-            doloremque, id minima earum saepe ut nostrum mollitia perferendis
-            quae eius tempora. Repellendus sapiente velit aperiam!
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
-            nemo, minus quidem expedita voluptates laboriosam.
+            I am a computer science student who enjoys challenges that blend
+            problem-solving with creativity. Programming hooked me for that
+            reason, and I have grown through both personal projects and team
+            experiences. I am still early in my journey, but I value learning as
+            much as building, and I am excited to keep improving while
+            contributing to teams where I can share ideas and learn from others.
           </p>
         </div>
 
