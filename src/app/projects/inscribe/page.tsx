@@ -8,7 +8,7 @@ import Image from "next/image";
 
 export default function InscribePage() {
   return (
-    <div className="min-h-screen flex-1 space-y-10 py-8 md:space-y-20">
+    <div className="min-h-screen flex-1 space-y-10 pt-8 pb-16 md:space-y-20">
       <InscribeAbout />
 
       <div className="group relative hidden aspect-[16/9] overflow-hidden rounded-sm shadow-2xl md:block dark:shadow-lg">

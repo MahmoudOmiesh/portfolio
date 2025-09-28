@@ -23,7 +23,7 @@ const TECHNOLOGIES = [
 
 export function VisualizerAbout() {
   return (
-    <Card className="font-mono">
+    <Card>
       <CardHeader className="gap-4">
         <div className="flex flex-col items-baseline justify-between sm:flex-row">
           <CardTitle className="text-2xl md:text-3xl">

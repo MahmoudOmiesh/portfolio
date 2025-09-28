@@ -3,7 +3,7 @@ import { Badge } from "~/components/ui/badge";
 
 export function SputnikOverview() {
   return (
-    <Card className="font-mono">
+    <Card>
       <CardHeader>
         <CardTitle className="text-xl md:text-2xl">Project Overview</CardTitle>
       </CardHeader>

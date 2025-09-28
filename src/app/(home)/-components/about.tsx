@@ -12,7 +12,7 @@ import { Badge } from "~/components/ui/badge";
 
 export function About() {
   return (
-    <Card className="rounded-0 animated-cat-container relative isolate gap-4 font-mono">
+    <Card className="rounded-0 animated-cat-container relative isolate gap-4">
       <CardHeader>
         <div className="flex flex-col items-start justify-between gap-4 sm:flex-row">
           <div className="space-y-1">

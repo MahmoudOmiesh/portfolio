@@ -10,7 +10,7 @@ import { LockIcon, User2Icon } from "lucide-react";
 
 export function SpuntikSpotlight() {
   return (
-    <Card className="font-mono">
+    <Card>
       <CardHeader>
         <CardTitle className="text-xl md:text-2xl">Spotlight</CardTitle>
         <CardDescription>

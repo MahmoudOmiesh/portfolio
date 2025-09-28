@@ -67,7 +67,7 @@ const SCREENSHOTS = [
 
 export function SputnikCarousel() {
   return (
-    <Card className="font-mono">
+    <Card>
       <CardHeader className="text-center">
         <CardTitle className="text-xl md:text-2xl">Take a Peek</CardTitle>
         <CardDescription className="hidden md:block">

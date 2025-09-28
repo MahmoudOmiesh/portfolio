@@ -35,7 +35,7 @@ const PROJECTS = [
 
 export function Projects() {
   return (
-    <Card className="gap-12 font-mono">
+    <Card className="gap-12">
       <CardHeader className="text-center">
         <CardTitle className="text-xl md:text-2xl">
           What I&apos;ve been working on

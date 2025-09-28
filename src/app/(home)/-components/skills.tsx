@@ -68,7 +68,7 @@ const SKILLS = [
 
 export function Skills() {
   return (
-    <Card className="font-mono">
+    <Card>
       <CardHeader>
         <CardTitle className="text-xl md:text-2xl">Skills</CardTitle>
       </CardHeader>

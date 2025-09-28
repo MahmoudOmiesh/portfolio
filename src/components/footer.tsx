@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 
 export function Footer() {
   return (
-    <footer className="flex flex-col items-center justify-between gap-2 border-t py-4 font-mono text-sm sm:flex-row">
+    <footer className="flex flex-col items-center justify-between gap-2 border-t py-4 text-sm sm:flex-row">
       <p>&copy; {new Date().getFullYear()} Mahmoud Omiesh</p>
       <ul className="flex gap-2">
         <li>

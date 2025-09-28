@@ -32,7 +32,7 @@ export default function RootLayout({
       className={`${geist.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="font-sans">
+      <body className="font-mono">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

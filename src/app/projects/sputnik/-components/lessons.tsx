@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 
 export function SputnikLessons() {
   return (
-    <Card className="font-mono">
+    <Card>
       <CardHeader>
         <CardTitle className="text-xl md:text-2xl">Lessons Learned</CardTitle>
       </CardHeader>

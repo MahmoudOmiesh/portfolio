@@ -22,11 +22,8 @@ export function Header() {
 
   return (
     <header className="supports-[backdrop-filter]:bg-card/80 bg-card sticky top-2 z-50 mb-2 flex items-center justify-between border p-5 py-4 backdrop-blur">
-      <Link
-        href="/"
-        className="text-primary relative font-mono text-xl font-bold"
-      >
-        Omiesh
+      <Link href="/" className="text-primary relative text-xl font-semibold">
+        omiesh
       </Link>
       <div className="flex items-center gap-4">
         <nav>

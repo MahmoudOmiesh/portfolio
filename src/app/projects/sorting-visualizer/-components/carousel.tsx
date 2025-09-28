@@ -67,7 +67,7 @@ const SCREENSHOTS = [
 
 export function VisualizerCarousel() {
   return (
-    <Card className="font-mono">
+    <Card>
       <CardHeader className="text-center">
         <CardTitle className="text-xl md:text-2xl">See it in Action</CardTitle>
         <CardDescription className="hidden md:block">

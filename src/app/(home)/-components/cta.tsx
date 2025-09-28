@@ -4,7 +4,7 @@ import { Card, CardContent } from "~/components/ui/card";
 
 export function CTA() {
   return (
-    <Card className="p-0 font-mono">
+    <Card className="p-0">
       <CardContent className="p-8">
         <h3 className="text-xxl font-bold md:text-2xl">
           Let&apos;s Build Something Together

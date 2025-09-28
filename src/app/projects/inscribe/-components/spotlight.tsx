@@ -10,7 +10,7 @@ import { CloudDownloadIcon, RefreshCwIcon } from "lucide-react";
 
 export function InscribeSpotlight() {
   return (
-    <Card className="font-mono">
+    <Card>
       <CardHeader>
         <CardTitle className="text-xl md:text-2xl">Spotlight</CardTitle>
         <CardDescription>
