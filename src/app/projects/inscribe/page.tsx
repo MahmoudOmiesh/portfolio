@@ -1,8 +1,8 @@
-import { InscribeAbout } from "./-components/about";
-import { InscribeOverview } from "./-components/overview";
-import { InscribeCarousel } from "./-components/carousel";
-import { InscribeSpotlight } from "./-components/spotlight";
-import { InscribeLessons } from "./-components/lessons";
+import { InscribeAbout } from "./_components/about";
+import { InscribeOverview } from "./_components/overview";
+import { InscribeCarousel } from "./_components/carousel";
+import { InscribeSpotlight } from "./_components/spotlight";
+import { InscribeLessons } from "./_components/lessons";
 
 import Image from "next/image";
 

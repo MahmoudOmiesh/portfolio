@@ -1,8 +1,8 @@
-import { SputnikAbout } from "./-components/about";
-import { SputnikOverview } from "./-components/overview";
-import { SputnikCarousel } from "./-components/carousel";
-import { SpuntikSpotlight } from "./-components/spotlight";
-import { SputnikLessons } from "./-components/lessons";
+import { SputnikAbout } from "./_components/about";
+import { SputnikOverview } from "./_components/overview";
+import { SputnikCarousel } from "./_components/carousel";
+import { SpuntikSpotlight } from "./_components/spotlight";
+import { SputnikLessons } from "./_components/lessons";
 
 import Image from "next/image";
 

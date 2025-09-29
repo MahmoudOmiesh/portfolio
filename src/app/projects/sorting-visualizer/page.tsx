@@ -1,6 +1,6 @@
-import { VisualizerAbout } from "./-components/about";
-import { VisualizerOverview } from "./-components/overview";
-import { VisualizerCarousel } from "./-components/carousel";
+import { VisualizerAbout } from "./_components/about";
+import { VisualizerOverview } from "./_components/overview";
+import { VisualizerCarousel } from "./_components/carousel";
 
 export default function VisualizerPage() {
   return (
