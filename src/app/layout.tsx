@@ -5,6 +5,7 @@ import { Geist_Mono, Inter } from "next/font/google";
 import { ThemeProvider } from "~/components/theme-provider";
 import { MaxWidthWrapper } from "~/components/max-width-wrapper";
 import { Header } from "~/components/header";
+import { BubbleBackground } from "~/components/animate-ui/components/backgrounds/bubble";
 
 export const metadata: Metadata = {
   title: "Mahmoud Omiesh | Full Stack Web Developer",
@@ -38,6 +39,10 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
+          <BubbleBackground
+            interactive={true}
+            className="fixed inset-0 flex items-center justify-center rounded-xl"
+          />
           <MaxWidthWrapper className="min-h-screen lg:flex lg:justify-between lg:gap-4">
             <Header />
             <main className="pt-24 lg:w-[52%] lg:py-24">{children}</main>
