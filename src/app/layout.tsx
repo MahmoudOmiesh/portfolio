@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
   variable: "--font-mono",
 });
 
-const geist = Inter({
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
@@ -29,20 +29,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geist.variable} ${geistMono.variable}`}
+      className={`${inter.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="font-mono">
+      <body className="font-sans">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem={false}
           disableTransitionOnChange
         >
-          <MaxWidthWrapper className="flex min-h-screen flex-col">
+          <MaxWidthWrapper className="flex min-h-screen justify-between gap-4">
             <Header />
             <main className="flex flex-1 flex-col">{children}</main>
-            <Footer />
           </MaxWidthWrapper>
         </ThemeProvider>
       </body>
