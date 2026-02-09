@@ -5,7 +5,6 @@ import { Geist_Mono, Inter } from "next/font/google";
 import { ThemeProvider } from "~/components/theme-provider";
 import { MaxWidthWrapper } from "~/components/max-width-wrapper";
 import { Header } from "~/components/header";
-import { Footer } from "~/components/footer";
 
 export const metadata: Metadata = {
   title: "Mahmoud Omiesh | Full Stack Web Developer",
@@ -39,9 +38,9 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <MaxWidthWrapper className="flex min-h-screen justify-between gap-4">
+          <MaxWidthWrapper className="min-h-screen lg:flex lg:justify-between lg:gap-4">
             <Header />
-            <main className="flex flex-1 flex-col">{children}</main>
+            <main className="pt-24 lg:w-[52%] lg:py-24">{children}</main>
           </MaxWidthWrapper>
         </ThemeProvider>
       </body>

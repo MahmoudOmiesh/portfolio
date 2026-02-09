@@ -33,7 +33,7 @@ const SOCIAL_LINKS = [
 
 export function Header() {
   return (
-    <header className="sticky top-0 flex max-h-screen w-[48%] flex-col justify-between py-24">
+    <header className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-[48%] lg:flex-col lg:justify-between lg:py-24">
       <div>
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
           <Link href="/">Mahmoud Omiesh</Link>
@@ -45,23 +45,25 @@ export function Header() {
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium,
           ratione?
         </p>
-        <ul className="mt-16 w-max">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <a
-                className="group flex items-center gap-4 py-3"
-                href={link.href}
-              >
-                <span className="h-px w-8 bg-slate-600 transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 group-[.active]:w-16 group-[.active]:bg-slate-200"></span>
-                <span className="text-xs font-bold tracking-widest text-slate-500 uppercase group-hover:text-slate-200 group-focus-visible:text-slate-200 group-[.active]:text-slate-200">
-                  {link.label}
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
+        <nav className="hidden lg:block">
+          <ul className="mt-16 w-max">
+            {NAV_LINKS.map((link) => (
+              <li key={link.href}>
+                <a
+                  className="group flex items-center gap-4 py-3"
+                  href={link.href}
+                >
+                  <span className="h-px w-8 bg-slate-600 transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 group-[.active]:w-16 group-[.active]:bg-slate-200"></span>
+                  <span className="text-xs font-bold tracking-widest text-slate-500 uppercase group-hover:text-slate-200 group-focus-visible:text-slate-200 group-[.active]:text-slate-200">
+                    {link.label}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
-      <ul className="flex items-center gap-5">
+      <ul className="mt-8 flex items-center gap-5 lg:mt-0">
         {SOCIAL_LINKS.map((link) => (
           <li key={link.href} className="shrink-0">
             <a
