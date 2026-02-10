@@ -1,35 +1,35 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
-import { Badge } from "~/components/ui/badge";
 import { CloudDownloadIcon, RefreshCwIcon } from "lucide-react";
+import { Section } from "~/components/section";
+import { FrostedHover } from "~/components/frosted-hover";
 
 export function InscribeSpotlight() {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-xl md:text-2xl">Spotlight</CardTitle>
-        <CardDescription>
-          Don&apos;t get me wrong, I really like the custom rich text editor I
-          built from scratch, but honestly what I want to talk about is the sync
-          system.
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        <div className="space-y-8">
-          <div>
-            <Badge variant="outline">
-              <CloudDownloadIcon className="text-primary" />
+    <Section>
+      <h2 className="text-base font-bold tracking-tight text-slate-200 md:text-lg">
+        Spotlight
+      </h2>
+      <p className="text-muted-foreground mt-2 text-sm leading-normal">
+        Don&apos;t get me wrong, I really like the custom rich text editor I
+        built from scratch, but honestly what I want to talk about is the sync
+        system.
+      </p>
+
+      <div className="group/list mt-8 space-y-8">
+        <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:group-hover/list:opacity-50 lg:hover:!opacity-100">
+          <FrostedHover />
+
+          <header className="z-10 mt-1 mb-2 sm:col-span-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-400/10 px-3 py-1 text-xs leading-5 font-medium text-teal-300">
+              <CloudDownloadIcon className="size-3" />
               Offline-First
-            </Badge>
-            <h3 className="mt-1 text-base font-semibold md:text-lg">
+            </span>
+          </header>
+
+          <div className="z-10 sm:col-span-6">
+            <h3 className="text-base leading-tight font-medium text-slate-200">
               Local-First Architecture
             </h3>
-            <ul className="mt-4 space-y-1.5 text-sm">
+            <ul className="text-muted-foreground mt-4 space-y-1.5 text-sm">
               <li>
                 • Data lives primarily on the device, with server as a backup
               </li>
@@ -47,16 +47,23 @@ export function InscribeSpotlight() {
               <li>• Failed operations are retried automatically</li>
             </ul>
           </div>
+        </div>
 
-          <div>
-            <Badge variant="outline">
-              <RefreshCwIcon className="text-primary" />
+        <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:group-hover/list:opacity-50 lg:hover:!opacity-100">
+          <FrostedHover />
+
+          <header className="z-10 mt-1 mb-2 sm:col-span-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-400/10 px-3 py-1 text-xs leading-5 font-medium text-teal-300">
+              <RefreshCwIcon className="size-3" />
               Real-Time Sync
-            </Badge>
-            <h3 className="mt-1 text-base font-semibold md:text-lg">
+            </span>
+          </header>
+
+          <div className="z-10 sm:col-span-6">
+            <h3 className="text-base leading-tight font-medium text-slate-200">
               Multi-Device Harmony
             </h3>
-            <ul className="mt-4 space-y-1.5 text-sm">
+            <ul className="text-muted-foreground mt-4 space-y-1.5 text-sm">
               <li>
                 • Incremental sync only pulls changes from the server since last
                 successful sync
@@ -66,7 +73,9 @@ export function InscribeSpotlight() {
               </li>
               <li>
                 • Real-time updates through{" "}
-                <code className="bg-muted rounded px-1 text-xs">tRPC</code>{" "}
+                <code className="rounded bg-slate-800/80 px-1.5 py-0.5 text-xs text-teal-300">
+                  tRPC
+                </code>{" "}
                 using server-sent events (SSE)
               </li>
               <li>
@@ -79,18 +88,16 @@ export function InscribeSpotlight() {
             </ul>
           </div>
         </div>
+      </div>
 
-        <div className="bg-primary/5 border-primary/10 mt-4 rounded-lg border p-4">
-          <p className="text-muted-foreground text-sm">
-            <span className="text-primary font-semibold">
-              Why this matters:
-            </span>{" "}
-            Most apps break when you go offline or have slow connections. This
-            architecture ensures you can always work productively, no matter the
-            situation and your data is always in sync.
-          </p>
-        </div>
-      </CardContent>
-    </Card>
+      <div className="mt-8 rounded-md border border-teal-400/10 bg-teal-400/5 p-4">
+        <p className="text-muted-foreground text-sm">
+          <span className="font-semibold text-teal-300">Why this matters:</span>{" "}
+          Most apps break when you go offline or have slow connections. This
+          architecture ensures you can always work productively, no matter the
+          situation and your data is always in sync.
+        </p>
+      </div>
+    </Section>
   );
 }

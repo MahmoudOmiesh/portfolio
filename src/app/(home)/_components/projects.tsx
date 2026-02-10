@@ -1,76 +1,89 @@
-import { ChevronsRight } from "lucide-react";
-import Link from "next/link";
-import { Button } from "~/components/ui/button";
+import { ChevronsRightIcon } from "lucide-react";
 import Image from "next/image";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { FrostedHover } from "~/components/frosted-hover";
+import { Section } from "~/components/section";
 
-const PROJECTS = [
+const PROJECTS: ProjectItem[] = [
   {
-    title: "Sputnik",
-    description:
-      "An online learning platform for kids I worked on during my internship at Sputnik Academy.",
-    image: "/sputnik/landing-page.png",
-    link: "/projects/sputnik",
-  },
-  {
+    href: "/projects/inscribe",
     title: "Inscribe",
     description: "A local first note-taking app, with a custom text editor",
-    image: "/inscribe/landing-page.png",
-    link: "/projects/inscribe",
+    imageSrc: "/inscribe/landing-page.png",
+    technologies: ["Next.js", "TypeScript", "tRPC", "Dexie"],
   },
   {
+    href: "/projects/sorting-visualizer",
     title: "Sorting Visualizer",
     description:
       "A visualizer for popular sorting alogrithms, with step-by-step demonstrations.",
-    image: "/visualizer/base.png",
-    link: "/projects/sorting-visualizer",
+    imageSrc: "/visualizer/base.png",
+    technologies: ["C++", "QT"],
   },
 ];
 
 export function Projects() {
   return (
-    <Card className="gap-12">
-      <CardHeader className="text-center">
-        <CardTitle className="text-xl md:text-2xl">
-          What I&apos;ve been working on
-        </CardTitle>
-        <CardDescription className="mx-auto max-w-[60ch]">
-          I like to always keep learning and building new things. Here are some
-          of the projects I&apos;ve dedicated my time to.
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-12">
+    <Section id="projects" label="Projects">
+      <ol className="group/list space-y-12">
         {PROJECTS.map((project) => (
-          <div
-            key={project.title}
-            className="grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2"
-          >
-            <Image
-              src={project.image ?? null}
-              alt={project.title}
-              width={500}
-              height={500}
-              className="border"
-            />
-            <div className="self-center">
-              <p className="text-base font-bold md:text-lg">{project.title}</p>
-              <p className="mt-2 text-sm md:text-base">{project.description}</p>
-              <Button variant="link" className="group mt-4 !pl-0" asChild>
-                <Link href={project.link}>
-                  Learn More{" "}
-                  <ChevronsRight className="size-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </Button>
-            </div>
-          </div>
+          <li key={project.href}>
+            <ProjectItem {...project} />
+          </li>
         ))}
-      </CardContent>
-    </Card>
+      </ol>
+    </Section>
+  );
+}
+
+interface ProjectItem {
+  href: string;
+  title: string;
+  imageSrc: string;
+  description: string;
+  technologies: string[];
+}
+
+function ProjectItem({
+  title,
+  href,
+  imageSrc,
+  description,
+  technologies,
+}: ProjectItem) {
+  return (
+    <a href={href} aria-label={title}>
+      <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:group-hover/list:opacity-50 lg:hover:!opacity-100">
+        <FrostedHover />
+
+        <Image
+          src={imageSrc}
+          alt={title}
+          className="z-10 mt-1 mb-2 aspect-video rounded border-2 border-slate-200/10 object-cover transition group-hover:border-slate-200/30 sm:col-span-2"
+          width={200}
+          height={48}
+        />
+
+        <div className="z-10 sm:col-span-6">
+          <h3 className="inline-flex items-center gap-1.5 text-base leading-tight font-medium text-slate-200 group-hover:text-teal-300 focus-visible:text-teal-300">
+            {title}
+            <ChevronsRightIcon className="size-3.5 transition-transform group-hover:translate-x-0.5 group-focus-visible:translate-x-0.5 motion-reduce:transition-none" />
+          </h3>
+
+          <p className="text-muted-foreground mt-2 text-sm leading-normal">
+            {description}
+          </p>
+
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {technologies.map((technology) => (
+              <li key={technology}>
+                <div className="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs leading-5 font-medium text-teal-300">
+                  {technology}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </a>
   );
 }

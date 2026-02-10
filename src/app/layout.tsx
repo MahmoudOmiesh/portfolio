@@ -5,7 +5,6 @@ import { Geist_Mono, Inter } from "next/font/google";
 import { ThemeProvider } from "~/components/theme-provider";
 import { MaxWidthWrapper } from "~/components/max-width-wrapper";
 import { Header } from "~/components/header";
-import { Footer } from "~/components/footer";
 
 export const metadata: Metadata = {
   title: "Mahmoud Omiesh | Full Stack Web Developer",
@@ -18,7 +17,7 @@ const geistMono = Geist_Mono({
   variable: "--font-mono",
 });
 
-const geist = Inter({
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
@@ -29,20 +28,23 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geist.variable} ${geistMono.variable}`}
+      className={`${inter.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="font-mono">
+      <body className="font-sans">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem={false}
           disableTransitionOnChange
         >
-          <MaxWidthWrapper className="flex min-h-screen flex-col">
+          {/* <BubbleBackground
+            interactive={true}
+            className="fixed inset-0 flex items-center justify-center rounded-xl"
+          /> */}
+          <MaxWidthWrapper className="min-h-screen lg:flex lg:justify-between lg:gap-4">
             <Header />
-            <main className="flex flex-1 flex-col">{children}</main>
-            <Footer />
+            <main className="pt-24 lg:w-[52%] lg:py-24">{children}</main>
           </MaxWidthWrapper>
         </ThemeProvider>
       </body>

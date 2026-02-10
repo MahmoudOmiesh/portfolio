@@ -1,28 +1,10 @@
-import { GithubIcon, LinkedinIcon } from "lucide-react";
-import { Button } from "./ui/button";
-
 export function Footer() {
   return (
-    <footer className="flex flex-col items-center justify-between gap-2 border-t py-4 text-sm sm:flex-row">
-      <p>&copy; {new Date().getFullYear()} Mahmoud Omiesh</p>
-      <ul className="flex gap-2">
-        <li>
-          <Button variant="link" asChild>
-            <a href="https://github.com/MahmoudOmiesh" target="_blank">
-              <GithubIcon />
-              GitHub
-            </a>
-          </Button>
-        </li>
-        <li>
-          <Button variant="link" asChild>
-            <a href="https://linkedin.com/in/mahmoud-omiesh" target="_blank">
-              <LinkedinIcon />
-              LinkedIn
-            </a>
-          </Button>
-        </li>
-      </ul>
+    <footer className="text-muted-foreground max-w-md text-sm">
+      <p>
+        &copy; {new Date().getFullYear()} Mahmoud A. Omiesh. All rights
+        reserved.
+      </p>
     </footer>
   );
 }

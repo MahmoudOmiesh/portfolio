@@ -1,4 +1,4 @@
-import { ArrowRightIcon, ExternalLinkIcon } from "lucide-react";
+import { ArrowUpRightIcon, ExternalLinkIcon } from "lucide-react";
 import {
   ShadcnIcon,
   TailwindIcon,
@@ -12,15 +12,7 @@ import {
   BetterAuthIcon,
   DexieIcon,
 } from "~/components/tech-icons";
-import { Badge } from "~/components/ui/badge";
-import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Section } from "~/components/section";
 
 const FRONTEND_TECHNOLOGIES = [
   {
@@ -74,49 +66,50 @@ const BACKEND_TECHNOLOGIES = [
 
 export function InscribeAbout() {
   return (
-    <Card>
-      <CardHeader className="gap-4">
-        <div className="flex flex-col items-baseline justify-between sm:flex-row">
-          <CardTitle className="text-2xl md:text-3xl">Inscribe</CardTitle>
-          <div className="space-x-2">
-            <Button variant="link" asChild className="group !pl-0">
-              <a
-                href="https://github.com/MahmoudOmiesh/Inscribe"
-                target="_blank"
-              >
-                Source Code{" "}
-                <ExternalLinkIcon className="size-4 transition-transform group-hover:-translate-y-0.5" />
-              </a>
-            </Button>
+    <Section>
+      <div className="flex flex-col items-baseline justify-between gap-2 sm:flex-row">
+        <a
+          href="https://inscribe-notes.vercel.app/"
+          target="_blank"
+          rel="noreferrer noopener"
+          className="group"
+        >
+          <h1 className="flex items-baseline gap-1.5 text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl">
+            Inscribe
+            <ExternalLinkIcon className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none" />
+          </h1>
+        </a>
+        <a
+          href="https://github.com/MahmoudOmiesh/Inscribe"
+          target="_blank"
+          rel="noreferrer noopener"
+          className="group inline-flex items-baseline gap-1.5 text-sm leading-tight font-semibold text-slate-200 hover:text-teal-300 focus-visible:text-teal-300"
+        >
+          Source Code
+          <ArrowUpRightIcon className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none" />
+        </a>
+      </div>
 
-            <Button variant="link" asChild className="group">
-              <a href="https://inscribe-notes.vercel.app/" target="_blank">
-                Visit Website{" "}
-                <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
-            </Button>
-          </div>
-        </div>
-        <CardDescription className="text-sm md:text-base">
-          Inscribe is a modern, local-first note-taking application with
-          AI-powered writing assistance that I built as a solo personal project
-          using Next.js, and tRPC. This application features a completely
-          custom-built rich text editor from scratch, real-time sync
-          capabilities, and integrated AI writing assistance.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p className="text-base font-semibold md:text-lg">Technologies:</p>
-        <div className="mt-3 flex flex-wrap gap-2">
-          {FRONTEND_TECHNOLOGIES.concat(BACKEND_TECHNOLOGIES).map(
-            (technology) => (
-              <Badge variant="outline" key={technology.name}>
-                <technology.icon /> {technology.name}
-              </Badge>
-            ),
-          )}
-        </div>
-      </CardContent>
-    </Card>
+      <p className="text-muted-foreground mt-4 text-sm leading-relaxed md:text-base">
+        Inscribe is a modern, local-first note-taking application with
+        AI-powered writing assistance that I built as a solo personal project
+        using Next.js, and tRPC. This application features a completely
+        custom-built rich text editor from scratch, real-time sync capabilities,
+        and integrated AI writing assistance.
+      </p>
+
+      <ul className="mt-6 flex flex-wrap gap-2">
+        {FRONTEND_TECHNOLOGIES.concat(BACKEND_TECHNOLOGIES).map(
+          (technology) => (
+            <li key={technology.name}>
+              <div className="flex items-center gap-1.5 rounded-full bg-teal-400/10 px-3 py-1 text-xs leading-5 font-medium text-teal-300">
+                <technology.icon />
+                {technology.name}
+              </div>
+            </li>
+          ),
+        )}
+      </ul>
+    </Section>
   );
 }

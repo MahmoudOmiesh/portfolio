@@ -1,0 +1,99 @@
+import { ArrowUpRightIcon, ChevronsRightIcon } from "lucide-react";
+import { FrostedHover } from "~/components/frosted-hover";
+import { Section } from "~/components/section";
+
+const EXPERIENCE: ExperienceItem[] = [
+  {
+    href: "/projects/sputnik",
+    role: "Fullstack Intern",
+    company: "Sputnik Academy",
+    startDate: "Mar",
+    endDate: "Aug 2025",
+    description:
+      "An online learning platform for kids I worked on during my internship at Sputnik Academy.",
+    technologies: ["React", "TypeScript", "TanStack Router", "Hono"],
+  },
+];
+
+export function Experience() {
+  return (
+    <Section id="experience" label="Experience">
+      <ol className="group/list space-y-12">
+        {EXPERIENCE.map((experience) => (
+          <li key={experience.href}>
+            <ExperienceItem {...experience} />
+          </li>
+        ))}
+      </ol>
+
+      <div className="mt-12">
+        <a
+          className="group/link inline-flex items-baseline gap-2 text-base leading-tight font-semibold text-slate-200 hover:text-teal-300 focus-visible:text-teal-300"
+          href="/resume.pdf"
+          target="_blank"
+          rel="noreferrer noopener"
+          aria-label="View Full Résumé (opens in a new tab)"
+        >
+          View Full Résumé
+          <ArrowUpRightIcon className="size-4 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1 group-focus-visible/link:translate-x-1 group-focus-visible/link:-translate-y-1 motion-reduce:transition-none" />
+        </a>
+      </div>
+    </Section>
+  );
+}
+
+interface ExperienceItem {
+  href: string;
+  role: string;
+  company: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+  technologies: string[];
+}
+
+function ExperienceItem({
+  href,
+  role,
+  company,
+  startDate,
+  endDate,
+  description,
+  technologies,
+}: ExperienceItem) {
+  return (
+    <a href={href} aria-label={`${role} at ${company}`}>
+      <div className="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:group-hover/list:opacity-50 lg:hover:!opacity-100">
+        <FrostedHover />
+
+        <header
+          className="z-10 mt-1 mb-2 text-xs font-semibold tracking-wide text-slate-500 uppercase sm:col-span-2"
+          aria-label={`${startDate} to ${endDate}`}
+        >
+          {startDate} — {endDate}
+        </header>
+
+        <div className="z-10 sm:col-span-6">
+          <h3 className="inline-flex items-baseline gap-1.5 text-base leading-tight font-medium text-slate-200 group-hover:text-teal-300 focus-visible:text-teal-300">
+            {role} · {company}
+            <ChevronsRightIcon className="size-3.5 transition-transform group-hover:translate-x-0.5 group-focus-visible:translate-x-0.5 motion-reduce:transition-none" />
+          </h3>
+
+          <p className="text-muted-foreground mt-2 text-sm leading-normal">
+            {description}
+          </p>
+
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {technologies.map((technology) => (
+              <li key={technology}>
+                <div className="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs leading-5 font-medium text-teal-300">
+                  {technology}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </a>
+  );
+}
