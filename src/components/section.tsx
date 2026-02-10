@@ -5,17 +5,18 @@ export function Section({
   label,
   children,
 }: {
-  id: string;
-  label: string;
+  id?: string;
+  label?: string;
   children: React.ReactNode;
 }) {
   return (
     <section
       id={id}
       className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
-      aria-label="About me"
+      aria-label={label}
     >
-      <StickySectionLabel label={label} />
+      {label && <StickySectionLabel label={label} />}
+
       <div>{children}</div>
     </section>
   );

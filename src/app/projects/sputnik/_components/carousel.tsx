@@ -1,12 +1,4 @@
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
-
-import {
   Carousel,
   CarouselContent,
   CarouselItem,
@@ -15,8 +7,8 @@ import {
 } from "~/components/ui/carousel";
 
 import Image from "next/image";
-import { Badge } from "~/components/ui/badge";
 import { LockIcon } from "lucide-react";
+import { Section } from "~/components/section";
 
 const SCREENSHOTS = [
   {
@@ -67,19 +59,20 @@ const SCREENSHOTS = [
 
 export function SputnikCarousel() {
   return (
-    <Card>
-      <CardHeader className="text-center">
-        <CardTitle className="text-xl md:text-2xl">Take a Peek</CardTitle>
-        <CardDescription className="hidden md:block">
-          Here are some screenshots of the project.
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="px-2 md:px-6">
+    <Section>
+      <h2 className="text-base font-bold tracking-tight text-slate-200 md:text-lg">
+        Take a Peek
+      </h2>
+      <p className="text-muted-foreground mt-2 hidden text-sm md:block">
+        Here are some screenshots of the project.
+      </p>
+
+      <div className="mt-8">
         <Carousel className="group w-full" opts={{ loop: true }}>
           <CarouselContent>
             {SCREENSHOTS.map((screenshot, index) => (
               <CarouselItem key={index}>
-                <div className="relative aspect-[16/9] border">
+                <div className="relative aspect-[16/9] overflow-hidden rounded-sm border-2 border-slate-200/10 transition-colors group-hover:border-slate-200/20">
                   <Image
                     src={screenshot.src}
                     alt={`Screenshot ${index + 1}`}
@@ -88,22 +81,22 @@ export function SputnikCarousel() {
                   />
 
                   {screenshot.isAdminOnly && (
-                    <Badge className="absolute right-4 bottom-4">
-                      <LockIcon />
+                    <span className="absolute right-4 bottom-4 inline-flex items-center gap-1.5 rounded-full bg-teal-400/10 px-3 py-1 text-xs leading-5 font-medium text-teal-300 backdrop-blur-sm">
+                      <LockIcon className="size-3" />
                       Admin Only
-                    </Badge>
+                    </span>
                   )}
-                  <span className="text-muted-foreground bg-muted/40 absolute bottom-4 left-4 p-1 text-xs">
+                  <span className="text-muted-foreground absolute bottom-4 left-4 rounded-full bg-slate-900/60 px-2.5 py-0.5 text-xs backdrop-blur-sm">
                     {index + 1} / {SCREENSHOTS.length}
                   </span>
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="left-4 opacity-0 group-hover:opacity-100" />
-          <CarouselNext className="right-4 opacity-0 group-hover:opacity-100" />
+          <CarouselPrevious className="left-4 opacity-0 transition-opacity group-hover:opacity-100" />
+          <CarouselNext className="right-4 opacity-0 transition-opacity group-hover:opacity-100" />
         </Carousel>
-      </CardContent>
-    </Card>
+      </div>
+    </Section>
   );
 }
