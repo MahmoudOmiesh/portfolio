@@ -253,3 +253,7 @@
 .animated-cat-container:hover .pupil-right-animation {
   transform: scale(1.2, 1.2) translate(0px, 0px);
 }
+
+html {
+  scroll-behavior: smooth;
+}

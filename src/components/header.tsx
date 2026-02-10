@@ -1,7 +1,9 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { GitHubIcon, LinkedInIcon } from "./tech-icons";
+import { cn } from "~/lib/utils";
 
 const NAV_LINKS = [
   {
@@ -17,6 +19,7 @@ const NAV_LINKS = [
     href: "#projects",
   },
 ];
+const DEFAULT_ACTIVE_HREF = NAV_LINKS[0]?.href ?? "";
 
 const SOCIAL_LINKS = [
   {
@@ -32,6 +35,55 @@ const SOCIAL_LINKS = [
 ];
 
 export function Header() {
+  const [activeHref, setActiveHref] = useState(DEFAULT_ACTIVE_HREF);
+  const visibleSectionsRef = useRef<Map<string, number>>(new Map());
+
+  useEffect(() => {
+    const visibleSections = visibleSectionsRef.current;
+    const sectionElements = NAV_LINKS.map((link) =>
+      document.querySelector<HTMLElement>(link.href),
+    ).filter(Boolean) as HTMLElement[];
+
+    if (sectionElements.length === 0) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const sectionId = `#${entry.target.id}`;
+
+          if (entry.isIntersecting) {
+            visibleSections.set(sectionId, entry.intersectionRatio);
+          } else {
+            visibleSections.delete(sectionId);
+          }
+        });
+
+        const [nextActiveHref] = [...visibleSections.entries()].sort(
+          (a, b) => b[1] - a[1],
+        )[0] ?? [DEFAULT_ACTIVE_HREF];
+
+        setActiveHref(nextActiveHref);
+      },
+      {
+        root: null,
+        // Keep a thin activation band near the top of the viewport.
+        rootMargin: "-15% 0px -75% 0px",
+        threshold: [0.1, 0.25, 0.5, 0.75],
+      },
+    );
+
+    sectionElements.forEach((sectionElement) =>
+      observer.observe(sectionElement),
+    );
+
+    return () => {
+      observer.disconnect();
+      visibleSections.clear();
+    };
+  }, []);
+
   return (
     <header className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-[48%] lg:flex-col lg:justify-between lg:py-24">
       <div>
@@ -50,7 +102,10 @@ export function Header() {
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <a
-                  className="group flex items-center gap-4 py-3"
+                  className={cn(
+                    "group flex items-center gap-4 py-3",
+                    activeHref === link.href && "active",
+                  )}
                   href={link.href}
                 >
                   <span className="h-px w-8 bg-slate-600 transition-all group-hover:w-16 group-hover:bg-slate-200 group-focus-visible:w-16 group-focus-visible:bg-slate-200 group-[.active]:w-16 group-[.active]:bg-slate-200"></span>
