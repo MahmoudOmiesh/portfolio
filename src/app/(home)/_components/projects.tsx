@@ -10,6 +10,14 @@ const PROJECTS: ProjectItem[] = [
     imageSrc: "/inscribe/landing-page.png",
     technologies: ["Next.js", "TypeScript", "tRPC", "Dexie"],
   },
+  {
+    href: "/projects/sorting-visualizer",
+    title: "Sorting Visualizer",
+    description:
+      "A visualizer for popular sorting alogrithms, with step-by-step demonstrations.",
+    imageSrc: "/visualizer/base.png",
+    technologies: ["C++", "QT"],
+  },
 ];
 
 export function Projects() {
