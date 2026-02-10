@@ -111,7 +111,9 @@ function ExperienceItem({
             <ExternalLinkIcon className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-focus-visible:translate-x-0.5 group-focus-visible:-translate-y-0.5 motion-reduce:transition-none" />
           </h3>
 
-          <p className="mt-2 text-sm leading-normal">{description}</p>
+          <p className="text-muted-foreground mt-2 text-sm leading-normal">
+            {description}
+          </p>
 
           <ul className="mt-4 flex flex-wrap gap-2">
             {technologies.map((technology) => (

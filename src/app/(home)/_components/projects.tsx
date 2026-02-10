@@ -24,7 +24,7 @@ const PROJECTS: ProjectItem[] = [
 
 export function Projects() {
   return (
-    <Section id="experience" label="Experience">
+    <Section id="projects" label="Projects">
       <ol className="group/list space-y-12">
         {PROJECTS.map((project) => (
           <li key={project.href}>
@@ -75,7 +75,9 @@ function ProjectItem({
             <ChevronsRightIcon className="size-3.5 transition-transform group-hover:translate-x-0.5 group-focus-visible:translate-x-0.5 motion-reduce:transition-none" />
           </h3>
 
-          <p className="mt-2 text-sm leading-normal">{description}</p>
+          <p className="text-muted-foreground mt-2 text-sm leading-normal">
+            {description}
+          </p>
 
           <ul className="mt-4 flex flex-wrap gap-2">
             {technologies.map((technology) => (

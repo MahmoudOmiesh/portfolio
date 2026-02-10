@@ -67,7 +67,7 @@ export function Header() {
         {SOCIAL_LINKS.map((link) => (
           <li key={link.href} className="shrink-0">
             <a
-              className="block p-1 hover:text-slate-200"
+              className="text-muted-foreground block p-1 hover:text-slate-200"
               href={link.href}
               target="_blank"
               rel="noreferrer noopener"
