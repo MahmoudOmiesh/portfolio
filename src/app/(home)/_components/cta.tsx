@@ -1,10 +1,10 @@
 import { ArrowUpRightIcon } from "lucide-react";
-import { HexagonBackground } from "~/components/animate-ui/components/backgrounds/hexagon";
 import { Button } from "~/components/ui/button";
+import { Section } from "~/components/section";
 
 export function CTA() {
   return (
-    <div className="relative isolate mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24">
+    <Section className="relative">
       <div className="absolute -inset-4 -z-10">
         <div className="size-full">
           {/* Diagonal Fade Grid Background - Top Right */}
@@ -39,6 +39,6 @@ export function CTA() {
           <ArrowUpRightIcon className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </a>
       </Button>
-    </div>
+    </Section>
   );
 }
