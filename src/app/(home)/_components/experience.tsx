@@ -1,7 +1,7 @@
 import { ArrowUpRightIcon, ExternalLinkIcon } from "lucide-react";
 import { Section } from "~/components/section";
 
-const EXPERIENCE = [
+const EXPERIENCE: ExperienceItem[] = [
   {
     href: "https://upstatement.com",
     role: "Lead Engineer",
@@ -69,7 +69,7 @@ export function Experience() {
   );
 }
 
-interface ExperienceItemProps {
+interface ExperienceItem {
   href: string;
   role: string;
   company: string;
@@ -87,7 +87,7 @@ function ExperienceItem({
   endDate,
   description,
   technologies,
-}: ExperienceItemProps) {
+}: ExperienceItem) {
   return (
     <a
       href={href}
@@ -108,7 +108,7 @@ function ExperienceItem({
         <div className="z-10 sm:col-span-6">
           <h3 className="inline-flex items-baseline gap-1.5 text-base leading-tight font-medium text-slate-200 group-hover:text-teal-300 focus-visible:text-teal-300">
             {role} · {company}
-            <ExternalLinkIcon className="size-3.5" />
+            <ExternalLinkIcon className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-focus-visible:translate-x-0.5 group-focus-visible:-translate-y-0.5 motion-reduce:transition-none" />
           </h3>
 
           <p className="mt-2 text-sm leading-normal">{description}</p>
