@@ -5,7 +5,6 @@ import { Geist_Mono, Inter } from "next/font/google";
 import { ThemeProvider } from "~/components/theme-provider";
 import { MaxWidthWrapper } from "~/components/max-width-wrapper";
 import { Header } from "~/components/header";
-import { BubbleBackground } from "~/components/animate-ui/components/backgrounds/bubble";
 
 export const metadata: Metadata = {
   title: "Mahmoud Omiesh | Full Stack Web Developer",
