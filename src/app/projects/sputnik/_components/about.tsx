@@ -79,7 +79,7 @@ export function SputnikAbout() {
     <Section>
       <div className="flex flex-col items-baseline justify-between gap-2 sm:flex-row">
         <a
-          href="https://sputnik.com"
+          href="https://www.linkedin.com/company/sputnik-academy/"
           target="_blank"
           rel="noreferrer noopener"
           className="group"
