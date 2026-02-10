@@ -45,10 +45,10 @@ export function Header() {
         <h2 className="mt-3 text-lg font-medium tracking-tight sm:text-xl">
           Full Stack Web Developer
         </h2>
-        <p className="text-muted-foreground mt-4 max-w-xs leading-normal">
+        {/* <p className="text-muted-foreground mt-4 max-w-xs leading-normal">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium,
           ratione?
-        </p>
+        </p> */}
 
         <Navbar />
       </div>
@@ -114,9 +114,8 @@ function Navbar() {
           }
         });
 
-        const [nextActiveHref] = [...visibleSections.entries()].sort(
-          (a, b) => b[1] - a[1],
-        )[0] ?? [];
+        const [nextActiveHref] =
+          [...visibleSections.entries()].sort((a, b) => b[1] - a[1])[0] ?? [];
 
         if (nextActiveHref) {
           setActiveHref(nextActiveHref);
@@ -127,7 +126,8 @@ function Navbar() {
         const nearestPassedSection = sectionElements
           .filter(
             (sectionElement) =>
-              sectionElement.getBoundingClientRect().top - activationOffset <= 0,
+              sectionElement.getBoundingClientRect().top - activationOffset <=
+              0,
           )
           .sort(
             (a, b) =>

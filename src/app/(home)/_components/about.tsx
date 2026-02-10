@@ -5,19 +5,24 @@ export function About() {
     <Section id="about" label="About">
       <div className="text-muted-foreground space-y-4">
         <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores
-          fugiat iure expedita atque error, eveniet perferendis consequuntur.
-          Itaque quaerat facilis delectus magni, aspernatur nostrum tempore
-          laborum earum dolorem numquam ipsum quia sequi tempora dolor ea
-          quidem! Ut repellat voluptatum, minus cumque, saepe, perspiciatis
-          nihil expedita perferendis obcaecati dolores voluptatem placeat?
+          I’m a computer science student who enjoys challenges that combine
+          problem-solving with creativity. Programming drew me in for that
+          reason, and I’m motivated by building things that feel thoughtful,
+          useful, and well-designed.
         </p>
 
         <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-          Reprehenderit sequi doloremque nesciunt expedita, voluptatem
-          exercitationem ex laborum quo illum facilis odit soluta earum ab ipsum
-          recusandae officiis assumenda labore atque?
+          Through both personal projects and team experiences, I’ve worked
+          across the stack to turn ideas into real products. I enjoy learning
+          new tools, refining my approach, and understanding how technical
+          decisions affect users and the overall product.
+        </p>
+
+        <p>
+          I’m still early in my journey, but I care deeply about growth and
+          continuous improvement. I’m excited to contribute to teams where I can
+          share ideas, take on meaningful challenges, and learn from people who
+          build great software.
         </p>
       </div>
     </Section>
