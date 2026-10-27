@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "unicorn", "oxc", "react", "jsx-a11y"],
+  "categories": { "correctness": "error" },
+  "rules": {
+    "oxc/no-accumulating-spread": "error",
+    "jsx-a11y/media-has-caption": "off"
+  },
+  "ignorePatterns": ["src/routeTree.gen.ts", "src/components/ui/**"]
+}
