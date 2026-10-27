@@ -31,9 +31,17 @@ export const Route = createRootRoute({
     ],
   }),
   shellComponent: RootDocument,
-  component: Layout,
+  component: () => (
+    <Layout>
+      <Outlet />
+    </Layout>
+  ),
   notFoundComponent: () => <Fallback heading="404" text="looks like you're lost" action="Take me home" />,
-  errorComponent: () => <Fallback heading="Error" text="Something went wrong" action="Go Home" />,
+  errorComponent: () => (
+    <Layout>
+      <Fallback heading="Error" text="Something went wrong" action="Go Home" />
+    </Layout>
+  ),
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
@@ -50,12 +58,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Layout() {
+function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="mx-auto flex min-h-svh max-w-160 flex-col px-6 pt-24 pb-18">
-      <main className="flex-1">
-        <Outlet />
-      </main>
+      <main className="flex-1">{children}</main>
       <footer className="mt-20 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 text-[13.5px] text-muted-foreground">
         <nav aria-label="Links" className="flex flex-wrap gap-x-4 gap-y-1">
           {profile.links.map((link) => (

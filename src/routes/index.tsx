@@ -70,7 +70,7 @@ function Projects() {
               <div className="overflow-hidden rounded-xl border bg-card transition-transform duration-200 group-hover:-translate-y-0.5">
                 <img
                   src={card.cover.src}
-                  alt={title}
+                  alt=""
                   width={card.cover.width}
                   height={card.cover.height}
                   loading={index === 0 ? "eager" : "lazy"}
