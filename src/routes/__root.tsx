@@ -1,10 +1,10 @@
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
 
+import { profile } from "@/content/profile";
+
 import appCss from "../styles.css?url";
 
-const title = "Mahmoud Omiesh | Full Stack Web Developer";
-const description =
-  "I am a computer science student who enjoys challenges that blend problem-solving with creativity. Programming hooked me for that reason, and I have grown through both personal projects and team experiences. I am still early in my journey, but I value learning as much as building, and I am excited to keep improving while contributing to teams where I can share ideas and learn from others.";
+const { title, description } = profile.meta;
 
 export const Route = createRootRoute({
   head: () => ({
