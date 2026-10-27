@@ -1,10 +1,14 @@
-import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
+import { HeadContent, Link, Outlet, Scripts, createRootRoute } from "@tanstack/react-router";
+import { cn } from "cn";
 
+import { buttonVariants } from "@/components/ui/button";
 import { profile } from "@/content/profile";
 
 import appCss from "../styles.css?url";
 
 const { title, description } = profile.meta;
+// Prerendered at build time, so the server and a client in a later year can disagree; the build year wins.
+const year = new Date().getFullYear();
 
 export const Route = createRootRoute({
   head: () => ({
@@ -27,6 +31,9 @@ export const Route = createRootRoute({
     ],
   }),
   shellComponent: RootDocument,
+  component: Layout,
+  notFoundComponent: () => <Fallback heading="404" text="looks like you're lost" action="Take me home" />,
+  errorComponent: () => <Fallback heading="Error" text="Something went wrong" action="Go Home" />,
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
@@ -40,5 +47,45 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <Scripts />
       </body>
     </html>
+  );
+}
+
+function Layout() {
+  return (
+    <div className="mx-auto flex min-h-svh max-w-160 flex-col px-6 pt-24 pb-18">
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      <footer className="mt-20 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 text-[13.5px] text-muted-foreground">
+        <nav aria-label="Links" className="flex flex-wrap gap-x-4 gap-y-1">
+          {profile.links.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target={link.newTab ? "_blank" : undefined}
+              rel={link.newTab ? "noreferrer noopener" : undefined}
+              className="transition-colors hover:text-foreground"
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+        <p suppressHydrationWarning>
+          &copy; {year} {profile.copyright}
+        </p>
+      </footer>
+    </div>
+  );
+}
+
+function Fallback({ heading, text, action }: { heading: string; text: string; action: string }) {
+  return (
+    <div className="flex flex-col items-start pt-16">
+      <h1 className="text-[28px] font-semibold tracking-tight">{heading}</h1>
+      <p className="mt-1.5 text-[15px] text-muted-foreground">{text}</p>
+      <Link to="/" className={cn(buttonVariants(), "mt-6")}>
+        {action}
+      </Link>
+    </div>
   );
 }

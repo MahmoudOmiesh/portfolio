@@ -1,3 +1,6 @@
+const email = "mahmoud.a.omiesh@gmail.com";
+const resume = "/resume.pdf";
+
 export const profile = {
   name: "Mahmoud Omiesh",
   role: "Full Stack Web Developer",
@@ -11,12 +14,14 @@ export const profile = {
     "Through both personal projects and team experiences, I’ve worked across the stack to turn ideas into real products. I enjoy learning new tools, refining my approach, and understanding how technical decisions affect users and the overall product.",
     "I’m still early in my journey, but I care deeply about growth and continuous improvement. I’m excited to contribute to teams where I can share ideas, take on meaningful challenges, and learn from people who build great software.",
   ],
-  socials: [
-    { label: "GitHub", href: "https://github.com/MahmoudOmiesh" },
-    { label: "LinkedIn", href: "https://linkedin.com/in/mahmoud-omiesh" },
+  links: [
+    { label: "GitHub", href: "https://github.com/MahmoudOmiesh", newTab: true },
+    { label: "LinkedIn", href: "https://linkedin.com/in/mahmoud-omiesh", newTab: true },
+    { label: "Résumé", href: resume, newTab: true },
+    { label: "Contact", href: `mailto:${email}`, newTab: false },
   ],
-  resume: { label: "View Full Résumé", href: "/resume.pdf" },
-  email: "mahmoud.a.omiesh@gmail.com",
+  resume: { label: "View Full Résumé", href: resume },
+  email,
   cta: {
     heading: "Let's Build Something Together",
     text: "Feel free to contact me if you have any questions or want to work together.",
