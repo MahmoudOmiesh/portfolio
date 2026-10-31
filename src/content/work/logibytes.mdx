@@ -1,0 +1,65 @@
+Logibytes is a logistics software company in Saudi Arabia. I'm a frontend developer there, and I built two of its web apps from scratch, the fleet portal and the merchant portal. Both work in Arabic and English, and the whole layout flips to right to left in Arabic.
+
+<Screens
+  src="/logibytes/live-map.webp"
+  width={2352}
+  height={1672}
+  alt="The fleet portal's live map of Riyadh, zoomed into one truck. A side panel shows the truck moving at 68 km/h, its driver, 46.5 km driven today and a timeline of drives and stops from 7:48 to 10:34 AM. The truck's route is drawn in blue across the map, with an orange dot at each stop."
+  caption="Following one truck through its day on the live map. The trucks, drivers and routes are made up."
+/>
+
+## The fleet portal
+
+A company that runs its own delivery trucks has a lot to keep track of. It needs to know who its drivers are, which truck each one drives, whether the trucks pass their inspections, and where they are right now. The fleet portal is where the office team does all of that. I built it on my own, and it's in use.
+
+- **Drivers and vehicles.** The team adds drivers and trucks and assigns a driver to each truck. The forms check things like VINs and ID numbers, and warn when a licence or registration is about to expire.
+- **Inspections.** Drivers inspect their trucks from the drivers' app and send photos. The portal shows every inspection, flags the late ones, and shows how well each truck has kept up over time.
+- **Driver requests.** Drivers ask for things through the app, like a day off, a loan or fuel. Admins decide who approves each kind of request and in what order, for example a supervisor and then finance. Next to those steps there's a diagram of where a request goes, which redraws as they edit. Whoever's turn it is can approve the request or reject it with a reason. Drivers see each kind of request in their own language, which can be Arabic, English, Urdu, Hindi, Nepali or Twi.
+- **A live map.** Every truck is on one map. Clicking a truck zooms into it and lays out its day as drives and stops, and you can replay the day.
+
+<Screens
+  src="/logibytes/request-editor.webp"
+  width={2080}
+  height={1528}
+  alt="Setting up a salary advance request. The form lists three approval steps, Supervisor, Fleet manager and Finance. Beside it, a diagram shows the request going from the driver through each step to Approved, and a Reject with reason line from every step to Rejected."
+  caption="Setting up who approves a salary advance, with the diagram next to the steps."
+/>
+
+<Screens
+  src="/logibytes/request-editor-ar.webp"
+  width={2080}
+  height={1528}
+  alt="The same request type editor in Arabic. The whole screen is mirrored, with the form on the right and the diagram on the left, and Rejected now sits on the left side of the diagram."
+  caption="The same screen in Arabic, mirrored right to left, diagram included."
+/>
+
+## The merchant portal
+
+When an online store sells something, it has to get the order to the customer. The merchant portal is the website where a store sends its orders out for delivery.
+
+- **Creating a shipment.** A six-step form takes the parcel's details, the pickup and delivery addresses on a map, and the item list. Then it shows the shipping prices to choose from.
+- **Connecting a store.** A store on Zid or Salla, two Saudi store builders, can connect it to the portal.
+- **The wallet.** The store tops up credit, and sees the cash its customers paid the driver on delivery. It can ask to withdraw that cash to its bank account.
+- **Managing shipments.** The store sees all its shipments, filters them by status, and can edit or cancel one.
+
+<Screens
+  src="/logibytes/shipping-rates.webp"
+  width={1788}
+  height={1170}
+  alt="Step 5 of 6 in the create shipment form, Shipping Rate. A table compares four services, Same-Day Express at 55 SAR, Next-Day Delivery at 41 SAR, Standard at 33 SAR and Locker Pickup Point at 30 SAR, with Next-Day Delivery selected."
+  caption="Choosing a shipping rate for a cash-on-delivery order. The prices are made up."
+/>
+
+<Screens
+  src="/logibytes/wallet.webp"
+  width={1996}
+  height={1312}
+  alt="The merchant wallet, with cards for an upcoming transfer of 3,000 SAR, a cash-on-delivery balance of 8,460 SAR, 21,500 SAR withdrawn and 1,250 SAR of credit. Below is a list of transactions, mostly cash collected from shipments, plus one 5,000 SAR withdrawal."
+  caption="A store's wallet, with the cash collected on delivery and what it has withdrawn. The figures are made up."
+/>
+
+I also worked on the operator portal, which the delivery team itself uses. That was mostly fixes and new modules, like a reports builder.
+
+**Stack.** React, Vite, React Router, TanStack Query and Table, React Hook Form with Zod, Tailwind with shadcn/ui, i18next, React Flow, and MapLibre for the map.
+
+**Link.** [logibytes.sa](https://logibytes.sa/en/)
