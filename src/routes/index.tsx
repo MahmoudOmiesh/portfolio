@@ -8,6 +8,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import { experience, type Job } from "@/content/experience";
 import { profile } from "@/content/profile";
 import { projects } from "@/content/projects";
+import { stories } from "@/content/work";
 
 export const Route = createFileRoute("/")({ component: Home });
 
@@ -165,16 +166,17 @@ function JobRow({ job }: { job: Job }) {
             <ChevronRightIcon aria-hidden className="size-3.5" />
           </Link>
         )}
-        {job.story && (
+        {job.stories?.map((slug) => (
           <Link
+            key={slug}
             to="/work/$slug"
-            params={{ slug: job.story }}
-            className="mt-3 mb-4 inline-flex items-center gap-1 text-sm link-underline"
+            params={{ slug }}
+            className="mt-3 mb-4 mr-5 inline-flex items-center gap-1 text-sm link-underline"
           >
-            Read the story
+            {stories[slug].title}
             <ChevronRightIcon aria-hidden className="size-3.5" />
           </Link>
-        )}
+        ))}
       </CollapsibleContent>
     </Collapsible>
   );

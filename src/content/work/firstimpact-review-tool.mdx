@@ -1,0 +1,52 @@
+After every visit, a doctor at FirstImpact Med writes a note, and someone has to check it before it's final. I built the internal tool that does that check. An AI reviews the draft and cites its sources, each finding goes to the person who has to act on it, and every month the clinic sees how each doctor is doing. Medical assistants (MAs) and doctors at the clinic use it now.
+
+<Flow
+  label="How a note moves through the review"
+  steps={[
+    { title: "AI checks the draft", note: "After the MA pastes it in" },
+    { title: "MA sorts findings", note: "Passes on what needs the doctor" },
+    { title: "Doctor revises", note: "Confirms the final version" },
+    { title: "MA files it", note: "In the records system" },
+  ]}
+/>
+
+## What I built
+
+I built it from the first commit.
+
+- **The AI review.** A small model first makes sure the draft is the right document for the right patient and visit. Then a larger model reviews it against the rules for that type of note. It searches a library of medical books and PubMed as it goes, and every finding links to the page or paper behind it. It can only cite what its searches actually found, so it can't make up a source.
+- **Rules that are safe to change.** Admins edit the rules in the app. A new version has to pass a set of test notes before it's used on real ones.
+- **The workflow.** An MA reads the AI's findings first and passes on only what needs the doctor. The doctor revises the note and confirms the final version, and the MA files it. Email and in-app notifications tell each person when it's their turn.
+- **An assistant on the web and in Slack.** It answers questions about a note with sources, reads the patient's other records, and rewrites the note. It can also do most steps of a review for you, like marking findings or sending the note to the doctor. Each step shows up as a card you confirm with one click.
+- **Monthly reports.** An audit of a sample of each doctor's signed notes, and a report on the mistakes they keep making.
+- **Patient data.** Notes are encrypted at rest and deleted once their retention period ends.
+
+**Stack.** TanStack Start, oRPC, Prisma and Postgres, Better Auth, Inngest, the Vercel AI SDK with Claude, Pinecone, and Hono for the Slack bot.
+
+## Why it exists
+
+Before this, MAs checked notes by pasting them into one Claude project. It had a single set of instructions for every kind of note, so on any given note some of them applied and some didn't. A visit note and a spinal injection report need different checks, so the tool keeps separate rules for each type of note.
+
+The project also had no medical sources to check against, and its results changed from one run to the next. Fixing a note meant messages back and forth in Slack. And nobody could see how each doctor was doing over time.
+
+## Spotlight: how each doctor is doing
+
+The clinic wanted two monthly reports, a formal audit of each doctor's notes and a report on the mistakes they keep making. The plan was to build the second report from the first. I thought they answered different questions, so I kept them apart.
+
+A formal review audits 10% of a doctor's signed notes each month. It checks whether each note is clinically sound, protects the clinic from risk, and would hold up legally. My first version made one review per note, which was too much to read. Now each doctor gets one review a month, where each problem appears once and links to the notes that show it. A doctor can challenge a finding, and the medical director decides.
+
+The pattern report is built from the findings of every review that month instead. A formal review only sees a sample of the notes and merges its findings together, so it would lose the detail a pattern needs. The report says whether each mistake is new, still there, or improving since last month.
+
+The hard part was a busy month. The whole month goes to the model in one call, and too many findings would swamp its context.
+
+1. My first version sent an even sample of individual findings. But that can miss the story. A mistake that's in every note might only get sampled once.
+2. So I send whole notes instead, spread across the month, until they fit. A pattern has to appear in at least two of them, and its rate is the notes it appears in out of the notes read. That keeps "improving" fair when one month has more notes than the last.
+3. A code review caught that picking every few notes from one mixed list could skip a whole type of note. Now it picks from each type separately.
+
+## What I learned
+
+- **Push back when something is worth improving.** Keeping the two monthly reports apart made both of them more useful.
+- **Fit the tool to how people already work.** The MAs are the ones who put notes in the records system, so the doctor confirms a version and the MA files it, instead of the doctor signing in the app. Doctors sometimes send a fix outside the app, so an MA can bring that version in. Most of the workflow came from what the MAs asked for while testing it.
+- **Set agents up to get it right.** I built most of this with AI agents, and two things made me trust their work more:
+  - **Lint rules from their mistakes.** Each custom rule has a test case taken from a mistake an agent made in this repo. When an agent found a way around a rule, I widened the rule.
+  - **A CLI to prove their work.** An agent can create a review at any step, call the API as any user, and talk to the Slack bot through a fake Slack. So it shows me the change working before I look.

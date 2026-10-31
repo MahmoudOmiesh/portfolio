@@ -98,7 +98,7 @@ The same change removed "unsign". Once a note has been sent, with its PDF and bi
 
 - **Find out what the other system can't do before you design around it.** One limit in the records system, entries we couldn't edit, decided where the note lives.
 - **Build the simple version first.** Requirements changed a lot here. Doctors were going to edit in the records system, then in our editor. There were no prescriptions, then there were. People could belong to one firm, then several. Now I build the simplest version that works and ship it. If nobody complains, everyone's happy and I've saved myself work.
-- **How to build with AI agents.** This is where I learned to code with agents. By the time I started my next project, the review tool, I had an order for fixing their mistakes, which I picked up from [@poteto](https://x.com/poteto). When an agent gets something wrong, I fix it at the highest level I can:
+- **How to build with AI agents.** This is where I learned to code with agents. By the time I started my next project, [the review tool](/work/firstimpact-review-tool), I had an order for fixing their mistakes, which I picked up from [@poteto](https://x.com/poteto). When an agent gets something wrong, I fix it at the highest level I can:
   1. **The codebase.** There's one way to do each thing, and the code itself shows how things are written, so an agent copies the right pattern. I clean up between sprints of work and keep code comments rare, because comments drift out of date and mislead agents.
   2. **Static analysis.** Strict types and lint rules catch what the codebase alone can't.
   3. **Prose.** An `AGENTS.md` covers what can't be checked automatically.

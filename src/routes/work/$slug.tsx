@@ -14,7 +14,7 @@ export const Route = createFileRoute("/work/$slug")({
 });
 
 function StoryPage() {
-  const { company, role, location, period, Content } = stories[Route.useLoaderData()];
+  const { title, company, role, location, period, Content } = stories[Route.useLoaderData()];
 
   return (
     <article>
@@ -27,9 +27,9 @@ function StoryPage() {
       </Link>
 
       <header className="mt-7">
-        <h1 className="text-[28px] font-semibold tracking-[-0.02em]">{company}</h1>
+        <h1 className="text-[28px] font-semibold tracking-[-0.02em]">{title}</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          {role} · {location} · {period}
+          {role} at {company} · {location} · {period}
         </p>
       </header>
 
