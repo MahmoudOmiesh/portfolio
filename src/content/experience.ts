@@ -1,4 +1,5 @@
 import type { ProjectSlug } from "./projects";
+import type { StorySlug } from "./work";
 
 export type Job = {
   role: string;
@@ -8,9 +9,19 @@ export type Job = {
   description: string;
   technologies: string[];
   project?: ProjectSlug;
+  story?: StorySlug;
 };
 
 export const experience: Job[] = [
+  {
+    role: "Full Stack Developer",
+    company: "FirstImpact Med",
+    startDate: "Mar 2026",
+    endDate: "Present",
+    description: "A platform that takes personal-injury patients from an AI intake to a report signed by a doctor.",
+    technologies: ["TanStack Start", "tRPC", "Drizzle", "Inngest", "Vercel AI SDK"],
+    story: "firstimpact",
+  },
   {
     role: "Fullstack Intern",
     company: "Sputnik Academy",

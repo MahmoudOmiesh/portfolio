@@ -1,3 +1,4 @@
+import mdx from "@mdx-js/rollup";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
@@ -13,6 +14,8 @@ export default defineConfig({
   },
   resolve: { tsconfigPaths: true },
   plugins: [
+    // MDX compiles to JSX, so it has to run before the React plugin sees the file.
+    { enforce: "pre", ...mdx() },
     tailwindcss(),
     tanstackStart({
       prerender: {
@@ -23,6 +26,6 @@ export default defineConfig({
       },
     }),
     nitro({ traceDeps: ["react"] }),
-    viteReact(),
+    viteReact({ include: /\.(mdx|tsx?)$/ }),
   ],
 });
