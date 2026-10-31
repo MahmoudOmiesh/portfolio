@@ -24,6 +24,16 @@ export const experience: Job[] = [
     stories: ["firstimpact", "firstimpact-review-tool"],
   },
   {
+    role: "Frontend Developer",
+    company: "Logibytes",
+    startDate: "Feb 2026",
+    endDate: "Present",
+    description:
+      "A fleet portal for companies that run their own trucks, and a portal where online stores ship their orders, both in Arabic and English.",
+    technologies: ["React", "TanStack Query", "React Router", "Tailwind", "i18next"],
+    stories: ["logibytes"],
+  },
+  {
     role: "Fullstack Intern",
     company: "Sputnik Academy",
     startDate: "Mar",
