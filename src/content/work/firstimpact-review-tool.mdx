@@ -10,6 +10,14 @@ After every visit, a doctor at FirstImpact Med writes a note, and someone has to
   ]}
 />
 
+<Screens
+  src="/firstimpact/review-findings.webp"
+  width={1983}
+  height={2808}
+  alt="The first two of three AI findings on a visit note, a red flag and a medical concern. The red flag says the assessment names right S1 radiculopathy while everything else in the note is on the left. The medical concern says the patient takes apixaban and the planned injection has no bleeding-risk decision, with a link to its sources. Each finding quotes the note, suggests a fix, and has No concern and Needs provider review buttons."
+  caption="The AI's findings on a made-up visit note, waiting for the MA to sort them."
+/>
+
 ## What I built
 
 I built it from the first commit.
@@ -35,7 +43,23 @@ The clinic wanted two monthly reports, a formal audit of each doctor's notes and
 
 A formal review audits 10% of a doctor's signed notes each month. It checks whether each note is clinically sound, protects the clinic from risk, and would hold up legally. My first version made one review per note, which was too much to read. Now each doctor gets one review a month, where each problem appears once and links to the notes that show it. A doctor can challenge a finding, and the medical director decides.
 
+<Screens
+  src="/firstimpact/formal-review.webp"
+  width={1983}
+  height={1386}
+  alt="The risk protection section of a monthly formal review, asking where the record would fail if a patient, attorney or licensing board challenged it. It has two findings, about missing pre-procedure safety screening and missing consent discussion. Each says it was in 2 of 4 notes audited and has Challenge and View sources buttons."
+  caption="Part of a formal review for a made-up doctor. Each problem appears once, with the notes that show it."
+/>
+
 The pattern report is built from the findings of every review that month instead. A formal review only sees a sample of the notes and merges its findings together, so it would lose the detail a pattern needs. The report says whether each mistake is new, still there, or improving since last month.
+
+<Screens
+  src="/firstimpact/pattern-report.webp"
+  width={1983}
+  height={1686}
+  alt="Two recurring patterns from a monthly pattern report. One marked New says the assessment names the opposite side from the rest of the note. One marked Improving says MRI findings are cited without a study date or source. Each was in 3 of 8 notes read."
+  caption="A pattern report for the same made-up doctor, compared with the month before."
+/>
 
 The hard part was a busy month. The whole month goes to the model in one call, and too many findings would swamp its context.
 
