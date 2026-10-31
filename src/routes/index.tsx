@@ -165,6 +165,16 @@ function JobRow({ job }: { job: Job }) {
             <ChevronRightIcon aria-hidden className="size-3.5" />
           </Link>
         )}
+        {job.story && (
+          <Link
+            to="/work/$slug"
+            params={{ slug: job.story }}
+            className="mt-3 mb-4 inline-flex items-center gap-1 text-sm link-underline"
+          >
+            Read the story
+            <ChevronRightIcon aria-hidden className="size-3.5" />
+          </Link>
+        )}
       </CollapsibleContent>
     </Collapsible>
   );
