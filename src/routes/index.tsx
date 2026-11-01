@@ -1,6 +1,7 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { cn } from "cn";
 import { ArrowUpRightIcon, ChevronRightIcon } from "lucide-react";
+import { Fragment } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
@@ -57,7 +58,9 @@ function Home() {
 }
 
 function Projects() {
-  const featured = Object.entries(projects).flatMap(([slug, { title, card }]) => (card ? [{ slug, title, card }] : []));
+  const entries = Object.entries(projects);
+  const featured = entries.flatMap(([slug, project]) => (project.kind === "story" ? [{ slug, ...project }] : []));
+  const archived = entries.flatMap(([slug, { kind, title }]) => (kind === "archived" ? [{ slug, title }] : []));
 
   return (
     <section aria-labelledby="projects" className="mt-16">
@@ -75,11 +78,7 @@ function Projects() {
                   width={card.cover.width}
                   height={card.cover.height}
                   loading={index === 0 ? "eager" : "lazy"}
-                  className={cn(
-                    "aspect-16/10 w-full object-cover object-top transition-[filter] duration-200",
-                    card.cover.grayscale &&
-                      "grayscale-100 contrast-90 group-hover:grayscale-0 group-hover:contrast-100 group-focus-visible:grayscale-0 group-focus-visible:contrast-100",
-                  )}
+                  className="aspect-16/10 w-full object-cover object-top"
                 />
               </div>
               <h3 className="mt-2.5 text-[15px] font-medium">{title}</h3>
@@ -89,6 +88,17 @@ function Projects() {
           </li>
         ))}
       </ul>
+      <p className="mt-6 text-sm text-muted-foreground">
+        Older projects:{" "}
+        {archived.map(({ slug, title }, index) => (
+          <Fragment key={slug}>
+            {index > 0 && " · "}
+            <Link to="/projects/$slug" params={{ slug }} className="text-foreground link-underline">
+              {title}
+            </Link>
+          </Fragment>
+        ))}
+      </p>
     </section>
   );
 }
@@ -156,16 +166,6 @@ function JobRow({ job }: { job: Job }) {
             </li>
           ))}
         </ul>
-        {job.project && (
-          <Link
-            to="/projects/$slug"
-            params={{ slug: job.project }}
-            className="mt-3 mb-4 inline-flex items-center gap-1 text-sm link-underline"
-          >
-            {projects[job.project].title}
-            <ChevronRightIcon aria-hidden className="size-3.5" />
-          </Link>
-        )}
         {job.stories?.map((slug) => (
           <Link
             key={slug}

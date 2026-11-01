@@ -1,4 +1,3 @@
-import type { ProjectSlug } from "./projects";
 import type { StorySlug } from "./work";
 
 export type Job = {
@@ -8,7 +7,6 @@ export type Job = {
   endDate: string;
   description: string;
   technologies: string[];
-  project?: ProjectSlug;
   stories?: StorySlug[];
 };
 
@@ -40,6 +38,5 @@ export const experience: Job[] = [
     endDate: "Aug 2025",
     description: "An online learning platform for kids I worked on during my internship at Sputnik Academy.",
     technologies: ["React", "TypeScript", "TanStack Router", "Hono"],
-    project: "sputnik",
   },
 ];
