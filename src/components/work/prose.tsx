@@ -44,14 +44,14 @@ function Screens({
 }) {
   return (
     <figure className="my-8">
-      <img
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        loading="lazy"
-        className={cn("block h-auto w-full", narrow && "mx-auto max-w-65")}
-      />
+      <a
+        href={src}
+        target="_blank"
+        rel="noreferrer noopener"
+        className={cn("block cursor-zoom-in", narrow && "mx-auto max-w-65")}
+      >
+        <img src={src} alt={alt} width={width} height={height} loading="lazy" className="block h-auto w-full" />
+      </a>
       <figcaption className="mt-3 text-center text-[13px] text-muted-foreground">{caption}</figcaption>
     </figure>
   );
