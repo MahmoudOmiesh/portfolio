@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { StoryArticle } from "@/components/work/story-article";
 import {
   projects,
   type Media,
@@ -16,7 +17,7 @@ import {
 } from "@/content/projects";
 
 export const Route = createFileRoute("/projects/$slug")({
-  // Returns the slug rather than the project: loader data is serialized for hydration and projects hold icon components.
+  // Returns the slug rather than the project: loader data is serialized for hydration and projects hold components.
   loader: ({ params }) => {
     if (!Object.hasOwn(projects, params.slug)) throw notFound();
     return params.slug as ProjectSlug;
@@ -24,9 +25,19 @@ export const Route = createFileRoute("/projects/$slug")({
   component: ProjectPage,
 });
 
+type ArchivedProject = Extract<Project, { kind: "archived" }>;
+
 function ProjectPage() {
   const project = projects[Route.useLoaderData()];
 
+  return project.kind === "story" ? (
+    <StoryArticle title={project.title} meta={project.meta} Content={project.Content} />
+  ) : (
+    <ArchivedProjectPage project={project} />
+  );
+}
+
+function ArchivedProjectPage({ project }: { project: ArchivedProject }) {
   return (
     <article>
       <Link
@@ -75,7 +86,7 @@ function ProjectPage() {
   );
 }
 
-function ProjectHeader({ project }: { project: Project }) {
+function ProjectHeader({ project }: { project: ArchivedProject }) {
   return (
     <header className="mt-7">
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">

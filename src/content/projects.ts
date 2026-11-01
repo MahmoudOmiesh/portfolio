@@ -1,15 +1,12 @@
-import { CloudDownloadIcon, LockIcon, RefreshCwIcon, User2Icon, type LucideIcon } from "lucide-react";
+import { LockIcon, User2Icon, type LucideIcon } from "lucide-react";
+import type { MDXContent } from "mdx/types";
 import type { ComponentType } from "react";
 
 import {
   AWSIcon,
-  BetterAuthIcon,
   CppIcon,
-  DexieIcon,
-  FloatingUiIcon,
   HonoIcon,
   MuxIcon,
-  NextjsIcon,
   PaymobIcon,
   PostgreSQLIcon,
   PrismaIcon,
@@ -20,9 +17,10 @@ import {
   TailwindIcon,
   TanstackQueryIcon,
   TanstackRouterIcon,
-  TrpcIcon,
   TypescriptIcon,
 } from "@/components/tech-icons";
+
+import Inscribe from "./projects/inscribe.mdx";
 
 /** Inline markup: `code` renders as code, **text** as emphasis. */
 export type RichText = string;
@@ -45,158 +43,48 @@ export type OverviewItem = {
 
 export type SpotlightItem = { label: string; icon: LucideIcon; title: string; bullets: RichText[] };
 
-export type Project = {
-  title: string;
-  /** Present when the project has a card in the home Projects section. */
-  card?: { summary: string; technologies: string[]; cover: ImageAsset & { grayscale?: boolean } };
-  liveUrl?: string;
-  sourceUrl: string;
-  description: string;
-  technologies: Technology[];
-  overview?: OverviewItem[];
-  gallery?: { heading: string; caption: string; media: Media[] };
-  spotlight?: { intro: string; items: SpotlightItem[]; callout: { label: string; text: string } };
-  /** A string is a paragraph, an array is a bulleted list. */
-  lessons?: (string | string[])[];
-};
+/** A story has a card in the home Projects section. An archived project keeps its old page and is only linked from the archive. */
+export type Project =
+  | {
+      kind: "story";
+      title: string;
+      meta: string;
+      card: { summary: string; technologies: string[]; cover: ImageAsset };
+      Content: MDXContent;
+    }
+  | {
+      kind: "archived";
+      title: string;
+      liveUrl?: string;
+      sourceUrl: string;
+      description: string;
+      technologies: Technology[];
+      overview?: OverviewItem[];
+      gallery?: { heading: string; caption: string; media: Media[] };
+      spotlight?: { intro: string; items: SpotlightItem[]; callout: { label: string; text: string } };
+      /** A string is a paragraph, an array is a bulleted list. */
+      lessons?: (string | string[])[];
+    };
 
 const screenshot = { kind: "image", width: 1666, height: 976 } as const;
 const recording = { kind: "video", width: 1234, height: 720 } as const;
 
 const registry = {
   inscribe: {
+    kind: "story",
     title: "Inscribe",
+    meta: "Personal project · 2025",
     card: {
       summary: "A local first note-taking app, with a custom text editor",
       technologies: ["Next.js", "TypeScript", "tRPC", "Dexie"],
       cover: { src: "/inscribe/landing-page.png", width: 1666, height: 976 },
     },
-    liveUrl: "https://inscribe-notes.vercel.app/",
-    sourceUrl: "https://github.com/MahmoudOmiesh/Inscribe",
-    description:
-      "Inscribe is a modern, local-first note-taking application with AI-powered writing assistance that I built as a solo personal project using Next.js, and tRPC. This application features a completely custom-built rich text editor from scratch, real-time sync capabilities, and integrated AI writing assistance.",
-    technologies: [
-      { name: "Next.js", icon: NextjsIcon },
-      { name: "TypeScript", icon: TypescriptIcon },
-      { name: "Tailwind CSS", icon: TailwindIcon },
-      { name: "Shadcn UI", icon: ShadcnIcon },
-      { name: "Tanstack Query", icon: TanstackQueryIcon },
-      { name: "Floating UI", icon: FloatingUiIcon },
-      { name: "tRPC", icon: TrpcIcon },
-      { name: "Dexie", icon: DexieIcon },
-      { name: "Prisma", icon: PrismaIcon },
-      { name: "PostgreSQL", icon: PostgreSQLIcon },
-      { name: "Better Auth", icon: BetterAuthIcon },
-    ],
-    overview: [
-      {
-        label: "Phase 1",
-        title: "Building the Rich Text Editor",
-        body: [
-          "I decided to build a completely custom rich text editor instead of using existing solutions just for fun (it wasn't fun). It's built with a transaction-based architecture and custom input handling to intercept browser events.",
-        ],
-        groups: [
-          {
-            heading: "Rich Formatting",
-            items: [
-              "All standard formatting (bold, italic, etc.)",
-              "Semantic structure (headings, quotes, etc.)",
-              "Unordered lists, ordered lists, and checklists all with support for nesting items",
-            ],
-          },
-          {
-            heading: "Interactive Features",
-            items: [
-              "Floating toolbar on text selection",
-              "Context handle `⠿` when hovering near blocks",
-              "Command menu with `/`",
-              "Emoji picker with `:`",
-            ],
-          },
-        ],
-      },
-      {
-        label: "Phase 2",
-        title: "Creating the Local-First Note App",
-        body: [
-          "I Built a proper note-taking app around the editor that works offline-first with IndexedDB (with Dexie). The sync system tracks changes and syncs them in the background when you're online.",
-        ],
-        groups: [
-          {
-            heading: "Organization & Functionality",
-            items: ["Folders with custom emojis", "Favorites, archive, and trash", "Full-text search indexing"],
-          },
-          {
-            heading: "Other Features",
-            items: [
-              "AI writing assistant with real-time streaming",
-              "Background sync with operation queue",
-              "Export to clean Markdown or styled HTML",
-            ],
-          },
-        ],
-      },
-    ],
-    gallery: {
-      heading: "Take a Peek",
-      caption: "Here are some screenshots of the project.",
-      media: [
-        { ...screenshot, src: "/inscribe/landing-page.png" },
-        { ...screenshot, src: "/inscribe/note.png" },
-        { ...screenshot, src: "/inscribe/note-favorite.png" },
-        { ...screenshot, src: "/inscribe/note-archive.png" },
-        { ...screenshot, src: "/inscribe/note-trash.png" },
-        { ...screenshot, src: "/inscribe/note-font.png" },
-        { ...screenshot, src: "/inscribe/note-search.png" },
-      ],
-    },
-    spotlight: {
-      intro:
-        "Don't get me wrong, I really like the custom rich text editor I built from scratch, but honestly what I want to talk about is the sync system.",
-      items: [
-        {
-          label: "Offline-First",
-          icon: CloudDownloadIcon,
-          title: "Local-First Architecture",
-          bullets: [
-            "Data lives primarily on the device, with server as a backup",
-            "Every user action gets queued as an operation in IndexedDB",
-            "The sync system never blocks you waiting for network requests - you're always productive even when offline",
-            "Pending operations are synced in the background when you're online",
-            "Failed operations are retried automatically",
-          ],
-        },
-        {
-          label: "Real-Time Sync",
-          icon: RefreshCwIcon,
-          title: "Multi-Device Harmony",
-          bullets: [
-            "Incremental sync only pulls changes from the server since last successful sync",
-            "Last-write-wins approach keeps things simple but effective",
-            "Real-time updates through `tRPC` using server-sent events (SSE)",
-            "A mutation status store to tell you when changes are syncing",
-            "Remote updates are merged with local state, preserving any user actions made during sync even if incoming data conflicts",
-          ],
-        },
-      ],
-      callout: {
-        label: "Why this matters:",
-        text: "Most apps break when you go offline or have slow connections. This architecture ensures you can always work productively, no matter the situation and your data is always in sync.",
-      },
-    },
-    lessons: [
-      'This project taught me way more than I expected, especially about the hidden complexity in things that seem simple on the surface. Text editing is deceptively hard - what looks like "just typing" involves managing selections, handling browser inconsistencies, and dealing with contentEditable quirks.',
-      "Most importantly, I learned that building from scratch teaches you more than using existing solutions ever could, even if it takes ten times longer. Every edge case that libraries handle becomes your problem to solve.",
-    ],
+    Content: Inscribe,
   },
 
   "sorting-visualizer": {
+    kind: "archived",
     title: "Sorting Visualizer",
-    card: {
-      summary: "A visualizer for popular sorting alogrithms, with step-by-step demonstrations.",
-      technologies: ["C++", "QT"],
-      cover: { src: "/visualizer/base.png", width: 1680, height: 975, grayscale: true },
-    },
     sourceUrl: "https://github.com/MahmoudOmiesh/Sorting-Visualizer",
     description:
       "I built this interactive desktop application in C++ using the Qt6 framework to help people understand how different sorting algorithms actually work behind the scenes. The app visualizes six classic sorting algorithms (bubble sort, selection sort, insertion sort, merge sort, quick sort, and heap sort) by showing colorful bars that represent array elements being compared, swapped, and moved around in real-time.",
@@ -260,6 +148,7 @@ const registry = {
   },
 
   sputnik: {
+    kind: "archived",
     title: "Sputnik",
     liveUrl: "https://www.linkedin.com/company/sputnik-academy/",
     sourceUrl: "https://github.com/abdalrahmanf2/sputnik",
