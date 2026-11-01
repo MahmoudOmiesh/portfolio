@@ -1,11 +1,11 @@
 Inscribe is a notes app I built on my own in the summer of 2025. It saves your notes in the browser first, so it works offline, and syncs them to a server in the background. I wrote the text editor in it myself, without an editor library like Tiptap or Lexical.
 
 <Screens
-  src="/inscribe/note.png"
-  width={1666}
-  height={976}
-  alt="A note titled A Cool Note in Inscribe's dark theme. It has a heading, a bulleted list with italic, highlighted and underlined text, a divider and a quote. The sidebar on the left has search, All Notes, Favorites, Archive, Trash and two folders of notes."
-  caption="A note in Inscribe, with its folders in the sidebar."
+  src="/inscribe/note.webp"
+  width={2400}
+  height={2080}
+  alt="A trip-planning note in Inscribe's dark theme, next to a sidebar of folders with emojis. The note has headings, a paragraph with bold, italic, underlined and highlighted text, a numbered itinerary with lettered sub-items, a checklist with one item done, and a quote."
+  caption="A note in Inscribe. The folders and notes are made up."
 />
 
 ## What I built
@@ -15,6 +15,22 @@ Inscribe is a notes app I built on my own in the summer of 2025. It saves your n
 - **Organizing.** Folders with an emoji each, favorites, archive, trash, and search.
 - **An AI assistant.** You give it an instruction for a block, its answer streams into the block, and you keep it or discard it.
 - **Export** to Markdown or HTML.
+
+<Screens
+  src="/inscribe/slash-menu.webp"
+  width={1800}
+  height={1264}
+  alt="A slash typed on a new line in a note, with a command menu open below it listing Paragraph, Heading 1 to 4 and Blockquote, and a search box at the top."
+  caption="Typing / opens a menu to change the block."
+/>
+
+<Screens
+  src="/inscribe/toolbar.webp"
+  width={1868}
+  height={596}
+  alt="A selected heading in a note, with a floating toolbar above it showing the block type, bold, italic, underline, code and highlight color."
+  caption="Selecting text shows a toolbar for formatting it."
+/>
 
 **Stack.** Next.js, tRPC, Prisma and Postgres, Dexie, Better Auth, Tailwind with shadcn/ui, Floating UI, and the Vercel AI SDK with Gemini.
 

@@ -3,6 +3,7 @@ import type { MDXContent } from "mdx/types";
 import FirstImpact from "./work/firstimpact.mdx";
 import FirstImpactReviewTool from "./work/firstimpact-review-tool.mdx";
 import Logibytes from "./work/logibytes.mdx";
+import Sputnik from "./work/sputnik.mdx";
 
 export type Story = {
   title: string;
@@ -27,10 +28,18 @@ const logibytesJob = {
   period: "Feb 2026 to present",
 };
 
+const sputnikJob = {
+  company: "Sputnik Academy",
+  role: "Fullstack Intern",
+  location: "Remote, Egypt",
+  period: "Mar to Aug 2025",
+};
+
 const registry = {
   firstimpact: { title: "The FirstImpact platform", ...firstImpactJob, Content: FirstImpact },
   "firstimpact-review-tool": { title: "The note review tool", ...firstImpactJob, Content: FirstImpactReviewTool },
   logibytes: { title: "The fleet and merchant portals", ...logibytesJob, Content: Logibytes },
+  sputnik: { title: "The Sputnik Academy platform", ...sputnikJob, Content: Sputnik },
 } satisfies Record<string, Story>;
 
 export type StorySlug = keyof typeof registry;

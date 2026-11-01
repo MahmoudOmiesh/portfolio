@@ -38,5 +38,6 @@ export const experience: Job[] = [
     endDate: "Aug 2025",
     description: "An online learning platform for kids I worked on during my internship at Sputnik Academy.",
     technologies: ["React", "TypeScript", "TanStack Router", "Hono"],
+    stories: ["sputnik"],
   },
 ];
