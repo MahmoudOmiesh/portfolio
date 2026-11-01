@@ -64,7 +64,7 @@ function Projects() {
       <h2 id="projects" className="mb-3 section-label">
         Projects
       </h2>
-      <ul className="grid gap-x-3.5 gap-y-6 min-[560px]:grid-cols-2">
+      <ul className={cn("grid gap-x-3.5 gap-y-6", featured.length > 1 && "min-[560px]:grid-cols-2")}>
         {featured.map(({ slug, title, card }, index) => (
           <li key={slug}>
             <Link to="/projects/$slug" params={{ slug }} className="group block">
@@ -139,11 +139,26 @@ function JobRow({ job }: { job: Job }) {
           {job.description}
         </span>
       </CollapsibleTrigger>
+      {job.stories && (
+        <div className="-mt-1 flex flex-wrap gap-x-5 gap-y-1 pb-3 min-[560px]:pl-35">
+          {job.stories.map((slug) => (
+            <Link
+              key={slug}
+              to="/work/$slug"
+              params={{ slug }}
+              className="inline-flex items-center gap-1 text-sm link-underline"
+            >
+              {stories[slug].title}
+              <ChevronRightIcon aria-hidden className="size-3.5" />
+            </Link>
+          ))}
+        </div>
+      )}
       <CollapsibleContent
         hiddenUntilFound
         className="h-(--collapsible-panel-height) overflow-hidden transition-[height] duration-200 ease-out data-ending-style:h-0 data-starting-style:h-0 min-[560px]:pl-35"
       >
-        <ul aria-label="Technologies" className="flex flex-wrap gap-1.5">
+        <ul aria-label="Technologies" className="flex flex-wrap gap-1.5 pb-4">
           {job.technologies.map((technology) => (
             <li key={technology}>
               <Badge variant="outline" className="font-normal text-muted-foreground">
@@ -152,17 +167,6 @@ function JobRow({ job }: { job: Job }) {
             </li>
           ))}
         </ul>
-        {job.stories?.map((slug) => (
-          <Link
-            key={slug}
-            to="/work/$slug"
-            params={{ slug }}
-            className="mt-3 mb-4 mr-5 inline-flex items-center gap-1 text-sm link-underline"
-          >
-            {stories[slug].title}
-            <ChevronRightIcon aria-hidden className="size-3.5" />
-          </Link>
-        ))}
       </CollapsibleContent>
     </Collapsible>
   );
