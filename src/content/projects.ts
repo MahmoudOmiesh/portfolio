@@ -16,7 +16,7 @@ const registry = {
     card: {
       summary: "A local first note-taking app, with a custom text editor",
       technologies: ["Next.js", "TypeScript", "tRPC", "Dexie"],
-      cover: { src: "/inscribe/landing-page.png", width: 1666, height: 976 },
+      cover: { src: "/inscribe/cover.webp", width: 2400, height: 1500 },
     },
     Content: Inscribe,
   },
