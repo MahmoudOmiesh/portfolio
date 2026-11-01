@@ -1,0 +1,41 @@
+Sputnik Academy teaches kids about space, and it wanted to start selling its courses online. During my internship, four of us interns built its website, where families buy space courses and game kits for kids aged 6 to 14, and watch the lessons. I built most of what students see and all of the checkout.
+
+<Screens
+  src="/sputnik/course-viewer.webp"
+  width={2400}
+  height={1988}
+  alt="A student inside a course about the solar system. The sidebar shows 43% progress, finished lessons in green and a section quiz scored 4 out of 5. The main area is a quiz on the rocky planets with Mercury picked for the first question."
+  caption="A student partway through a course. The courses and people in these screenshots are made up."
+/>
+
+## What I built
+
+- **Checkout and orders.** Card and mobile wallet payments through Paymob, coupons, and shipping orders for game kits. The server works out the price from the cart itself and checks that each payment report really came from Paymob before it gives access to a course. Admins see every order and update its status. Paymob's docs left a lot out, and some of what they did say was wrong, so this took longer than it looks.
+- **The course viewer.** Video lessons, section quizzes graded on the server, reviews, and progress. When a video ends, the lesson is marked done and the next one opens.
+- **Browsing and buying.** The course list with filters and pages, course previews, game kit pages, the cart, and pages for your courses and orders.
+- **The admin side.** Editors for lessons and quizzes, publishing courses, instructors and tags, coupons and game kits, and a page per student with their progress, quiz answers and reviews.
+- **Uploads.** The server side of uploading lesson videos to Mux and files to S3.
+
+<Screens
+  src="/sputnik/checkout.webp"
+  width={2400}
+  height={2108}
+  alt="The checkout with a course and a rocket lab game kit, both 20% off with the coupon SPACE20, a total of EGP 1,920, and a shipping address in Alexandria filled in next to them."
+  caption="Checking out a course and a game kit together. The address form only shows when there's a kit in the cart."
+/>
+
+<Screens
+  src="/sputnik/student-progress.webp"
+  width={1860}
+  height={1760}
+  alt="The admin's student dashboard on the Quizzes tab, listing three completed section quizzes with scores of 80%, 100% and 75%. Tabs for Lesson Progress and Review sit above them."
+  caption="What an admin sees for one student in a course."
+/>
+
+Others on the team built sign-in, most of the landing page, and the signed links that play the lesson videos.
+
+**Stack.** React, TanStack Router and Query, Hono on Bun, Prisma and Postgres, Kinde, Paymob, Mux, S3, and Turborepo.
+
+## What I learned
+
+This was my first internship, so I learned how to work on a team, meet deadlines, take part in meetings and talk to the people we were building for. Building software turned out to be as much about working with people as about writing code.
