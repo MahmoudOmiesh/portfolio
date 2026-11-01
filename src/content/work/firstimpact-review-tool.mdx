@@ -22,12 +22,12 @@ After every visit, a doctor at FirstImpact Med writes a note, and someone has to
 
 I built it from the first commit.
 
-- **The AI review.** A small model first makes sure the draft is the right document for the right patient and visit. Then a larger model reviews it against the rules for that type of note. It searches a library of medical books and PubMed as it goes, and every finding links to the page or paper behind it. It can only cite what its searches actually found, so it can't make up a source.
+- **The AI review.** A small model first makes sure the draft is the right document for the right patient and visit. Then a larger model reviews it against the rules for that type of note. It searches a library of medical books and PubMed as it goes, and every finding links to the page or paper behind it. It can only cite what its searches actually found, so it can't cite a source that doesn't exist.
 - **Rules that are safe to change.** Admins edit the rules in the app. A new version has to pass a set of test notes before it's used on real ones.
 - **The workflow.** An MA reads the AI's findings first and passes on only what needs the doctor. The doctor revises the note and confirms the final version, and the MA files it. Email and in-app notifications tell each person when it's their turn.
 - **An assistant on the web and in Slack.** It answers questions about a note with sources, reads the patient's other records, and rewrites the note. It can also do most steps of a review for you, like marking findings or sending the note to the doctor. Each step shows up as a card you confirm with one click.
 - **Monthly reports.** An audit of a sample of each doctor's signed notes, and a report on the mistakes they keep making.
-- **Patient data.** Notes are encrypted at rest and deleted once their retention period ends.
+- **Patient data.** Notes and chat history are encrypted with AES-256-GCM before they go into the database, using a key from AWS KMS. They're deleted once their retention period ends.
 
 **Stack.** TanStack Start, oRPC, Prisma and Postgres, Better Auth, Inngest, the Vercel AI SDK with Claude, Pinecone, and Hono for the Slack bot.
 

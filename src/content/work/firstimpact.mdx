@@ -1,4 +1,4 @@
-FirstImpact Med is a small US startup in personal-injury medicine. Its platform takes a patient from an AI-guided intake to a clinical report signed by a doctor, and lets the patient's law firm follow the case. There are four of us on the team, and most of the code came from me and one other developer.
+FirstImpact Med is a small US startup in personal-injury medicine. Its platform takes a patient from an AI-guided intake to a clinical report signed by a doctor, and lets the patient's law firm follow the case. It's live, and real patients now go from intake to a signed report in a few hours. There are four of us on the team, and most of the code came from me and one other developer.
 
 <Screens
   src="/firstimpact/intake.webp"
@@ -32,7 +32,7 @@ Personal-injury care in the US often runs on a lien. The clinic treats the patie
 4. A doctor sees the patient, evaluates them and writes the note.
 5. Once the note is final, the clinic sends it to the law firm.
 
-The whole process used to take days. The platform replaces the online version of it. The assistant's phone call becomes an AI intake the patient does on their own, and they sign the lien right after it. The doctor starts from a note the AI drafted from the intake. The law firm follows the case in its own portal instead of waiting to hear from the clinic. It's live, and real patients now go from intake to a signed report in a few hours.
+The whole process used to take days. The platform replaces the online version of it. The assistant's phone call becomes an AI intake the patient does on their own, and they sign the lien right after it. The doctor starts from a note the AI drafted from the intake. The law firm follows the case in its own portal instead of waiting to hear from the clinic.
 
 ## Spotlight: letting a law firm invite its patients
 
@@ -48,7 +48,7 @@ A patient has to be verified with an ID before they can sign their lien. The fir
   ]}
 />
 
-The hard part was keeping it easy for everyone involved. The first version sent the patient a one-time code by SMS. Then we matched their ID against the details the firm entered. In the end the patient doesn't make an account at all. They open the link, scan their ID, and they're in.
+The hard part was keeping it easy for the patient. Most of our patients aren't technical, and every extra step was friction for them. The first version had the patient make an account and enter a one-time code we sent by SMS. Then we matched their ID against the details the firm entered. In the end the patient doesn't make an account or enter a code at all. They open the link, scan their ID, and they're in.
 
 <Screens
   narrow
@@ -98,7 +98,7 @@ The same change removed "unsign". Once a note has been sent, with its PDF and bi
 
 - **Find out what the other system can't do before you design around it.** One limit in the records system, entries we couldn't edit, decided where the note lives.
 - **Build the simple version first.** Requirements changed a lot here. Doctors were going to edit in the records system, then in our editor. There were no prescriptions, then there were. People could belong to one firm, then several. Now I build the simplest version that works and ship it. If nobody complains, everyone's happy and I've saved myself work.
-- **How to build with AI agents.** This is where I learned to code with agents. By the time I started my next project, [the review tool](/work/firstimpact-review-tool), I had an order for fixing their mistakes, which I picked up from [@poteto](https://x.com/poteto). When an agent gets something wrong, I fix it at the highest level I can:
+- **How to build with AI agents.** This is where I learned to code with agents. By the time I started my next project, [the review tool](/work/firstimpact-review-tool), I had an order for fixing their mistakes, which I picked up from [Lauren Tan (@poteto)](https://x.com/poteto). When an agent gets something wrong, I fix it at the highest level I can:
   1. **The codebase.** There's one way to do each thing, and the code itself shows how things are written, so an agent copies the right pattern. I clean up between sprints of work and keep code comments rare, because comments drift out of date and mislead agents.
   2. **Static analysis.** Strict types and lint rules catch what the codebase alone can't.
   3. **Prose.** An `AGENTS.md` covers what can't be checked automatically.

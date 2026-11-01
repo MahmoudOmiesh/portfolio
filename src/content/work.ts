@@ -23,7 +23,7 @@ const firstImpactJob = {
 
 const logibytesJob = {
   company: "Logibytes",
-  role: "Frontend Developer",
+  role: "Part-time Frontend Developer",
   location: "Remote, Saudi Arabia",
   period: "Feb 2026 to present",
 };
