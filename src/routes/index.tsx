@@ -1,7 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { cn } from "cn";
 import { ArrowUpRightIcon, ChevronRightIcon } from "lucide-react";
-import { Fragment } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
@@ -58,9 +57,7 @@ function Home() {
 }
 
 function Projects() {
-  const entries = Object.entries(projects);
-  const featured = entries.flatMap(([slug, project]) => (project.kind === "story" ? [{ slug, ...project }] : []));
-  const archived = entries.flatMap(([slug, { kind, title }]) => (kind === "archived" ? [{ slug, title }] : []));
+  const featured = Object.entries(projects).map(([slug, project]) => ({ slug, ...project }));
 
   return (
     <section aria-labelledby="projects" className="mt-16">
@@ -88,17 +85,6 @@ function Projects() {
           </li>
         ))}
       </ul>
-      <p className="mt-6 text-sm text-muted-foreground">
-        Older projects:{" "}
-        {archived.map(({ slug, title }, index) => (
-          <Fragment key={slug}>
-            {index > 0 && " · "}
-            <Link to="/projects/$slug" params={{ slug }} className="text-foreground link-underline">
-              {title}
-            </Link>
-          </Fragment>
-        ))}
-      </p>
     </section>
   );
 }
