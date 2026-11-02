@@ -2,23 +2,29 @@ import { cn } from "cn";
 import { ArrowRightIcon } from "lucide-react";
 import type { MDXComponents } from "mdx/types";
 
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
 type Step = { title: string; note?: string };
 
 function Flow({ label, steps }: { label: string; steps: Step[] }) {
   return (
-    <figure className="my-6">
-      <figcaption className="mb-2.5 text-[13px] text-muted-foreground">{label}</figcaption>
-      <ol className="grid auto-cols-fr gap-6 min-[560px]:grid-flow-col">
+    <figure className="my-8">
+      <figcaption className="mb-3 text-sm text-muted-foreground">{label}</figcaption>
+      <ol className="grid auto-cols-fr gap-6 sm:grid-flow-col">
         {steps.map((step, index) => (
-          <li key={step.title} className="relative rounded-lg border bg-card px-3 py-2.5">
+          <li key={step.title} className="relative">
             {index > 0 && (
               <ArrowRightIcon
                 aria-hidden
-                className="absolute -top-5 left-1/2 size-3.5 -translate-x-1/2 rotate-90 text-faint min-[560px]:top-1/2 min-[560px]:-left-5 min-[560px]:translate-x-0 min-[560px]:-translate-y-1/2 min-[560px]:rotate-0"
+                className="absolute -top-5 left-1/2 size-3.5 -translate-x-1/2 rotate-90 text-muted-foreground sm:top-1/2 sm:-left-5 sm:translate-x-0 sm:-translate-y-1/2 sm:rotate-0"
               />
             )}
-            <p className="text-[13.5px] font-medium">{step.title}</p>
-            {step.note && <p className="mt-0.5 text-[12.5px] leading-snug text-muted-foreground">{step.note}</p>}
+            <Card size="sm" className="h-full">
+              <CardHeader>
+                <CardTitle>{step.title}</CardTitle>
+                {step.note && <CardDescription>{step.note}</CardDescription>}
+              </CardHeader>
+            </Card>
           </li>
         ))}
       </ol>
@@ -43,39 +49,49 @@ function Screens({
   narrow?: boolean;
 }) {
   return (
-    <figure className="my-8">
+    <figure className={cn("my-10", !narrow && "lg:-mx-24")}>
       <a
         href={src}
         target="_blank"
         rel="noreferrer noopener"
-        className={cn("block cursor-zoom-in", narrow && "mx-auto max-w-65")}
+        className={cn("block cursor-zoom-in rounded-lg", narrow && "mx-auto max-w-65")}
       >
-        <img src={src} alt={alt} width={width} height={height} loading="lazy" className="block h-auto w-full" />
+        <img
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          loading="lazy"
+          className="block h-auto w-full rounded-lg outline -outline-offset-1 outline-black/10 dark:outline-white/10"
+        />
       </a>
-      <figcaption className="mt-3 text-center text-[13px] text-muted-foreground">{caption}</figcaption>
+      <figcaption className={cn("mt-3.5 text-sm text-muted-foreground", narrow ? "text-center" : "lg:mx-24")}>
+        {caption}
+      </figcaption>
     </figure>
   );
 }
 
 export const prose: MDXComponents = {
   h2: ({ children, ...props }) => (
-    <h2 className="mt-14 mb-3 text-[19px] font-semibold tracking-[-0.01em] text-foreground" {...props}>
+    <h2 className="mt-18 mb-2 text-3xl font-extrabold tracking-tighter text-balance text-foreground" {...props}>
       {children}
     </h2>
   ),
-  p: (props) => <p className="mt-4 first:mt-0" {...props} />,
-  ul: (props) => <ul className="mt-4 list-disc space-y-2 pl-4.5 marker:text-faint" {...props} />,
-  ol: (props) => <ol className="mt-4 list-decimal space-y-2 pl-5 marker:text-faint" {...props} />,
-  li: ({ className, ...props }) => <li className={cn("pl-1 [&>ol]:mt-2", className)} {...props} />,
-  strong: (props) => <strong className="font-medium text-foreground" {...props} />,
+  p: (props) => <p className="mt-5 first:mt-0" {...props} />,
+  ul: (props) => <ul className="mt-5 list-disc space-y-2.5 pl-5 marker:text-brand" {...props} />,
+  ol: (props) => <ol className="mt-5 list-decimal space-y-2.5 pl-5 marker:text-brand" {...props} />,
+  li: ({ className, ...props }) => <li className={cn("pl-1 [&>ol]:mt-2.5", className)} {...props} />,
+  strong: (props) => <strong className="font-bold text-foreground" {...props} />,
+  // Relative to the surrounding text, so code reads the same size in a paragraph or a list item.
   code: (props) => (
-    <code className="rounded-[5px] bg-muted px-1.5 py-0.5 font-mono text-[0.85em] text-foreground" {...props} />
+    <code className="rounded-sm bg-muted px-1.5 py-0.5 font-mono text-[0.85em] text-foreground" {...props} />
   ),
   a: ({ href = "", children, ...props }) => (
     <a
       href={href}
       {...(!href.startsWith("/") && { target: "_blank", rel: "noreferrer noopener" })}
-      className="link-underline"
+      className="link text-foreground"
       {...props}
     >
       {children}

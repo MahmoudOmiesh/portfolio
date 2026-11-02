@@ -1,7 +1,8 @@
 import { HeadContent, Link, Outlet, Scripts, createRootRoute } from "@tanstack/react-router";
-import { cn } from "cn";
 
-import { buttonVariants } from "@/components/ui/button";
+import { ProfileLinks } from "@/components/profile-links";
+import { Button } from "@/components/ui/button";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
 import { profile } from "@/content/profile";
 
 import appCss from "../styles.css?url";
@@ -60,38 +61,32 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mx-auto flex min-h-svh max-w-160 flex-col px-6 pt-24 pb-18">
-      <main className="flex-1">{children}</main>
-      <footer className="mt-20 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 text-[13.5px] text-muted-foreground">
-        <nav aria-label="Links" className="flex flex-wrap gap-x-4 gap-y-1">
-          {profile.links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target={link.newTab ? "_blank" : undefined}
-              rel={link.newTab ? "noreferrer noopener" : undefined}
-              className="transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
+    <>
+      <main>{children}</main>
+      <footer className="mx-auto mt-24 flex max-w-5xl flex-wrap justify-between gap-3 px-5 pb-16 text-sm text-muted-foreground sm:px-8">
         <p suppressHydrationWarning>
           &copy; {year} {profile.copyright}
         </p>
+        <ProfileLinks aria-label="Footer" />
       </footer>
-    </div>
+    </>
   );
 }
 
 function Fallback({ heading, text, action }: { heading: string; text: string; action: string }) {
   return (
-    <div className="flex flex-col items-start pt-16">
-      <h1 className="text-[28px] font-semibold tracking-tight">{heading}</h1>
-      <p className="mt-1.5 text-[15px] text-muted-foreground">{text}</p>
-      <Link to="/" className={cn(buttonVariants(), "mt-6")}>
-        {action}
-      </Link>
-    </div>
+    <Empty className="py-32">
+      <EmptyHeader>
+        <EmptyTitle>
+          <h1 className="text-5xl leading-none font-extrabold tracking-tighter">{heading}</h1>
+        </EmptyTitle>
+        <EmptyDescription className="text-lg">{text}</EmptyDescription>
+      </EmptyHeader>
+      <EmptyContent>
+        <Button nativeButton={false} render={<Link to="/" />}>
+          {action}
+        </Button>
+      </EmptyContent>
+    </Empty>
   );
 }

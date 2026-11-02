@@ -1,23 +1,24 @@
 import type { MDXContent } from "mdx/types";
 
 import Inscribe from "./projects/inscribe.mdx";
+import type { Cover } from "./work";
 
 export type Project = {
   title: string;
-  meta: string;
-  card: { summary: string; technologies: string[]; cover: { src: string; width: number; height: number } };
+  kind: string;
+  year: string;
+  summary: string;
+  cover: Cover;
   Content: MDXContent;
 };
 
 const registry = {
   inscribe: {
     title: "Inscribe",
-    meta: "Personal project · 2025",
-    card: {
-      summary: "A local-first note-taking app, with a custom text editor",
-      technologies: ["Next.js", "TypeScript", "tRPC", "Dexie"],
-      cover: { src: "/inscribe/cover.webp", width: 2400, height: 1500 },
-    },
+    kind: "Personal project",
+    year: "2025",
+    summary: "A local-first note-taking app, with a custom text editor",
+    cover: { src: "/inscribe/cover.webp", width: 2400, height: 1500 },
     Content: Inscribe,
   },
 } satisfies Record<string, Project>;
