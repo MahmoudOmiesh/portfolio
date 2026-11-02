@@ -3,6 +3,7 @@ import { ArrowRightIcon } from "lucide-react";
 import type { MDXComponents } from "mdx/types";
 
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 type Step = { title: string; note?: string };
 
@@ -49,21 +50,28 @@ function Screens({
 }) {
   return (
     <figure className={cn("my-10", !narrow && "lg:-mx-24")}>
-      <a
-        href={src}
-        target="_blank"
-        rel="noreferrer noopener"
-        className={cn("block cursor-zoom-in rounded-lg", narrow && "mx-auto max-w-65")}
-      >
-        <img
-          src={src}
-          alt={alt}
-          width={width}
-          height={height}
-          loading="lazy"
-          className="block h-auto w-full rounded-lg outline -outline-offset-1 outline-black/10 dark:outline-white/10"
-        />
-      </a>
+      <Dialog>
+        <DialogTrigger className={cn("block w-full cursor-zoom-in rounded-lg", narrow && "mx-auto max-w-65")}>
+          <img
+            src={src}
+            alt={alt}
+            width={width}
+            height={height}
+            loading="lazy"
+            className="block h-auto w-full rounded-lg outline -outline-offset-1 outline-black/10 dark:outline-white/10"
+          />
+        </DialogTrigger>
+        <DialogContent className="pointer-events-none inset-4 flex w-auto max-w-none translate-none items-center justify-center bg-transparent p-0 ring-0 *:pointer-events-auto sm:inset-8 sm:max-w-none">
+          <DialogTitle className="sr-only">{alt}</DialogTitle>
+          <img
+            src={src}
+            alt=""
+            width={width}
+            height={height}
+            className="size-auto max-h-full max-w-full rounded-lg object-contain outline -outline-offset-1 outline-black/10 dark:outline-white/10"
+          />
+        </DialogContent>
+      </Dialog>
       <figcaption className={cn("mt-3.5 text-sm text-muted-foreground", narrow ? "text-center" : "lg:mx-24")}>
         {caption}
       </figcaption>
