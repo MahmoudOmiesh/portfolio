@@ -1,4 +1,18 @@
 {
   "printWidth": 120,
-  "ignorePatterns": ["src/routeTree.gen.ts"]
+  "ignorePatterns": [
+    "src/routeTree.gen.ts",
+    ".agent/**",
+    ".agents/**",
+    ".claude/**",
+    ".codex/**",
+    ".continue/**",
+    ".cursor/**",
+    ".gemini/**",
+    ".opencode/**",
+    ".pi/**",
+    ".roo/**",
+    ".windsurf/**",
+    "tools/oxlint/anti-slop/**"
+  ]
 }

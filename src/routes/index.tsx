@@ -10,6 +10,7 @@ import { jobs, type Cover } from "@/content/work";
 export const Route = createFileRoute("/")({ component: Home });
 
 const titleClass = "text-4xl leading-tight font-bold tracking-tight transition-colors hover:text-brand";
+
 const coverClass =
   "aspect-16/10 rounded-lg object-cover object-left-top outline -outline-offset-1 outline-black/10 dark:outline-white/10";
 

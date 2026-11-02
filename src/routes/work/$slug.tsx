@@ -5,7 +5,9 @@ import { storiesBySlug } from "@/content/work";
 
 function findStory(slug: string) {
   const entry = storiesBySlug.get(slug);
+
   if (!entry) throw notFound();
+
   return entry;
 }
 

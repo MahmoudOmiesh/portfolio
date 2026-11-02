@@ -5,7 +5,9 @@ import { projectsBySlug } from "@/content/projects";
 
 function findProject(slug: string) {
   const project = projectsBySlug.get(slug);
+
   if (!project) throw notFound();
+
   return project;
 }
 
