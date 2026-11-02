@@ -61,7 +61,7 @@ function Screens({
             className="image-outline block h-auto w-full rounded-lg"
           />
         </DialogTrigger>
-        <DialogContent className="pointer-events-none inset-4 flex w-auto max-w-none translate-none items-center justify-center bg-transparent p-0 ring-0 *:pointer-events-auto sm:inset-8 sm:max-w-none">
+        <DialogContent className="pointer-events-none inset-4 flex w-auto max-w-none translate-none items-center justify-center bg-transparent p-0 text-white ring-0 *:pointer-events-auto sm:inset-8 sm:max-w-none">
           <DialogTitle className="sr-only">{alt}</DialogTitle>
           <img
             src={src}
