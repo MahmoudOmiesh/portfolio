@@ -105,7 +105,7 @@ function Row({
   return (
     <li>
       <Separator />
-      <div className="grid gap-4 py-7 md:grid-cols-3 md:gap-8">
+      <div className="grid gap-4 py-7 md:grid-cols-3 md:items-baseline md:gap-8">
         <div className="text-sm text-muted-foreground tabular-nums">
           <h3 className="text-lg font-bold text-foreground">{heading}</h3>
           {details.map((detail) => (
