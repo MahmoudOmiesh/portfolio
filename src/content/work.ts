@@ -5,8 +5,11 @@ import FirstImpactReviewTool from "./work/firstimpact-review-tool.mdx";
 import Logibytes from "./work/logibytes.mdx";
 import Sputnik from "./work/sputnik.mdx";
 
+export type Cover = { src: string; width: number; height: number };
+
 export type Story = {
   title: string;
+  cover: Cover;
   company: string;
   role: string;
   location: string;
@@ -36,10 +39,30 @@ const sputnikJob = {
 };
 
 const registry = {
-  firstimpact: { title: "The FirstImpact platform", ...firstImpactJob, Content: FirstImpact },
-  "firstimpact-review-tool": { title: "The note review tool", ...firstImpactJob, Content: FirstImpactReviewTool },
-  logibytes: { title: "The fleet and merchant portals", ...logibytesJob, Content: Logibytes },
-  sputnik: { title: "The Sputnik Academy platform", ...sputnikJob, Content: Sputnik },
+  firstimpact: {
+    title: "The FirstImpact platform",
+    cover: { src: "/firstimpact/intake.webp", width: 1815, height: 1266 },
+    ...firstImpactJob,
+    Content: FirstImpact,
+  },
+  "firstimpact-review-tool": {
+    title: "The note review tool",
+    cover: { src: "/firstimpact/formal-review.webp", width: 1983, height: 1386 },
+    ...firstImpactJob,
+    Content: FirstImpactReviewTool,
+  },
+  logibytes: {
+    title: "The fleet and merchant portals",
+    cover: { src: "/logibytes/live-map.webp", width: 2352, height: 1672 },
+    ...logibytesJob,
+    Content: Logibytes,
+  },
+  sputnik: {
+    title: "The Sputnik Academy platform",
+    cover: { src: "/sputnik/course-viewer.webp", width: 2400, height: 1988 },
+    ...sputnikJob,
+    Content: Sputnik,
+  },
 } satisfies Record<string, Story>;
 
 export type StorySlug = keyof typeof registry;

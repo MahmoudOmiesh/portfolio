@@ -15,5 +15,5 @@ export const Route = createFileRoute("/work/$slug")({
 function StoryPage() {
   const { title, company, role, location, period, Content } = stories[Route.useLoaderData()];
 
-  return <StoryArticle title={title} meta={`${role} at ${company} · ${location} · ${period}`} Content={Content} />;
+  return <StoryArticle title={title} meta={`${role} at ${company}. ${location}. ${period}.`} Content={Content} />;
 }

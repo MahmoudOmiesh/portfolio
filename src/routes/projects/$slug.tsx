@@ -13,7 +13,7 @@ export const Route = createFileRoute("/projects/$slug")({
 });
 
 function ProjectPage() {
-  const { title, meta, Content } = projects[Route.useLoaderData()];
+  const { title, kind, year, Content } = projects[Route.useLoaderData()];
 
-  return <StoryArticle title={title} meta={meta} Content={Content} />;
+  return <StoryArticle title={title} meta={`${kind}, ${year}.`} Content={Content} />;
 }

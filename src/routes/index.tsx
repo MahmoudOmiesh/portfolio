@@ -1,188 +1,162 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { cn } from "cn";
-import { ArrowUpRightIcon, ChevronRightIcon } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { experience, type Job } from "@/content/experience";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { Separator } from "@/components/ui/separator";
+import { experience } from "@/content/experience";
 import { profile } from "@/content/profile";
 import { projects } from "@/content/projects";
-import { stories } from "@/content/work";
+import { stories, type Cover } from "@/content/work";
 
 export const Route = createFileRoute("/")({ component: Home });
 
+// Prerendered at build time, so the server and a client in a later year can disagree; the build year wins.
+const year = new Date().getFullYear();
+
+const rowClass = "grid gap-3.5 py-7 md:grid-cols-3 md:gap-8";
+const titleClass = "text-4xl leading-tight font-bold tracking-tight transition-colors hover:text-brand";
+const coverClass =
+  "aspect-16/10 rounded-lg object-cover object-left-top outline -outline-offset-1 outline-black/10 dark:outline-white/10";
+
 function Home() {
   return (
-    <>
-      <header className="flex items-center gap-3">
-        <div
-          aria-hidden
-          className="grid size-9.5 shrink-0 place-items-center rounded-[10px] bg-foreground text-[13px] font-semibold tracking-[-0.02em] text-background"
-        >
-          MO
-        </div>
-        <div>
-          <h1 className="text-[15.5px] font-medium">{profile.name}</h1>
-          <p className="text-[15px] text-muted-foreground">{profile.role}</p>
+    <div className="mx-auto max-w-5xl px-5 pt-12 pb-16 sm:px-8 sm:pt-18">
+      <header>
+        <h1 className="text-6xl leading-none font-extrabold tracking-tighter sm:text-8xl lg:text-9xl">
+          {profile.name.split(" ").map((word) => (
+            <span key={word} className="block">
+              {word}
+            </span>
+          ))}
+        </h1>
+        <div className="mt-10 flex flex-col gap-5 text-lg md:flex-row md:items-end md:justify-between md:gap-10">
+          <div className="max-w-md space-y-2">
+            {profile.about.map((paragraph, index) => (
+              <p key={paragraph} className={index > 0 ? "text-muted-foreground" : undefined}>
+                {paragraph}
+              </p>
+            ))}
+          </div>
+          <ProfileLinks aria-label="Profiles" className="font-medium" />
         </div>
       </header>
 
-      <section aria-label="About" className="mt-3.5 space-y-3.5 text-[15.5px] leading-[1.65] text-muted-foreground">
-        {profile.about.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
+      <section aria-labelledby="work">
+        <h2 id="work" className="mt-28 mb-1 text-3xl font-extrabold tracking-tighter">
+          Work
+        </h2>
+        <ol>
+          {experience.map((job) => (
+            <li key={`${job.company}-${job.role}`}>
+              <Separator />
+              <div className={rowClass}>
+                <div className="text-sm text-muted-foreground tabular-nums">
+                  <h3 className="text-lg font-bold text-foreground">{job.company}</h3>
+                  <p>{job.role}</p>
+                  <p>
+                    {job.startDate} to {job.endDate}
+                  </p>
+                </div>
+                <div className="flex flex-col items-start gap-1.5 md:col-span-2">
+                  {job.stories?.map((slug) => (
+                    <Preview key={slug} cover={stories[slug].cover}>
+                      <Link to="/work/$slug" params={{ slug }} className={titleClass}>
+                        {stories[slug].title}
+                      </Link>
+                    </Preview>
+                  ))}
+                  <p className="mt-2 max-w-xl text-lg text-muted-foreground">{job.description}</p>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <Separator />
       </section>
 
-      <nav aria-label="Profiles" className="mt-5.5 flex flex-wrap gap-x-4.5 gap-y-2 text-sm">
-        {profile.links.map((link) => (
-          <a
-            key={link.label}
-            href={link.href}
-            target={link.newTab ? "_blank" : undefined}
-            rel={link.newTab ? "noreferrer noopener" : undefined}
-            className="link"
-          >
-            {link.label}
-            {link.href === profile.resume.href && <span aria-hidden> ↗</span>}
-          </a>
-        ))}
-      </nav>
-
-      <Projects />
-      <Experience />
-      <CallToAction />
-    </>
-  );
-}
-
-function Projects() {
-  const featured = Object.entries(projects).map(([slug, project]) => ({ slug, ...project }));
-
-  return (
-    <section aria-labelledby="projects" className="mt-16">
-      <h2 id="projects" className="mb-3 section-label">
-        Projects
-      </h2>
-      <ul className={cn("grid gap-x-3.5 gap-y-6", featured.length > 1 && "min-[560px]:grid-cols-2")}>
-        {featured.map(({ slug, title, card }, index) => (
-          <li key={slug}>
-            <Link to="/projects/$slug" params={{ slug }} className="group block">
-              <div className="overflow-hidden rounded-xl border bg-card transition-transform duration-200 group-hover:-translate-y-0.5">
-                <img
-                  src={card.cover.src}
-                  alt=""
-                  width={card.cover.width}
-                  height={card.cover.height}
-                  loading={index === 0 ? "eager" : "lazy"}
-                  className="aspect-16/10 w-full object-cover object-top"
-                />
+      <section aria-labelledby="projects">
+        <h2 id="projects" className="mt-28 mb-1 text-3xl font-extrabold tracking-tighter">
+          Projects
+        </h2>
+        <ul>
+          {Object.entries(projects).map(([slug, project]) => (
+            <li key={slug}>
+              <Separator />
+              <div className={rowClass}>
+                <div className="text-sm text-muted-foreground tabular-nums">
+                  <h3 className="text-lg font-bold text-foreground">{project.kind}</h3>
+                  <p>{project.year}</p>
+                </div>
+                <div className="flex flex-col items-start gap-1.5 md:col-span-2">
+                  <Preview cover={project.cover}>
+                    <Link to="/projects/$slug" params={{ slug }} className={titleClass}>
+                      {project.title}
+                    </Link>
+                  </Preview>
+                  <p className="mt-2 max-w-xl text-lg text-muted-foreground">{project.summary}</p>
+                </div>
               </div>
-              <h3 className="mt-2.5 text-[15px] font-medium">{title}</h3>
-              <p className="mt-0.5 text-sm leading-[1.45] text-muted-foreground">{card.summary}</p>
-              <p className="mt-1.5 text-[12.5px] text-muted-foreground">{card.technologies.join(" · ")}</p>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-}
-
-function Experience() {
-  return (
-    <section aria-labelledby="experience" className="mt-16">
-      <h2 id="experience" className="mb-3 section-label">
-        Experience
-      </h2>
-      <ol>
-        {experience.map((job) => (
-          <li key={`${job.company}-${job.role}`} className="border-t last:border-b">
-            <JobRow job={job} />
-          </li>
-        ))}
-      </ol>
-      <a
-        href={profile.resume.href}
-        target="_blank"
-        rel="noreferrer noopener"
-        aria-label={`${profile.resume.label} (opens in a new tab)`}
-        className="mt-5 inline-block text-sm link"
-      >
-        {profile.resume.label}
-        <span aria-hidden> ↗</span>
-      </a>
-    </section>
-  );
-}
-
-function JobRow({ job }: { job: Job }) {
-  return (
-    <Collapsible>
-      <CollapsibleTrigger className="group grid w-full cursor-pointer grid-cols-[1fr_auto] items-baseline gap-x-4 gap-y-1 py-3 text-left min-[560px]:grid-cols-[124px_1fr]">
-        <span className="text-[15px]">
-          <span className="font-medium">{job.role}</span> <span className="text-muted-foreground">· {job.company}</span>
-        </span>
-        <span className="flex items-center gap-2 text-[13px] whitespace-nowrap text-muted-foreground tabular-nums min-[560px]:col-start-1 min-[560px]:row-start-1">
-          <span aria-hidden>
-            {job.startDate} — {job.endDate}
-          </span>
-          <span className="sr-only">
-            {job.startDate} to {job.endDate}
-          </span>
-          <ChevronRightIcon
-            aria-hidden
-            className="size-3 shrink-0 text-muted-foreground transition-transform duration-200 group-data-panel-open:rotate-90"
-          />
-        </span>
-        <span className="col-span-full text-[14.5px] leading-normal text-muted-foreground min-[560px]:col-start-2">
-          {job.description}
-        </span>
-      </CollapsibleTrigger>
-      {job.stories && (
-        <div className="-mt-1 flex flex-wrap gap-x-5 gap-y-1 pb-3 min-[560px]:pl-35">
-          {job.stories.map((slug) => (
-            <Link key={slug} to="/work/$slug" params={{ slug }} className="inline-flex items-center gap-1 text-sm link">
-              {stories[slug].title}
-              <ChevronRightIcon aria-hidden className="size-3.5" />
-            </Link>
-          ))}
-        </div>
-      )}
-      <CollapsibleContent
-        hiddenUntilFound
-        className="h-(--collapsible-panel-height) overflow-hidden transition-[height] duration-200 ease-out data-ending-style:h-0 data-starting-style:h-0 min-[560px]:pl-35"
-      >
-        <ul aria-label="Technologies" className="flex flex-wrap gap-1.5 pb-4">
-          {job.technologies.map((technology) => (
-            <li key={technology}>
-              <Badge variant="outline" className="font-normal text-muted-foreground">
-                {technology}
-              </Badge>
             </li>
           ))}
         </ul>
-      </CollapsibleContent>
-    </Collapsible>
+        <Separator />
+      </section>
+
+      <section aria-labelledby="cta" className="mt-30">
+        <p id="cta" className="mb-3.5 text-lg text-muted-foreground">
+          {profile.cta.text}
+        </p>
+        <a
+          href={`mailto:${profile.email}`}
+          className="text-5xl leading-none font-extrabold tracking-tighter underline decoration-brand decoration-4 underline-offset-8 sm:text-7xl"
+        >
+          {profile.cta.button}
+        </a>
+      </section>
+
+      <footer className="mt-24 flex flex-wrap justify-between gap-3 text-sm text-muted-foreground">
+        <p suppressHydrationWarning>
+          &copy; {year} {profile.copyright}
+        </p>
+        <ProfileLinks aria-label="Footer" />
+      </footer>
+    </div>
   );
 }
 
-function CallToAction() {
+function ProfileLinks(props: React.ComponentProps<"nav">) {
   return (
-    <section aria-labelledby="cta" className="mt-16 border-t pt-10">
-      <h2 id="cta" className="text-[19px] font-semibold tracking-[-0.01em]">
-        {profile.cta.heading}
-      </h2>
-      <p className="mt-1.5 max-w-[50ch] text-[15px] leading-relaxed text-pretty text-muted-foreground">
-        {profile.cta.text}
-      </p>
-      <a href={`mailto:${profile.email}`} className={cn(buttonVariants({ size: "lg" }), "group/cta mt-5 px-3")}>
-        {profile.cta.button}
-        <ArrowUpRightIcon
-          data-icon="inline-end"
-          className="transition-transform group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
-        />
-      </a>
-    </section>
+    <nav {...props}>
+      <ul className="flex gap-5">
+        {profile.links.map((link) => (
+          <li key={link.label}>
+            <a href={link.href} target="_blank" rel="noreferrer noopener" className="link">
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
+// Touch screens can't hover, so below md the cover shows inline under the title instead of in the card.
+function Preview({ cover, children }: { cover: Cover; children: React.ReactElement }) {
+  return (
+    <>
+      <HoverCard>
+        <HoverCardTrigger delay={150} render={children} />
+        <HoverCardContent align="start" alignOffset={0} sideOffset={8} className="hidden w-96 rounded-xl p-1 md:block">
+          <img src={cover.src} alt="" width={cover.width} height={cover.height} className={coverClass} />
+        </HoverCardContent>
+      </HoverCard>
+      <img
+        src={cover.src}
+        alt=""
+        width={cover.width}
+        height={cover.height}
+        loading="lazy"
+        className={`${coverClass} mt-2 mb-4 w-full md:hidden`}
+      />
+    </>
   );
 }
