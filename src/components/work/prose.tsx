@@ -9,7 +9,7 @@ type Step = { title: string; note?: string };
 
 function Flow({ label, steps }: { label: string; steps: Step[] }) {
   return (
-    <figure className="my-8">
+    <figure className="my-10">
       <figcaption className="mb-3 text-sm text-muted-foreground">{label}</figcaption>
       <ol className="grid auto-cols-fr gap-6 sm:grid-flow-col">
         {steps.map((step, index) => (

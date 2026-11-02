@@ -56,7 +56,7 @@ function Home() {
         ))}
       </Section>
 
-      <section aria-labelledby="cta" className="mt-30">
+      <section aria-labelledby="cta" className="mt-28">
         <p id="cta" className="mb-3 text-lg text-muted-foreground">
           {profile.cta.text}
         </p>
