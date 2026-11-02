@@ -10,7 +10,6 @@ function findStory(slug: string) {
 }
 
 export const Route = createFileRoute("/work/$slug")({
-  // Returns the slug rather than the story: loader data is serialized for hydration and stories hold components.
   loader: ({ params }) => findStory(params.slug).story.slug,
   component: StoryPage,
 });

@@ -8,7 +8,6 @@ import { profile } from "@/content/profile";
 import appCss from "../styles.css?url";
 
 const { title, description } = profile.meta;
-// Prerendered at build time, so the server and a client in a later year can disagree; the build year wins.
 const year = new Date().getFullYear();
 
 export const Route = createRootRoute({

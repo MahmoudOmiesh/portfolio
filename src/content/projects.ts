@@ -3,7 +3,7 @@ import type { MDXContent } from "mdx/types";
 import Inscribe from "./projects/inscribe.mdx";
 import type { Cover } from "./work";
 
-export type Project = {
+type Project = {
   slug: string;
   title: string;
   kind: string;

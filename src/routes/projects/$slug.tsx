@@ -10,7 +10,6 @@ function findProject(slug: string) {
 }
 
 export const Route = createFileRoute("/projects/$slug")({
-  // Returns the slug rather than the project: loader data is serialized for hydration and projects hold components.
   loader: ({ params }) => findProject(params.slug).slug,
   component: ProjectPage,
 });

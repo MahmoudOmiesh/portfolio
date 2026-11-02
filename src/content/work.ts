@@ -7,14 +7,14 @@ import Sputnik from "./work/sputnik.mdx";
 
 export type Cover = { src: string; width: number; height: number };
 
-export type Story = {
+type Story = {
   slug: string;
   title: string;
   cover: Cover;
   Content: MDXContent;
 };
 
-export type Job = {
+type Job = {
   company: string;
   role: string;
   location: string;

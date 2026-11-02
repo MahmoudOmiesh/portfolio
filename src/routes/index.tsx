@@ -129,8 +129,6 @@ function Row({
   );
 }
 
-// Touch screens can't hover, so below md the cover shows inline under the title instead of in the card.
-// The card only mounts its image once open, so the cover starts downloading as soon as the pointer arrives.
 function Preview({ cover, children }: { cover: Cover; children: React.ReactElement }) {
   return (
     <>
