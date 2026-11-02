@@ -5,12 +5,9 @@ import viteReact from "@vitejs/plugin-react";
 import { nitro } from "nitro/vite";
 import { defineConfig } from "vite";
 
-const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+import { profile } from "./src/content/profile";
 
 export default defineConfig({
-  define: {
-    "import.meta.env.VITE_SITE_URL": JSON.stringify(productionHost ? `https://${productionHost}` : ""),
-  },
   resolve: { tsconfigPaths: true },
   plugins: [
     { enforce: "pre", ...mdx() },
@@ -22,8 +19,9 @@ export default defineConfig({
         // The crawler follows every same-origin href, including /resume.pdf; only HTML routes belong here.
         filter: ({ path }) => !/\.\w+$/.test(path),
       },
+      sitemap: { host: profile.url },
     }),
-    nitro({ traceDeps: ["react"] }),
+    nitro(),
     viteReact({ include: /\.(mdx|tsx?)$/ }),
   ],
 });

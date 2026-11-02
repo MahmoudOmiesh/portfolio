@@ -2,6 +2,7 @@ const email = "mahmoud.a.omiesh@gmail.com";
 
 export const profile = {
   name: "Mahmoud Omiesh",
+  url: "https://mahmoudomiesh.vercel.app",
   meta: {
     title: "Mahmoud Omiesh | Software Engineer",
     description:

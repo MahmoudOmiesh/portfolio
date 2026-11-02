@@ -6,8 +6,12 @@ import { Separator } from "@/components/ui/separator";
 import { profile } from "@/content/profile";
 import { projects } from "@/content/projects";
 import { jobs, type Cover } from "@/content/work";
+import { pageHead } from "@/seo";
 
-export const Route = createFileRoute("/")({ component: Home });
+export const Route = createFileRoute("/")({
+  head: () => pageHead("/", profile.meta.title, profile.meta.description),
+  component: Home,
+});
 
 const titleClass = "text-4xl leading-tight font-bold tracking-tight transition-colors hover:text-brand";
 
