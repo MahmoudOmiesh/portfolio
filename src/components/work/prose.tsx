@@ -87,7 +87,7 @@ export const prose: MDXComponents = {
   ),
   p: (props) => <p className="mt-5 first:mt-0" {...props} />,
   ul: (props) => <ul className="mt-5 list-disc space-y-2.5 pl-5 marker:text-brand" {...props} />,
-  ol: (props) => <ol className="mt-5 list-decimal space-y-2.5 pl-5 marker:text-brand" {...props} />,
+  ol: (props) => <ol className="mt-5 list-decimal space-y-2.5 pl-5 marker:text-brand marker:normal-nums" {...props} />,
   li: ({ className, ...props }) => <li className={cn("pl-1 [&>ol]:mt-2.5", className)} {...props} />,
   strong: (props) => <strong className="font-bold text-foreground" {...props} />,
   code: (props) => (
