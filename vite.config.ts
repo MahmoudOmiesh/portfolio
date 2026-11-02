@@ -5,12 +5,13 @@ import viteReact from "@vitejs/plugin-react";
 import { nitro } from "nitro/vite";
 import { defineConfig } from "vite";
 
+import { remarkHeadings } from "./remark-headings";
 import { profile } from "./src/content/profile";
 
 export default defineConfig({
   resolve: { tsconfigPaths: true },
   plugins: [
-    { enforce: "pre", ...mdx() },
+    { enforce: "pre", ...mdx({ remarkPlugins: [remarkHeadings] }) },
     tailwindcss(),
     tanstackStart({
       prerender: {
