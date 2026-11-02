@@ -11,12 +11,11 @@ export const Route = createFileRoute("/")({ component: Home });
 
 const titleClass = "text-4xl leading-tight font-bold tracking-tight transition-colors hover:text-brand";
 
-const coverClass =
-  "aspect-16/10 rounded-lg object-cover object-left-top outline -outline-offset-1 outline-black/10 dark:outline-white/10";
+const coverClass = "aspect-16/10 rounded-lg object-cover object-left-top";
 
 function Home() {
   return (
-    <div className="mx-auto max-w-5xl px-5 pt-12 sm:px-8 sm:pt-18">
+    <div className="mx-auto max-w-5xl px-5 pt-12 sm:px-8 sm:pt-16">
       <header>
         <h1 className="text-6xl leading-none font-extrabold tracking-tighter sm:text-8xl lg:text-9xl">
           {profile.name.split(" ").map((word) => (
@@ -25,7 +24,7 @@ function Home() {
             </span>
           ))}
         </h1>
-        <div className="mt-10 flex flex-col gap-5 text-lg md:flex-row md:items-end md:justify-between md:gap-10">
+        <div className="mt-10 flex flex-col gap-5 text-lg lg:flex-row lg:items-end lg:justify-between lg:gap-10">
           <div className="max-w-md space-y-2">
             {profile.about.map((paragraph, index) => (
               <p key={paragraph} className={index > 0 ? "text-muted-foreground" : undefined}>
@@ -41,11 +40,7 @@ function Home() {
         {jobs.map((job) => (
           <Row key={job.company} heading={job.company} details={[job.role, job.period]} description={job.description}>
             {job.stories.map((story) => (
-              <Preview key={story.slug} cover={story.cover}>
-                <Link to="/work/$slug" params={{ slug: story.slug }} className={titleClass}>
-                  {story.title}
-                </Link>
-              </Preview>
+              <Preview key={story.slug} to="/work/$slug" slug={story.slug} title={story.title} cover={story.cover} />
             ))}
           </Row>
         ))}
@@ -54,17 +49,13 @@ function Home() {
       <Section id="projects" title="Projects" list="ul">
         {projects.map((project) => (
           <Row key={project.slug} heading={project.kind} details={[project.year]} description={project.summary}>
-            <Preview cover={project.cover}>
-              <Link to="/projects/$slug" params={{ slug: project.slug }} className={titleClass}>
-                {project.title}
-              </Link>
-            </Preview>
+            <Preview to="/projects/$slug" slug={project.slug} title={project.title} cover={project.cover} />
           </Row>
         ))}
       </Section>
 
-      <section aria-labelledby="cta" className="mt-30">
-        <p id="cta" className="mb-3.5 text-lg text-muted-foreground">
+      <section aria-labelledby="cta" className="mt-28">
+        <p id="cta" className="mb-3 text-lg text-muted-foreground">
           {profile.cta.text}
         </p>
         <a
@@ -114,7 +105,7 @@ function Row({
   return (
     <li>
       <Separator />
-      <div className="grid gap-3.5 py-7 md:grid-cols-3 md:gap-8">
+      <div className="grid gap-4 py-7 md:grid-cols-3 md:items-baseline md:gap-8">
         <div className="text-sm text-muted-foreground tabular-nums">
           <h3 className="text-lg font-bold text-foreground">{heading}</h3>
           {details.map((detail) => (
@@ -130,13 +121,27 @@ function Row({
   );
 }
 
-function Preview({ cover, children }: { cover: Cover; children: React.ReactElement }) {
+function Preview({
+  to,
+  slug,
+  title,
+  cover,
+}: {
+  to: "/work/$slug" | "/projects/$slug";
+  slug: string;
+  title: string;
+  cover: Cover;
+}) {
   return (
     <>
       <HoverCard>
         <HoverCardTrigger
           delay={150}
-          render={children}
+          render={
+            <Link to={to} params={{ slug }} className={titleClass}>
+              {title}
+            </Link>
+          }
           onPointerEnter={() => {
             new Image().src = cover.src;
           }}
@@ -145,20 +150,28 @@ function Preview({ cover, children }: { cover: Cover; children: React.ReactEleme
           side="left"
           align="start"
           alignOffset={0}
-          sideOffset={16}
-          className="hidden w-96 rounded-xl p-1 md:block"
+          sideOffset={32}
+          className="hidden w-72 rounded-xl p-1 lg:pointer-fine:block"
         >
           <img src={cover.src} alt="" width={cover.width} height={cover.height} className={coverClass} />
         </HoverCardContent>
       </HoverCard>
-      <img
-        src={cover.src}
-        alt=""
-        width={cover.width}
-        height={cover.height}
-        loading="lazy"
-        className={`${coverClass} mt-2 mb-4 w-full md:hidden`}
-      />
+      <Link
+        to={to}
+        params={{ slug }}
+        tabIndex={-1}
+        aria-hidden
+        className="mt-2 mb-4 block w-full rounded-lg lg:pointer-fine:hidden"
+      >
+        <img
+          src={cover.src}
+          alt=""
+          width={cover.width}
+          height={cover.height}
+          loading="lazy"
+          className={`${coverClass} image-outline block w-full`}
+        />
+      </Link>
     </>
   );
 }

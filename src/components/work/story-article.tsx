@@ -7,8 +7,8 @@ import { prose } from "@/components/work/prose";
 
 export function StoryArticle({ title, meta, Content }: { title: string; meta: string; Content: MDXContent }) {
   return (
-    <div className="px-5 pt-12 sm:px-8 sm:pt-18">
-      <article className="mx-auto max-w-2xl">
+    <div className="px-5 pt-12 sm:px-8 sm:pt-16">
+      <article className="mx-auto max-w-xl">
         <Button
           variant="ghost"
           size="sm"
