@@ -11,8 +11,9 @@ export const Route = createFileRoute("/")({ component: Home });
 
 const titleClass = "text-4xl leading-tight font-bold tracking-tight transition-colors hover:text-brand";
 
-const coverClass =
-  "aspect-16/10 rounded-lg object-cover object-left-top outline -outline-offset-1 outline-black/10 dark:outline-white/10";
+const coverClass = "aspect-16/10 rounded-lg object-cover object-left-top";
+
+const outlineClass = "outline -outline-offset-1 outline-black/10 dark:outline-white/10";
 
 function Home() {
   return (
@@ -145,8 +146,8 @@ function Preview({ cover, children }: { cover: Cover; children: React.ReactEleme
           side="left"
           align="start"
           alignOffset={0}
-          sideOffset={16}
-          className="hidden w-96 rounded-xl p-1 md:block"
+          sideOffset={32}
+          className="hidden w-72 rounded-xl p-1 lg:pointer-fine:block"
         >
           <img src={cover.src} alt="" width={cover.width} height={cover.height} className={coverClass} />
         </HoverCardContent>
@@ -157,7 +158,7 @@ function Preview({ cover, children }: { cover: Cover; children: React.ReactEleme
         width={cover.width}
         height={cover.height}
         loading="lazy"
-        className={`${coverClass} mt-2 mb-4 w-full md:hidden`}
+        className={`${coverClass} ${outlineClass} mt-2 mb-4 w-full lg:pointer-fine:hidden`}
       />
     </>
   );
