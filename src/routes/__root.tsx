@@ -1,5 +1,6 @@
-import { HeadContent, Link, Scripts, createRootRoute } from "@tanstack/react-router";
+import { HeadContent, Link, Outlet, Scripts, createRootRoute } from "@tanstack/react-router";
 
+import { ProfileLinks } from "@/components/profile-links";
 import { Button } from "@/components/ui/button";
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
 import { profile } from "@/content/profile";
@@ -7,6 +8,8 @@ import { profile } from "@/content/profile";
 import appCss from "../styles.css?url";
 
 const { title, description } = profile.meta;
+// Prerendered at build time, so the server and a client in a later year can disagree; the build year wins.
+const year = new Date().getFullYear();
 
 export const Route = createRootRoute({
   head: () => ({
@@ -29,8 +32,17 @@ export const Route = createRootRoute({
     ],
   }),
   shellComponent: RootDocument,
+  component: () => (
+    <Layout>
+      <Outlet />
+    </Layout>
+  ),
   notFoundComponent: () => <Fallback heading="404" text="looks like you're lost" action="Take me home" />,
-  errorComponent: () => <Fallback heading="Error" text="Something went wrong" action="Go Home" />,
+  errorComponent: () => (
+    <Layout>
+      <Fallback heading="Error" text="Something went wrong" action="Go Home" />
+    </Layout>
+  ),
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
@@ -47,9 +59,23 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   );
 }
 
+function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <>
+      <main>{children}</main>
+      <footer className="mx-auto mt-24 flex max-w-5xl flex-wrap justify-between gap-3 px-5 pb-16 text-sm text-muted-foreground sm:px-8">
+        <p suppressHydrationWarning>
+          &copy; {year} {profile.copyright}
+        </p>
+        <ProfileLinks aria-label="Footer" />
+      </footer>
+    </>
+  );
+}
+
 function Fallback({ heading, text, action }: { heading: string; text: string; action: string }) {
   return (
-    <Empty className="min-h-svh">
+    <Empty className="py-32">
       <EmptyHeader>
         <EmptyTitle>
           <h1 className="text-5xl leading-none font-extrabold tracking-tighter">{heading}</h1>

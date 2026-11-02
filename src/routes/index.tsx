@@ -1,6 +1,7 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { ProfileLinks } from "@/components/profile-links";
 import { Separator } from "@/components/ui/separator";
 import { experience } from "@/content/experience";
 import { profile } from "@/content/profile";
@@ -9,9 +10,6 @@ import { stories, type Cover } from "@/content/work";
 
 export const Route = createFileRoute("/")({ component: Home });
 
-// Prerendered at build time, so the server and a client in a later year can disagree; the build year wins.
-const year = new Date().getFullYear();
-
 const rowClass = "grid gap-3.5 py-7 md:grid-cols-3 md:gap-8";
 const titleClass = "text-4xl leading-tight font-bold tracking-tight transition-colors hover:text-brand";
 const coverClass =
@@ -19,7 +17,7 @@ const coverClass =
 
 function Home() {
   return (
-    <div className="mx-auto max-w-5xl px-5 pt-12 pb-16 sm:px-8 sm:pt-18">
+    <div className="mx-auto max-w-5xl px-5 pt-12 sm:px-8 sm:pt-18">
       <header>
         <h1 className="text-6xl leading-none font-extrabold tracking-tighter sm:text-8xl lg:text-9xl">
           {profile.name.split(" ").map((word) => (
@@ -112,30 +110,7 @@ function Home() {
           {profile.cta.button}
         </a>
       </section>
-
-      <footer className="mt-24 flex flex-wrap justify-between gap-3 text-sm text-muted-foreground">
-        <p suppressHydrationWarning>
-          &copy; {year} {profile.copyright}
-        </p>
-        <ProfileLinks aria-label="Footer" />
-      </footer>
     </div>
-  );
-}
-
-function ProfileLinks(props: React.ComponentProps<"nav">) {
-  return (
-    <nav {...props}>
-      <ul className="flex gap-5">
-        {profile.links.map((link) => (
-          <li key={link.label}>
-            <a href={link.href} target="_blank" rel="noreferrer noopener" className="link">
-              {link.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
   );
 }
 

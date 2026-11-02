@@ -7,7 +7,7 @@ import { prose } from "@/components/work/prose";
 
 export function StoryArticle({ title, meta, Content }: { title: string; meta: string; Content: MDXContent }) {
   return (
-    <div className="px-5 pt-12 pb-40 sm:px-8 sm:pt-18">
+    <div className="px-5 pt-12 sm:px-8 sm:pt-18">
       <article className="mx-auto max-w-2xl">
         {/* Pulled left so the label, not the icon, lines up with the column; phones have no margin to hang it in. */}
         <Button
