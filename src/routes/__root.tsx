@@ -1,6 +1,6 @@
 import { HeadContent, Link, Outlet, Scripts, createRootRoute } from "@tanstack/react-router";
 
-import { ProfileLinks } from "@/components/profile-links";
+import { ProfileIcons } from "@/components/profile-links";
 import { Button } from "@/components/ui/button";
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
 import { profile } from "@/content/profile";
@@ -62,11 +62,11 @@ function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-dvh flex-col">
       <main className="flex-1">{children}</main>
-      <footer className="mx-auto mt-24 flex w-full max-w-5xl flex-wrap justify-between gap-3 px-5 pb-16 text-sm text-muted-foreground sm:px-8">
+      <footer className="mx-auto mt-24 flex w-full max-w-5xl flex-wrap items-center justify-between gap-3 px-5 pb-16 text-sm text-muted-foreground sm:px-8">
         <p suppressHydrationWarning>
           &copy; {year} {profile.copyright}
         </p>
-        <ProfileLinks aria-label="Footer" />
+        <ProfileIcons aria-label="Footer" />
       </footer>
     </div>
   );
