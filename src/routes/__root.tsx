@@ -1,7 +1,7 @@
 import { HeadContent, Link, Scripts, createRootRoute } from "@tanstack/react-router";
-import { cn } from "cn";
 
-import { buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
 import { profile } from "@/content/profile";
 
 import appCss from "../styles.css?url";
@@ -49,12 +49,18 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 function Fallback({ heading, text, action }: { heading: string; text: string; action: string }) {
   return (
-    <div className="mx-auto flex max-w-5xl flex-col items-start px-5 pt-16 sm:px-8">
-      <h1 className="text-[28px] font-semibold tracking-tight">{heading}</h1>
-      <p className="mt-1.5 text-[15px] text-muted-foreground">{text}</p>
-      <Link to="/" className={cn(buttonVariants(), "mt-6")}>
-        {action}
-      </Link>
-    </div>
+    <Empty className="min-h-svh">
+      <EmptyHeader>
+        <EmptyTitle>
+          <h1 className="text-5xl leading-none font-extrabold tracking-tighter">{heading}</h1>
+        </EmptyTitle>
+        <EmptyDescription className="text-lg">{text}</EmptyDescription>
+      </EmptyHeader>
+      <EmptyContent>
+        <Button nativeButton={false} render={<Link to="/" />}>
+          {action}
+        </Button>
+      </EmptyContent>
+    </Empty>
   );
 }
