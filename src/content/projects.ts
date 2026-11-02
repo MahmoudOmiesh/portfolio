@@ -1,7 +1,5 @@
-import type { MDXContent } from "mdx/types";
-
-import Inscribe from "./projects/inscribe.mdx";
-import type { Cover } from "./work";
+import * as Inscribe from "./projects/inscribe.mdx";
+import type { Article, Cover } from "./work";
 
 type Project = {
   slug: string;
@@ -10,7 +8,7 @@ type Project = {
   year: string;
   summary: string;
   cover: Cover;
-  Content: MDXContent;
+  article: Article;
 };
 
 export const projects: Project[] = [
@@ -21,7 +19,7 @@ export const projects: Project[] = [
     year: "2025",
     summary: "A local-first note-taking app, with a custom text editor",
     cover: { src: "/inscribe/cover.webp", width: 2400, height: 1500 },
-    Content: Inscribe,
+    article: Inscribe,
   },
 ];
 

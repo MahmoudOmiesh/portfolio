@@ -49,7 +49,7 @@ function Screens({
   narrow?: boolean;
 }) {
   return (
-    <figure className={cn("my-10", !narrow && "w-[100cqw]")}>
+    <figure className="my-10">
       <Dialog>
         <DialogTrigger className={cn("block w-full cursor-zoom-in rounded-lg", narrow && "mx-auto max-w-64")}>
           <img
@@ -72,16 +72,17 @@ function Screens({
           />
         </DialogContent>
       </Dialog>
-      <figcaption className={cn("mt-3 text-sm text-muted-foreground", narrow ? "text-center" : "max-w-2xl")}>
-        {caption}
-      </figcaption>
+      <figcaption className={cn("mt-3 text-sm text-muted-foreground", narrow && "text-center")}>{caption}</figcaption>
     </figure>
   );
 }
 
 export const prose: MDXComponents = {
   h2: ({ children, ...props }) => (
-    <h2 className="mt-16 mb-2 text-3xl font-extrabold tracking-tighter text-balance text-foreground" {...props}>
+    <h2
+      className="mt-16 mb-2 scroll-mt-12 text-3xl font-extrabold tracking-tighter text-balance text-foreground"
+      {...props}
+    >
       {children}
     </h2>
   ),
