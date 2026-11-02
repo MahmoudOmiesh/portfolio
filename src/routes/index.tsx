@@ -42,11 +42,7 @@ function Home() {
         {jobs.map((job) => (
           <Row key={job.company} heading={job.company} details={[job.role, job.period]} description={job.description}>
             {job.stories.map((story) => (
-              <Preview key={story.slug} cover={story.cover}>
-                <Link to="/work/$slug" params={{ slug: story.slug }} className={titleClass}>
-                  {story.title}
-                </Link>
-              </Preview>
+              <Preview key={story.slug} to="/work/$slug" slug={story.slug} title={story.title} cover={story.cover} />
             ))}
           </Row>
         ))}
@@ -55,11 +51,7 @@ function Home() {
       <Section id="projects" title="Projects" list="ul">
         {projects.map((project) => (
           <Row key={project.slug} heading={project.kind} details={[project.year]} description={project.summary}>
-            <Preview cover={project.cover}>
-              <Link to="/projects/$slug" params={{ slug: project.slug }} className={titleClass}>
-                {project.title}
-              </Link>
-            </Preview>
+            <Preview to="/projects/$slug" slug={project.slug} title={project.title} cover={project.cover} />
           </Row>
         ))}
       </Section>
@@ -131,13 +123,27 @@ function Row({
   );
 }
 
-function Preview({ cover, children }: { cover: Cover; children: React.ReactElement }) {
+function Preview({
+  to,
+  slug,
+  title,
+  cover,
+}: {
+  to: "/work/$slug" | "/projects/$slug";
+  slug: string;
+  title: string;
+  cover: Cover;
+}) {
   return (
     <>
       <HoverCard>
         <HoverCardTrigger
           delay={150}
-          render={children}
+          render={
+            <Link to={to} params={{ slug }} className={titleClass}>
+              {title}
+            </Link>
+          }
           onPointerEnter={() => {
             new Image().src = cover.src;
           }}
@@ -152,14 +158,22 @@ function Preview({ cover, children }: { cover: Cover; children: React.ReactEleme
           <img src={cover.src} alt="" width={cover.width} height={cover.height} className={coverClass} />
         </HoverCardContent>
       </HoverCard>
-      <img
-        src={cover.src}
-        alt=""
-        width={cover.width}
-        height={cover.height}
-        loading="lazy"
-        className={`${coverClass} ${outlineClass} mt-2 mb-4 w-full lg:pointer-fine:hidden`}
-      />
+      <Link
+        to={to}
+        params={{ slug }}
+        tabIndex={-1}
+        aria-hidden
+        className="mt-2 mb-4 block w-full rounded-lg lg:pointer-fine:hidden"
+      >
+        <img
+          src={cover.src}
+          alt=""
+          width={cover.width}
+          height={cover.height}
+          loading="lazy"
+          className={`${coverClass} ${outlineClass} block w-full`}
+        />
+      </Link>
     </>
   );
 }
