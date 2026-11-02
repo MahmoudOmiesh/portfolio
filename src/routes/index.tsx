@@ -3,10 +3,9 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { ProfileLinks } from "@/components/profile-links";
 import { Separator } from "@/components/ui/separator";
-import { experience } from "@/content/experience";
 import { profile } from "@/content/profile";
 import { projects } from "@/content/projects";
-import { stories, type Cover } from "@/content/work";
+import { jobs, type Cover } from "@/content/work";
 
 export const Route = createFileRoute("/")({ component: Home });
 
@@ -43,22 +42,20 @@ function Home() {
           Work
         </h2>
         <ol>
-          {experience.map((job) => (
-            <li key={`${job.company}-${job.role}`}>
+          {jobs.map((job) => (
+            <li key={job.company}>
               <Separator />
               <div className={rowClass}>
                 <div className="text-sm text-muted-foreground tabular-nums">
                   <h3 className="text-lg font-bold text-foreground">{job.company}</h3>
                   <p>{job.role}</p>
-                  <p>
-                    {job.startDate} to {job.endDate}
-                  </p>
+                  <p>{job.period}</p>
                 </div>
                 <div className="flex flex-col items-start gap-1.5 md:col-span-2">
-                  {job.stories?.map((slug) => (
-                    <Preview key={slug} cover={stories[slug].cover}>
-                      <Link to="/work/$slug" params={{ slug }} className={titleClass}>
-                        {stories[slug].title}
+                  {job.stories.map((story) => (
+                    <Preview key={story.slug} cover={story.cover}>
+                      <Link to="/work/$slug" params={{ slug: story.slug }} className={titleClass}>
+                        {story.title}
                       </Link>
                     </Preview>
                   ))}
@@ -76,8 +73,8 @@ function Home() {
           Projects
         </h2>
         <ul>
-          {Object.entries(projects).map(([slug, project]) => (
-            <li key={slug}>
+          {projects.map((project) => (
+            <li key={project.slug}>
               <Separator />
               <div className={rowClass}>
                 <div className="text-sm text-muted-foreground tabular-nums">
@@ -86,7 +83,7 @@ function Home() {
                 </div>
                 <div className="flex flex-col items-start gap-1.5 md:col-span-2">
                   <Preview cover={project.cover}>
-                    <Link to="/projects/$slug" params={{ slug }} className={titleClass}>
+                    <Link to="/projects/$slug" params={{ slug: project.slug }} className={titleClass}>
                       {project.title}
                     </Link>
                   </Preview>
