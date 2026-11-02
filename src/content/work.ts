@@ -1,9 +1,9 @@
-import type { MDXContent } from "mdx/types";
+import * as FirstImpact from "./work/firstimpact.mdx";
+import * as FirstImpactReviewTool from "./work/firstimpact-review-tool.mdx";
+import * as Logibytes from "./work/logibytes.mdx";
+import * as Sputnik from "./work/sputnik.mdx";
 
-import FirstImpact from "./work/firstimpact.mdx";
-import FirstImpactReviewTool from "./work/firstimpact-review-tool.mdx";
-import Logibytes from "./work/logibytes.mdx";
-import Sputnik from "./work/sputnik.mdx";
+export type Article = typeof FirstImpact;
 
 export type Cover = { src: string; width: number; height: number };
 
@@ -11,7 +11,7 @@ type Story = {
   slug: string;
   title: string;
   cover: Cover;
-  Content: MDXContent;
+  article: Article;
 };
 
 type Job = {
@@ -36,13 +36,13 @@ export const jobs: Job[] = [
         slug: "firstimpact",
         title: "The FirstImpact platform",
         cover: { src: "/firstimpact/intake.webp", width: 1815, height: 1266 },
-        Content: FirstImpact,
+        article: FirstImpact,
       },
       {
         slug: "firstimpact-review-tool",
         title: "The note review tool",
         cover: { src: "/firstimpact/formal-review.webp", width: 1983, height: 1386 },
-        Content: FirstImpactReviewTool,
+        article: FirstImpactReviewTool,
       },
     ],
   },
@@ -58,7 +58,7 @@ export const jobs: Job[] = [
         slug: "logibytes",
         title: "The fleet and merchant portals",
         cover: { src: "/logibytes/live-map.webp", width: 2352, height: 1672 },
-        Content: Logibytes,
+        article: Logibytes,
       },
     ],
   },
@@ -73,7 +73,7 @@ export const jobs: Job[] = [
         slug: "sputnik",
         title: "The Sputnik Academy platform",
         cover: { src: "/sputnik/course-viewer.webp", width: 2400, height: 1988 },
-        Content: Sputnik,
+        article: Sputnik,
       },
     ],
   },

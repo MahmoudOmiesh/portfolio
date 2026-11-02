@@ -31,8 +31,9 @@ function StoryPage() {
   return (
     <StoryArticle
       title={story.title}
-      meta={`${job.role} at ${job.company}. ${job.location}. ${job.period}.`}
-      Content={story.Content}
+      heading={job.company}
+      details={[job.role, job.location, job.period]}
+      article={story.article}
     />
   );
 }
