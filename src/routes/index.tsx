@@ -17,7 +17,7 @@ const outlineClass = "outline -outline-offset-1 outline-black/10 dark:outline-wh
 
 function Home() {
   return (
-    <div className="mx-auto max-w-5xl px-5 pt-12 sm:px-8 sm:pt-18">
+    <div className="mx-auto max-w-5xl px-5 pt-12 sm:px-8 sm:pt-16">
       <header>
         <h1 className="text-6xl leading-none font-extrabold tracking-tighter sm:text-8xl lg:text-9xl">
           {profile.name.split(" ").map((word) => (
@@ -57,7 +57,7 @@ function Home() {
       </Section>
 
       <section aria-labelledby="cta" className="mt-30">
-        <p id="cta" className="mb-3.5 text-lg text-muted-foreground">
+        <p id="cta" className="mb-3 text-lg text-muted-foreground">
           {profile.cta.text}
         </p>
         <a
@@ -107,7 +107,7 @@ function Row({
   return (
     <li>
       <Separator />
-      <div className="grid gap-3.5 py-7 md:grid-cols-3 md:gap-8">
+      <div className="grid gap-4 py-7 md:grid-cols-3 md:gap-8">
         <div className="text-sm text-muted-foreground tabular-nums">
           <h3 className="text-lg font-bold text-foreground">{heading}</h3>
           {details.map((detail) => (

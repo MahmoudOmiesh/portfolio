@@ -29,7 +29,7 @@ MDX can use `<Screens>` and `<Flow>` from `src/components/work/prose.tsx`. Scree
 ## UI
 
 - Build with shadcn components from `src/components/ui`. Add new ones with `bunx shadcn@latest add <name>`. Those files come from shadcn; keep their unused exports.
-- Use Tailwind's named scale (`text-sm`, `mt-18`, `max-w-65`), not arbitrary values like `text-[15px]`. The one exception is `text-[0.85em]` on inline code in `prose.tsx`, which has to scale with the text around it.
+- Use Tailwind's named scale (`text-sm`, `mt-16`, `max-w-64`), not arbitrary values like `text-[15px]`.
 - Text links use the `link` utility from `src/styles.css`. It is the only link style.
 - Write code without comments. Add one only for a why the code cannot show.
 

@@ -51,7 +51,7 @@ function Screens({
   return (
     <figure className={cn("my-10", !narrow && "lg:-mx-24")}>
       <Dialog>
-        <DialogTrigger className={cn("block w-full cursor-zoom-in rounded-lg", narrow && "mx-auto max-w-65")}>
+        <DialogTrigger className={cn("block w-full cursor-zoom-in rounded-lg", narrow && "mx-auto max-w-64")}>
           <img
             src={src}
             alt={alt}
@@ -72,7 +72,7 @@ function Screens({
           />
         </DialogContent>
       </Dialog>
-      <figcaption className={cn("mt-3.5 text-sm text-muted-foreground", narrow ? "text-center" : "lg:mx-24")}>
+      <figcaption className={cn("mt-3 text-sm text-muted-foreground", narrow ? "text-center" : "lg:mx-24")}>
         {caption}
       </figcaption>
     </figure>
@@ -81,7 +81,7 @@ function Screens({
 
 export const prose: MDXComponents = {
   h2: ({ children, ...props }) => (
-    <h2 className="mt-18 mb-2 text-3xl font-extrabold tracking-tighter text-balance text-foreground" {...props}>
+    <h2 className="mt-16 mb-2 text-3xl font-extrabold tracking-tighter text-balance text-foreground" {...props}>
       {children}
     </h2>
   ),
@@ -91,7 +91,7 @@ export const prose: MDXComponents = {
   li: ({ className, ...props }) => <li className={cn("pl-1 [&>ol]:mt-2.5", className)} {...props} />,
   strong: (props) => <strong className="font-bold text-foreground" {...props} />,
   code: (props) => (
-    <code className="rounded-sm bg-muted px-1.5 py-0.5 font-mono text-[0.85em] text-foreground" {...props} />
+    <code className="rounded-sm bg-muted px-1.5 py-0.5 font-mono text-base text-foreground" {...props} />
   ),
   a: ({ href = "", children, ...props }) => (
     <a
