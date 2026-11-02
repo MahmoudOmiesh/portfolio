@@ -45,7 +45,6 @@ function Screens({
   width: number;
   height: number;
   caption: string;
-  /** A single phone screen would be far too tall at the full column width. */
   narrow?: boolean;
 }) {
   return (
@@ -83,7 +82,6 @@ export const prose: MDXComponents = {
   ol: (props) => <ol className="mt-5 list-decimal space-y-2.5 pl-5 marker:text-brand" {...props} />,
   li: ({ className, ...props }) => <li className={cn("pl-1 [&>ol]:mt-2.5", className)} {...props} />,
   strong: (props) => <strong className="font-bold text-foreground" {...props} />,
-  // Relative to the surrounding text, so code reads the same size in a paragraph or a list item.
   code: (props) => (
     <code className="rounded-sm bg-muted px-1.5 py-0.5 font-mono text-[0.85em] text-foreground" {...props} />
   ),

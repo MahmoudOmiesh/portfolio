@@ -3,7 +3,8 @@ import type { MDXContent } from "mdx/types";
 import Inscribe from "./projects/inscribe.mdx";
 import type { Cover } from "./work";
 
-export type Project = {
+type Project = {
+  slug: string;
   title: string;
   kind: string;
   year: string;
@@ -12,8 +13,9 @@ export type Project = {
   Content: MDXContent;
 };
 
-const registry = {
-  inscribe: {
+export const projects: Project[] = [
+  {
+    slug: "inscribe",
     title: "Inscribe",
     kind: "Personal project",
     year: "2025",
@@ -21,8 +23,6 @@ const registry = {
     cover: { src: "/inscribe/cover.webp", width: 2400, height: 1500 },
     Content: Inscribe,
   },
-} satisfies Record<string, Project>;
+];
 
-export type ProjectSlug = keyof typeof registry;
-
-export const projects: Record<ProjectSlug, Project> = registry;
+export const projectsBySlug = new Map(projects.map((project) => [project.slug, project]));

@@ -3,15 +3,14 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { ProfileLinks } from "@/components/profile-links";
 import { Separator } from "@/components/ui/separator";
-import { experience } from "@/content/experience";
 import { profile } from "@/content/profile";
 import { projects } from "@/content/projects";
-import { stories, type Cover } from "@/content/work";
+import { jobs, type Cover } from "@/content/work";
 
 export const Route = createFileRoute("/")({ component: Home });
 
-const rowClass = "grid gap-3.5 py-7 md:grid-cols-3 md:gap-8";
 const titleClass = "text-4xl leading-tight font-bold tracking-tight transition-colors hover:text-brand";
+
 const coverClass =
   "aspect-16/10 rounded-lg object-cover object-left-top outline -outline-offset-1 outline-black/10 dark:outline-white/10";
 
@@ -38,66 +37,31 @@ function Home() {
         </div>
       </header>
 
-      <section aria-labelledby="work">
-        <h2 id="work" className="mt-28 mb-1 text-3xl font-extrabold tracking-tighter">
-          Work
-        </h2>
-        <ol>
-          {experience.map((job) => (
-            <li key={`${job.company}-${job.role}`}>
-              <Separator />
-              <div className={rowClass}>
-                <div className="text-sm text-muted-foreground tabular-nums">
-                  <h3 className="text-lg font-bold text-foreground">{job.company}</h3>
-                  <p>{job.role}</p>
-                  <p>
-                    {job.startDate} to {job.endDate}
-                  </p>
-                </div>
-                <div className="flex flex-col items-start gap-1.5 md:col-span-2">
-                  {job.stories?.map((slug) => (
-                    <Preview key={slug} cover={stories[slug].cover}>
-                      <Link to="/work/$slug" params={{ slug }} className={titleClass}>
-                        {stories[slug].title}
-                      </Link>
-                    </Preview>
-                  ))}
-                  <p className="mt-2 max-w-xl text-lg text-muted-foreground">{job.description}</p>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ol>
-        <Separator />
-      </section>
+      <Section id="work" title="Work" list="ol">
+        {jobs.map((job) => (
+          <Row key={job.company} heading={job.company} details={[job.role, job.period]} description={job.description}>
+            {job.stories.map((story) => (
+              <Preview key={story.slug} cover={story.cover}>
+                <Link to="/work/$slug" params={{ slug: story.slug }} className={titleClass}>
+                  {story.title}
+                </Link>
+              </Preview>
+            ))}
+          </Row>
+        ))}
+      </Section>
 
-      <section aria-labelledby="projects">
-        <h2 id="projects" className="mt-28 mb-1 text-3xl font-extrabold tracking-tighter">
-          Projects
-        </h2>
-        <ul>
-          {Object.entries(projects).map(([slug, project]) => (
-            <li key={slug}>
-              <Separator />
-              <div className={rowClass}>
-                <div className="text-sm text-muted-foreground tabular-nums">
-                  <h3 className="text-lg font-bold text-foreground">{project.kind}</h3>
-                  <p>{project.year}</p>
-                </div>
-                <div className="flex flex-col items-start gap-1.5 md:col-span-2">
-                  <Preview cover={project.cover}>
-                    <Link to="/projects/$slug" params={{ slug }} className={titleClass}>
-                      {project.title}
-                    </Link>
-                  </Preview>
-                  <p className="mt-2 max-w-xl text-lg text-muted-foreground">{project.summary}</p>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-        <Separator />
-      </section>
+      <Section id="projects" title="Projects" list="ul">
+        {projects.map((project) => (
+          <Row key={project.slug} heading={project.kind} details={[project.year]} description={project.summary}>
+            <Preview cover={project.cover}>
+              <Link to="/projects/$slug" params={{ slug: project.slug }} className={titleClass}>
+                {project.title}
+              </Link>
+            </Preview>
+          </Row>
+        ))}
+      </Section>
 
       <section aria-labelledby="cta" className="mt-30">
         <p id="cta" className="mb-3.5 text-lg text-muted-foreground">
@@ -114,8 +78,58 @@ function Home() {
   );
 }
 
-// Touch screens can't hover, so below md the cover shows inline under the title instead of in the card.
-// The card only mounts its image once open, so the cover starts downloading as soon as the pointer arrives.
+function Section({
+  id,
+  title,
+  list: List,
+  children,
+}: {
+  id: string;
+  title: string;
+  list: "ol" | "ul";
+  children: React.ReactNode;
+}) {
+  return (
+    <section aria-labelledby={id}>
+      <h2 id={id} className="mt-28 mb-1 text-3xl font-extrabold tracking-tighter">
+        {title}
+      </h2>
+      <List>{children}</List>
+      <Separator />
+    </section>
+  );
+}
+
+function Row({
+  heading,
+  details,
+  description,
+  children,
+}: {
+  heading: string;
+  details: string[];
+  description: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <li>
+      <Separator />
+      <div className="grid gap-3.5 py-7 md:grid-cols-3 md:gap-8">
+        <div className="text-sm text-muted-foreground tabular-nums">
+          <h3 className="text-lg font-bold text-foreground">{heading}</h3>
+          {details.map((detail) => (
+            <p key={detail}>{detail}</p>
+          ))}
+        </div>
+        <div className="flex flex-col items-start gap-1.5 md:col-span-2">
+          {children}
+          <p className="mt-2 max-w-xl text-lg text-muted-foreground">{description}</p>
+        </div>
+      </div>
+    </li>
+  );
+}
+
 function Preview({ cover, children }: { cover: Cover; children: React.ReactElement }) {
   return (
     <>
