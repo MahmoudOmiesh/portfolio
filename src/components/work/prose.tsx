@@ -14,7 +14,7 @@ function Flow({ label, steps }: { label: string; steps: Step[] }) {
             {index > 0 && (
               <ArrowRightIcon
                 aria-hidden
-                className="absolute -top-5 left-1/2 size-3.5 -translate-x-1/2 rotate-90 text-faint min-[560px]:top-1/2 min-[560px]:-left-5 min-[560px]:translate-x-0 min-[560px]:-translate-y-1/2 min-[560px]:rotate-0"
+                className="absolute -top-5 left-1/2 size-3.5 -translate-x-1/2 rotate-90 text-muted-foreground min-[560px]:top-1/2 min-[560px]:-left-5 min-[560px]:translate-x-0 min-[560px]:-translate-y-1/2 min-[560px]:rotate-0"
               />
             )}
             <p className="text-[13.5px] font-medium">{step.title}</p>
@@ -64,8 +64,8 @@ export const prose: MDXComponents = {
     </h2>
   ),
   p: (props) => <p className="mt-4 first:mt-0" {...props} />,
-  ul: (props) => <ul className="mt-4 list-disc space-y-2 pl-4.5 marker:text-faint" {...props} />,
-  ol: (props) => <ol className="mt-4 list-decimal space-y-2 pl-5 marker:text-faint" {...props} />,
+  ul: (props) => <ul className="mt-4 list-disc space-y-2 pl-4.5 marker:text-muted-foreground" {...props} />,
+  ol: (props) => <ol className="mt-4 list-decimal space-y-2 pl-5 marker:text-muted-foreground" {...props} />,
   li: ({ className, ...props }) => <li className={cn("pl-1 [&>ol]:mt-2", className)} {...props} />,
   strong: (props) => <strong className="font-medium text-foreground" {...props} />,
   code: (props) => (
@@ -75,7 +75,7 @@ export const prose: MDXComponents = {
     <a
       href={href}
       {...(!href.startsWith("/") && { target: "_blank", rel: "noreferrer noopener" })}
-      className="link-underline"
+      className="link"
       {...props}
     >
       {children}

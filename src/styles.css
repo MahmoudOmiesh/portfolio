@@ -1,13 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
+@import "@fontsource-variable/schibsted-grotesk";
 
 @custom-variant dark (@media (prefers-color-scheme: dark));
 
 @theme inline {
   --font-heading: var(--font-sans);
-  --font-sans: "Geist Variable", system-ui, sans-serif;
+  --font-sans: "Schibsted Grotesk Variable", system-ui, sans-serif;
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -26,7 +26,6 @@
   --color-card: var(--card);
   --color-foreground: var(--foreground);
   --color-background: var(--background);
-  --color-faint: var(--faint);
   --color-brand: var(--brand);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
@@ -39,51 +38,49 @@
 
 :root {
   color-scheme: light dark;
-  --background: #fcfcfb;
-  --foreground: #161616;
+  --background: #f6f6f3;
+  --foreground: #121212;
   --card: #ffffff;
-  --card-foreground: #161616;
+  --card-foreground: #121212;
   --popover: #ffffff;
-  --popover-foreground: #161616;
-  --primary: #161616;
-  --primary-foreground: #fcfcfb;
-  --secondary: #f4f4f3;
-  --secondary-foreground: #161616;
-  --muted: #f4f4f3;
-  --muted-foreground: #6a6a6a;
-  --accent: #f4f4f3;
-  --accent-foreground: #161616;
+  --popover-foreground: #121212;
+  --primary: #121212;
+  --primary-foreground: #f6f6f3;
+  --secondary: #ecece8;
+  --secondary-foreground: #121212;
+  --muted: #ecece8;
+  --muted-foreground: #6b6b68;
+  --accent: #ecece8;
+  --accent-foreground: #121212;
   --destructive: #e5484d;
-  --border: #ebebea;
-  --input: #ebebea;
-  --ring: #6a6a6a;
-  --faint: #a0a0a0;
-  --brand: #e5484d;
+  --border: #dcdcd6;
+  --input: #dcdcd6;
+  --brand: #5a3cf0;
+  --ring: var(--brand);
   --radius: 0.625rem;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0e0e0e;
-    --foreground: #ececec;
-    --card: #161616;
-    --card-foreground: #ececec;
-    --popover: #161616;
-    --popover-foreground: #ececec;
-    --primary: #ececec;
-    --primary-foreground: #0e0e0e;
-    --secondary: #171717;
-    --secondary-foreground: #ececec;
-    --muted: #171717;
-    --muted-foreground: #9b9b9b;
-    --accent: #171717;
-    --accent-foreground: #ececec;
+    --background: #141413;
+    --foreground: #ededea;
+    --card: #1b1b19;
+    --card-foreground: #ededea;
+    --popover: #1b1b19;
+    --popover-foreground: #ededea;
+    --primary: #ededea;
+    --primary-foreground: #141413;
+    --secondary: #21211f;
+    --secondary-foreground: #ededea;
+    --muted: #21211f;
+    --muted-foreground: #9a9a95;
+    --accent: #21211f;
+    --accent-foreground: #ededea;
     --destructive: #ff6369;
-    --border: #232323;
-    --input: #232323;
-    --ring: #9b9b9b;
-    --faint: #5e5e5e;
-    --brand: #ff6369;
+    --border: #2a2a27;
+    --input: #2a2a27;
+    --brand: #8f7bff;
+    --ring: var(--brand);
   }
 }
 
@@ -102,23 +99,8 @@
   }
 }
 
-@utility section-label {
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--muted-foreground);
-}
-
-@utility link-underline {
-  color: var(--foreground);
-  font-weight: 500;
-  text-decoration: none;
-  background: linear-gradient(var(--border), var(--border)) 0 100% / 100% 1.5px no-repeat;
-
-  &:hover {
-    background-image: linear-gradient(var(--brand), var(--brand));
-  }
+@utility link {
+  @apply underline decoration-border decoration-2 underline-offset-4 transition-colors hover:decoration-brand;
 }
 
 @media (prefers-reduced-motion: reduce) {

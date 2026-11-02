@@ -41,7 +41,7 @@ function Home() {
             href={link.href}
             target={link.newTab ? "_blank" : undefined}
             rel={link.newTab ? "noreferrer noopener" : undefined}
-            className="link-underline"
+            className="link"
           >
             {link.label}
             {link.href === profile.resume.href && <span aria-hidden> ↗</span>}
@@ -107,7 +107,7 @@ function Experience() {
         target="_blank"
         rel="noreferrer noopener"
         aria-label={`${profile.resume.label} (opens in a new tab)`}
-        className="mt-5 inline-block text-sm link-underline"
+        className="mt-5 inline-block text-sm link"
       >
         {profile.resume.label}
         <span aria-hidden> ↗</span>
@@ -132,7 +132,7 @@ function JobRow({ job }: { job: Job }) {
           </span>
           <ChevronRightIcon
             aria-hidden
-            className="size-3 shrink-0 text-faint transition-transform duration-200 group-data-panel-open:rotate-90"
+            className="size-3 shrink-0 text-muted-foreground transition-transform duration-200 group-data-panel-open:rotate-90"
           />
         </span>
         <span className="col-span-full text-[14.5px] leading-normal text-muted-foreground min-[560px]:col-start-2">
@@ -142,12 +142,7 @@ function JobRow({ job }: { job: Job }) {
       {job.stories && (
         <div className="-mt-1 flex flex-wrap gap-x-5 gap-y-1 pb-3 min-[560px]:pl-35">
           {job.stories.map((slug) => (
-            <Link
-              key={slug}
-              to="/work/$slug"
-              params={{ slug }}
-              className="inline-flex items-center gap-1 text-sm link-underline"
-            >
+            <Link key={slug} to="/work/$slug" params={{ slug }} className="inline-flex items-center gap-1 text-sm link">
               {stories[slug].title}
               <ChevronRightIcon aria-hidden className="size-3.5" />
             </Link>
