@@ -77,7 +77,7 @@ function Fallback({ heading, text, action }: { heading: string; text: string; ac
     <Empty className="py-32">
       <EmptyHeader>
         <EmptyTitle>
-          <h1 className="text-5xl leading-none font-extrabold tracking-tighter">{heading}</h1>
+          <h1 className="text-5xl leading-none font-extrabold tracking-tighter sm:text-7xl">{heading}</h1>
         </EmptyTitle>
         <EmptyDescription className="text-lg">{text}</EmptyDescription>
       </EmptyHeader>
