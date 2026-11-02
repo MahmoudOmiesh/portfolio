@@ -7,7 +7,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "lint": "oxlint && oxfmt --check",
+    "lint": "oxlint && oxfmt --check && sh scripts/check-tailwind-scale.sh",
     "check": "bun run typecheck && bun run lint"
   },
   "dependencies": {
