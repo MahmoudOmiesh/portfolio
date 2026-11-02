@@ -100,7 +100,7 @@
 }
 
 @utility link {
-  @apply underline decoration-border decoration-2 underline-offset-4 transition-colors hover:decoration-brand;
+  @apply underline decoration-muted-foreground/80 decoration-2 underline-offset-4 transition-colors hover:decoration-brand;
 }
 
 @media (prefers-reduced-motion: reduce) {
