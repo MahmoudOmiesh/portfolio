@@ -115,13 +115,25 @@ function Home() {
 }
 
 // Touch screens can't hover, so below md the cover shows inline under the title instead of in the card.
-// The inline image loads eagerly even while hidden, so the card's copy comes from cache on first hover.
+// The card only mounts its image once open, so the cover starts downloading as soon as the pointer arrives.
 function Preview({ cover, children }: { cover: Cover; children: React.ReactElement }) {
   return (
     <>
       <HoverCard>
-        <HoverCardTrigger delay={150} render={children} />
-        <HoverCardContent align="start" alignOffset={0} sideOffset={8} className="hidden w-96 rounded-xl p-1 md:block">
+        <HoverCardTrigger
+          delay={150}
+          render={children}
+          onPointerEnter={() => {
+            new Image().src = cover.src;
+          }}
+        />
+        <HoverCardContent
+          side="left"
+          align="start"
+          alignOffset={0}
+          sideOffset={16}
+          className="hidden w-96 rounded-xl p-1 md:block"
+        >
           <img src={cover.src} alt="" width={cover.width} height={cover.height} className={coverClass} />
         </HoverCardContent>
       </HoverCard>
@@ -130,7 +142,7 @@ function Preview({ cover, children }: { cover: Cover; children: React.ReactEleme
         alt=""
         width={cover.width}
         height={cover.height}
-        fetchPriority="low"
+        loading="lazy"
         className={`${coverClass} mt-2 mb-4 w-full md:hidden`}
       />
     </>
