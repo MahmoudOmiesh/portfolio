@@ -99,6 +99,10 @@
   }
 }
 
+@utility image-outline {
+  @apply outline -outline-offset-1 outline-black/10 dark:outline-white/10;
+}
+
 @utility link {
   @apply underline decoration-muted-foreground/80 decoration-2 underline-offset-4 transition-colors hover:decoration-brand;
 }

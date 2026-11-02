@@ -13,8 +13,6 @@ const titleClass = "text-4xl leading-tight font-bold tracking-tight transition-c
 
 const coverClass = "aspect-16/10 rounded-lg object-cover object-left-top";
 
-const outlineClass = "outline -outline-offset-1 outline-black/10 dark:outline-white/10";
-
 function Home() {
   return (
     <div className="mx-auto max-w-5xl px-5 pt-12 sm:px-8 sm:pt-16">
@@ -171,7 +169,7 @@ function Preview({
           width={cover.width}
           height={cover.height}
           loading="lazy"
-          className={`${coverClass} ${outlineClass} block w-full`}
+          className={`${coverClass} image-outline block w-full`}
         />
       </Link>
     </>

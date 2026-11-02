@@ -58,7 +58,7 @@ function Screens({
             width={width}
             height={height}
             loading="lazy"
-            className="block h-auto w-full rounded-lg outline -outline-offset-1 outline-black/10 dark:outline-white/10"
+            className="image-outline block h-auto w-full rounded-lg"
           />
         </DialogTrigger>
         <DialogContent className="pointer-events-none inset-4 flex w-auto max-w-none translate-none items-center justify-center bg-transparent p-0 ring-0 *:pointer-events-auto sm:inset-8 sm:max-w-none">
@@ -68,7 +68,7 @@ function Screens({
             alt=""
             width={width}
             height={height}
-            className="size-auto max-h-full max-w-full rounded-lg object-contain outline -outline-offset-1 outline-black/10 dark:outline-white/10"
+            className="image-outline size-auto max-h-full max-w-full rounded-lg object-contain"
           />
         </DialogContent>
       </Dialog>
