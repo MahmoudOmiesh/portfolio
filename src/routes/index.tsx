@@ -140,6 +140,7 @@ function ProfileLinks(props: React.ComponentProps<"nav">) {
 }
 
 // Touch screens can't hover, so below md the cover shows inline under the title instead of in the card.
+// The inline image loads eagerly even while hidden, so the card's copy comes from cache on first hover.
 function Preview({ cover, children }: { cover: Cover; children: React.ReactElement }) {
   return (
     <>
@@ -154,7 +155,7 @@ function Preview({ cover, children }: { cover: Cover; children: React.ReactEleme
         alt=""
         width={cover.width}
         height={cover.height}
-        loading="lazy"
+        fetchPriority="low"
         className={`${coverClass} mt-2 mb-4 w-full md:hidden`}
       />
     </>
