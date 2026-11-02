@@ -26,7 +26,7 @@ function Home() {
             </span>
           ))}
         </h1>
-        <div className="mt-10 flex flex-col gap-5 text-lg md:flex-row md:items-end md:justify-between md:gap-10">
+        <div className="mt-10 flex flex-col gap-5 text-lg lg:flex-row lg:items-end lg:justify-between lg:gap-10">
           <div className="max-w-md space-y-2">
             {profile.about.map((paragraph, index) => (
               <p key={paragraph} className={index > 0 ? "text-muted-foreground" : undefined}>
