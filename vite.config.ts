@@ -23,7 +23,7 @@ export default defineConfig({
         filter: ({ path }) => !/\.\w+$/.test(path),
       },
     }),
-    nitro({ traceDeps: ["react"] }),
+    nitro(),
     viteReact({ include: /\.(mdx|tsx?)$/ }),
   ],
 });
