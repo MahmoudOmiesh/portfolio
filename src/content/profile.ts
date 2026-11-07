@@ -8,10 +8,8 @@ export const profile = {
     description:
       "Software engineer who likes owning a feature from start to finish, from the database to the last detail on screen.",
   },
-  about: [
-    "I build web apps, and I like owning a feature from start to finish, from the database to the last detail on screen.",
-    "I'm open to remote roles, or to relocating for the right one.",
-  ],
+  about:
+    "I build web apps, and I like owning a feature from start to finish, from the database to the last detail on screen. I'm open to remote roles, or to relocating for the right one.",
   links: [
     { label: "GitHub", href: "https://github.com/MahmoudOmiesh", newTab: true },
     { label: "LinkedIn", href: "https://linkedin.com/in/mahmoud-omiesh", newTab: true },
