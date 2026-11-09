@@ -80,7 +80,12 @@ function Screens({
           setZoomed(undefined);
         }}
       >
-        <div className={cn("group relative", narrow && "mx-auto max-w-64")}>
+        <div
+          className={cn(
+            "group relative transition-transform duration-150 ease-out has-active:scale-[0.985]",
+            narrow && "mx-auto max-w-64",
+          )}
+        >
           <img
             src={src}
             alt={alt}
@@ -91,7 +96,7 @@ function Screens({
           />
           <DialogTrigger
             ref={trigger}
-            aria-label="Enlarge screenshot"
+            aria-label={`Enlarge: ${caption}`}
             className="absolute inset-0 cursor-zoom-in rounded-lg"
           >
             <span className="absolute top-2 right-2 grid size-8 place-items-center rounded-full bg-black/60 text-white opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100 group-has-focus-visible:opacity-100 pointer-coarse:opacity-100">
@@ -129,8 +134,7 @@ function Screens({
           <Button
             variant="ghost"
             size="icon-sm"
-            aria-label="Zoom in"
-            aria-pressed={Boolean(zoomed)}
+            aria-label={zoomed ? "Zoom out" : "Zoom in"}
             onClick={() => zoom(0.5, 0.5)}
             className="absolute top-2 right-11"
           >

@@ -24,7 +24,12 @@ export function StoryArticle({
 
   return (
     <article className="mx-auto max-w-5xl px-5 pt-8 sm:px-8 sm:pt-12">
-      <h1 className="text-5xl leading-none font-extrabold tracking-tighter text-balance sm:text-7xl">{title}</h1>
+      <h1
+        style={{ viewTransitionName: `title-${slug}` }}
+        className="w-fit text-5xl leading-none font-extrabold tracking-tighter text-balance sm:text-7xl"
+      >
+        {title}
+      </h1>
 
       <div className="mt-10 grid gap-6 md:grid-cols-3 md:gap-8">
         <aside className="text-sm text-muted-foreground md:sticky md:top-24 md:self-start">
