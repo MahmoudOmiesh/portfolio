@@ -62,8 +62,16 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-dvh flex-col">
+      <a
+        href="#main"
+        className="fixed top-2 left-2 z-50 -translate-y-16 rounded-md bg-foreground px-3 py-2 text-sm font-medium text-background focus:translate-y-0"
+      >
+        Skip to content
+      </a>
       <SiteHeader />
-      <main className="flex-1">{children}</main>
+      <main id="main" className="flex-1">
+        {children}
+      </main>
       <footer className="mx-auto mt-24 flex w-full max-w-5xl flex-wrap items-center justify-between gap-3 px-5 pb-16 text-sm text-muted-foreground sm:px-8">
         <p suppressHydrationWarning>
           &copy; {year} {profile.copyright}

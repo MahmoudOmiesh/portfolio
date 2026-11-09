@@ -24,7 +24,7 @@ export function SiteHeader() {
   return (
     <header
       data-scrolled={scrolled || undefined}
-      className="sticky top-0 z-10 border-b border-transparent bg-background/80 backdrop-blur transition-colors data-scrolled:border-border"
+      className="sticky top-0 z-10 border-b border-transparent bg-background transition-colors data-scrolled:border-border"
     >
       <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 px-5 text-sm sm:px-8">
         <Link to="/" className="font-bold">
