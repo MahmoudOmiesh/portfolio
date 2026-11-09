@@ -1,50 +1,58 @@
-import { Link } from "@tanstack/react-router";
-import { ArrowLeftIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ChevronDownIcon } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
-import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import { prose } from "@/components/work/prose";
+import { Tile } from "@/components/work/tile";
+import { caseStudies } from "@/content/case-studies";
 import type { Article } from "@/content/work";
 
 export function StoryArticle({
+  slug,
   title,
   heading,
   details,
   article: { default: Content, headings },
 }: {
+  slug: string;
   title: string;
   heading: string;
   details: string[];
   article: Article;
 }) {
-  return (
-    <article className="mx-auto max-w-5xl px-5 pt-12 sm:px-8 sm:pt-16">
-      <Button
-        variant="ghost"
-        size="sm"
-        nativeButton={false}
-        render={<Link to="/" />}
-        className="-ml-1.5 text-sm text-muted-foreground sm:-ml-6"
-      >
-        <ArrowLeftIcon data-icon="inline-start" />
-        Back home
-      </Button>
+  const next = caseStudies[(caseStudies.findIndex((study) => study.slug === slug) + 1) % caseStudies.length];
 
-      <h1 className="mt-10 text-5xl leading-none font-extrabold tracking-tighter text-balance sm:text-7xl">{title}</h1>
+  return (
+    <article className="mx-auto max-w-5xl px-5 pt-8 sm:px-8 sm:pt-12">
+      <h1
+        style={{ viewTransitionName: `title-${slug}` }}
+        className="w-fit text-5xl leading-[1.08] font-extrabold tracking-tighter text-balance sm:text-7xl sm:leading-none"
+      >
+        {title}
+      </h1>
 
       <div className="mt-10 grid gap-6 md:grid-cols-3 md:gap-8">
-        <aside className="text-sm text-muted-foreground md:sticky md:top-16 md:self-start">
+        <aside className="text-sm text-muted-foreground md:sticky md:top-24 md:self-start">
           <p className="text-lg font-bold text-foreground">{heading}</p>
           {details.map((detail) => (
             <p key={detail}>{detail}</p>
           ))}
           <SectionNav headings={headings} />
+          <SectionMenu headings={headings} />
         </aside>
 
         <div className="text-lg text-foreground/80 md:col-span-2">
           <Content components={prose} />
         </div>
       </div>
+
+      <Separator className="mt-24" />
+      <nav aria-label="Next case study" className="grid gap-6 pt-10 md:grid-cols-3 md:gap-8">
+        <p className="text-sm text-muted-foreground">Next</p>
+        <div className="md:col-span-2">
+          <Tile {...next} />
+        </div>
+      </nav>
     </article>
   );
 }
@@ -86,5 +94,35 @@ function SectionNav({ headings }: { headings: Article["headings"] }) {
         ))}
       </ul>
     </nav>
+  );
+}
+
+function SectionMenu({ headings }: { headings: Article["headings"] }) {
+  const ref = useRef<HTMLDetailsElement>(null);
+
+  if (headings.length === 0) return null;
+
+  return (
+    <details ref={ref} className="group mt-6 border-y md:hidden">
+      <summary className="flex cursor-pointer list-none items-center justify-between py-3 [&::-webkit-details-marker]:hidden">
+        Contents
+        <ChevronDownIcon aria-hidden className="size-4 transition-transform group-open:rotate-180" />
+      </summary>
+      <ul className="space-y-2 pb-4">
+        {headings.map(({ id, text }) => (
+          <li key={id}>
+            <a
+              href={`#${id}`}
+              onClick={() => {
+                if (ref.current) ref.current.open = false;
+              }}
+              className="block transition-colors hover:text-foreground"
+            >
+              {text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </details>
   );
 }

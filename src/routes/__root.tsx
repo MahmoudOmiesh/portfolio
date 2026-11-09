@@ -1,6 +1,8 @@
-import { HeadContent, Link, Outlet, Scripts, createRootRoute } from "@tanstack/react-router";
+import { HeadContent, Link, Outlet, Scripts, createRootRoute, useLocation } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
 
 import { ProfileIcons } from "@/components/profile-links";
+import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
 import { profile } from "@/content/profile";
@@ -59,9 +61,28 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 }
 
 function Layout({ children }: { children: React.ReactNode }) {
+  const pathname = useLocation({ select: (location) => location.pathname });
+  const main = useRef<HTMLElement>(null);
+  const previousPath = useRef(pathname);
+
+  useEffect(() => {
+    if (pathname === previousPath.current) return;
+    previousPath.current = pathname;
+    main.current?.focus({ preventScroll: true });
+  }, [pathname]);
+
   return (
     <div className="flex min-h-dvh flex-col">
-      <main className="flex-1">{children}</main>
+      <a
+        href="#main"
+        className="fixed top-2 left-2 z-50 -translate-y-16 rounded-md bg-foreground px-3 py-2 text-sm font-medium text-background focus:translate-y-0"
+      >
+        Skip to content
+      </a>
+      <SiteHeader />
+      <main ref={main} id="main" tabIndex={-1} className="flex-1 outline-none">
+        {children}
+      </main>
       <footer className="mx-auto mt-24 flex w-full max-w-5xl flex-wrap items-center justify-between gap-3 px-5 pb-16 text-sm text-muted-foreground sm:px-8">
         <p suppressHydrationWarning>
           &copy; {year} {profile.copyright}

@@ -5,7 +5,13 @@ import * as Sputnik from "./work/sputnik.mdx";
 
 export type Article = typeof FirstImpact;
 
-export type Cover = { src: string; width: number; height: number };
+export type Cover = {
+  src: string;
+  width: number;
+  height: number;
+  position?: string;
+  phone?: { zoom: number; origin: string };
+};
 
 type Story = {
   slug: string;
@@ -35,13 +41,25 @@ export const jobs: Job[] = [
       {
         slug: "firstimpact",
         title: "The FirstImpact platform",
-        cover: { src: "/firstimpact/intake.webp", width: 1815, height: 1266 },
+        cover: {
+          src: "/firstimpact/intake.webp",
+          width: 1815,
+          height: 1266,
+          position: "bottom",
+          phone: { zoom: 3.2, origin: "0% 70%" },
+        },
         article: FirstImpact,
       },
       {
         slug: "firstimpact-review-tool",
         title: "The note review tool",
-        cover: { src: "/firstimpact/formal-review.webp", width: 1983, height: 1386 },
+        cover: {
+          src: "/firstimpact/formal-review.webp",
+          width: 1983,
+          height: 1386,
+          position: "50% 92%",
+          phone: { zoom: 1.6, origin: "0% 30%" },
+        },
         article: FirstImpactReviewTool,
       },
     ],
@@ -57,7 +75,7 @@ export const jobs: Job[] = [
       {
         slug: "logibytes",
         title: "The fleet and merchant portals",
-        cover: { src: "/logibytes/live-map.webp", width: 2352, height: 1672 },
+        cover: { src: "/logibytes/live-map.webp", width: 2352, height: 1672, phone: { zoom: 2.2, origin: "0% 0%" } },
         article: Logibytes,
       },
     ],
@@ -72,7 +90,13 @@ export const jobs: Job[] = [
       {
         slug: "sputnik",
         title: "The Sputnik Academy platform",
-        cover: { src: "/sputnik/course-viewer.webp", width: 2400, height: 1988 },
+        cover: {
+          src: "/sputnik/course-viewer.webp",
+          width: 2400,
+          height: 1988,
+          position: "50% 4%",
+          phone: { zoom: 1.45, origin: "90% 0%" },
+        },
         article: Sputnik,
       },
     ],

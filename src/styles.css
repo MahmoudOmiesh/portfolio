@@ -89,7 +89,7 @@
     @apply border-border outline-ring;
   }
   html {
-    @apply font-sans antialiased;
+    @apply scroll-pt-24 font-sans antialiased;
   }
   body {
     @apply bg-background text-foreground;
@@ -107,7 +107,23 @@
   @apply underline decoration-muted-foreground/80 decoration-2 underline-offset-4 transition-colors hover:decoration-brand;
 }
 
+::view-transition-group(*) {
+  animation-duration: 280ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 180ms;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+
   *,
   ::before,
   ::after {
