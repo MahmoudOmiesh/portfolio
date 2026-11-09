@@ -1,6 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
+import { ArrowUpRightIcon } from "lucide-react";
 
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { ProfileLinks } from "@/components/profile-links";
 import { Separator } from "@/components/ui/separator";
 import { profile } from "@/content/profile";
@@ -12,10 +12,6 @@ export const Route = createFileRoute("/")({
   head: () => pageHead("/", profile.meta.title, profile.meta.description),
   component: Home,
 });
-
-const titleClass = "text-4xl leading-tight font-bold tracking-tight transition-colors hover:text-brand";
-
-const coverClass = "aspect-16/10 rounded-lg object-cover object-left-top";
 
 function Home() {
   return (
@@ -35,10 +31,17 @@ function Home() {
       </header>
 
       <Section id="work" title="Work" list="ol">
-        {jobs.map((job) => (
+        {jobs.map((job, jobIndex) => (
           <Row key={job.company} heading={job.company} details={[job.role, job.period]} description={job.description}>
-            {job.stories.map((story) => (
-              <Preview key={story.slug} to="/work/$slug" slug={story.slug} title={story.title} cover={story.cover} />
+            {job.stories.map((story, storyIndex) => (
+              <Tile
+                key={story.slug}
+                to="/work/$slug"
+                slug={story.slug}
+                title={story.title}
+                cover={story.cover}
+                loading={jobIndex === 0 && storyIndex === 0 ? "eager" : "lazy"}
+              />
             ))}
           </Row>
         ))}
@@ -47,7 +50,7 @@ function Home() {
       <Section id="projects" title="Projects" list="ul">
         {projects.map((project) => (
           <Row key={project.slug} heading={project.kind} details={[project.year]} description={project.summary}>
-            <Preview to="/projects/$slug" slug={project.slug} title={project.title} cover={project.cover} />
+            <Tile to="/projects/$slug" slug={project.slug} title={project.title} cover={project.cover} />
           </Row>
         ))}
       </Section>
@@ -103,73 +106,54 @@ function Row({
   return (
     <li>
       <Separator />
-      <div className="grid gap-4 py-7 md:grid-cols-3 md:items-baseline md:gap-8">
-        <div className="text-sm text-muted-foreground tabular-nums">
-          <h3 className="text-lg font-bold text-foreground">{heading}</h3>
-          {details.map((detail) => (
-            <p key={detail}>{detail}</p>
-          ))}
+      <div className="grid gap-6 py-10 md:grid-cols-3 md:gap-8">
+        <div>
+          <h3 className="text-lg font-bold">{heading}</h3>
+          <div className="text-sm text-muted-foreground tabular-nums">
+            {details.map((detail) => (
+              <p key={detail}>{detail}</p>
+            ))}
+          </div>
+          <p className="mt-4 max-w-sm text-base text-muted-foreground">{description}</p>
         </div>
-        <div className="flex flex-col items-start gap-1.5 md:col-span-2">
-          {children}
-          <p className="mt-2 max-w-xl text-lg text-muted-foreground">{description}</p>
-        </div>
+        <div className="flex flex-col gap-10 md:col-span-2">{children}</div>
       </div>
     </li>
   );
 }
 
-function Preview({
+function Tile({
   to,
   slug,
   title,
   cover,
+  loading = "lazy",
 }: {
   to: "/work/$slug" | "/projects/$slug";
   slug: string;
   title: string;
   cover: Cover;
+  loading?: "eager" | "lazy";
 }) {
   return (
-    <>
-      <HoverCard>
-        <HoverCardTrigger
-          delay={150}
-          render={
-            <Link to={to} params={{ slug }} className={titleClass}>
-              {title}
-            </Link>
-          }
-          onPointerEnter={() => {
-            new Image().src = cover.src;
-          }}
-        />
-        <HoverCardContent
-          side="left"
-          align="start"
-          alignOffset={0}
-          sideOffset={32}
-          className="hidden w-72 rounded-xl p-1 lg:pointer-fine:block"
-        >
-          <img src={cover.src} alt="" width={cover.width} height={cover.height} className={coverClass} />
-        </HoverCardContent>
-      </HoverCard>
-      <Link
-        to={to}
-        params={{ slug }}
-        tabIndex={-1}
-        aria-hidden
-        className="mt-2 mb-4 block w-full rounded-lg lg:pointer-fine:hidden"
-      >
+    <Link to={to} params={{ slug }} className="group block">
+      <div className="overflow-hidden rounded-lg">
         <img
           src={cover.src}
           alt=""
           width={cover.width}
           height={cover.height}
-          loading="lazy"
-          className={`${coverClass} image-outline block w-full`}
+          loading={loading}
+          className="image-outline aspect-2/1 w-full rounded-lg object-cover object-left-top transition-transform duration-300 ease-out group-hover:scale-[1.02] group-focus-visible:scale-[1.02]"
         />
-      </Link>
-    </>
+      </div>
+      <h4 className="mt-4 text-2xl text-pretty font-bold tracking-tight transition-colors group-hover:text-brand group-focus-visible:text-brand sm:text-3xl">
+        {title}
+        <ArrowUpRightIcon
+          aria-hidden
+          className="ml-1.5 inline size-6 align-[-0.15em] text-muted-foreground transition-[color,translate] duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-brand group-focus-visible:translate-x-1 group-focus-visible:-translate-y-1 group-focus-visible:text-brand"
+        />
+      </h4>
+    </Link>
   );
 }
