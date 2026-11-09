@@ -1,11 +1,11 @@
-import { Link, createFileRoute } from "@tanstack/react-router";
-import { ArrowUpRightIcon } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
 
 import { ProfileLinks } from "@/components/profile-links";
 import { Separator } from "@/components/ui/separator";
+import { Tile } from "@/components/work/tile";
 import { profile } from "@/content/profile";
 import { projects } from "@/content/projects";
-import { jobs, type Cover } from "@/content/work";
+import { jobs } from "@/content/work";
 import { pageHead } from "@/seo";
 
 export const Route = createFileRoute("/")({
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   return (
-    <div className="mx-auto max-w-5xl px-5 pt-12 sm:px-8 sm:pt-16">
+    <div className="mx-auto max-w-5xl px-5 pt-8 sm:px-8 sm:pt-12">
       <header>
         <h1 className="text-6xl leading-none font-extrabold tracking-tighter sm:text-8xl lg:text-9xl">
           {profile.name.split(" ").map((word) => (
@@ -119,41 +119,5 @@ function Row({
         <div className="flex flex-col gap-10 md:col-span-2">{children}</div>
       </div>
     </li>
-  );
-}
-
-function Tile({
-  to,
-  slug,
-  title,
-  cover,
-  loading = "lazy",
-}: {
-  to: "/work/$slug" | "/projects/$slug";
-  slug: string;
-  title: string;
-  cover: Cover;
-  loading?: "eager" | "lazy";
-}) {
-  return (
-    <Link to={to} params={{ slug }} className="group block">
-      <div className="overflow-hidden rounded-lg">
-        <img
-          src={cover.src}
-          alt=""
-          width={cover.width}
-          height={cover.height}
-          loading={loading}
-          className="image-outline aspect-2/1 w-full rounded-lg object-cover object-left-top transition-transform duration-300 ease-out group-hover:scale-[1.02] group-focus-visible:scale-[1.02]"
-        />
-      </div>
-      <h4 className="mt-4 text-2xl text-pretty font-bold tracking-tight transition-colors group-hover:text-brand group-focus-visible:text-brand sm:text-3xl">
-        {title}
-        <ArrowUpRightIcon
-          aria-hidden
-          className="ml-1.5 inline size-6 align-[-0.15em] text-muted-foreground transition-[color,translate] duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-brand group-focus-visible:translate-x-1 group-focus-visible:-translate-y-1 group-focus-visible:text-brand"
-        />
-      </h4>
-    </Link>
   );
 }

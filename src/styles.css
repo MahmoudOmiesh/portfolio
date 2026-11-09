@@ -89,7 +89,7 @@
     @apply border-border outline-ring;
   }
   html {
-    @apply font-sans antialiased;
+    @apply scroll-pt-24 font-sans antialiased;
   }
   body {
     @apply bg-background text-foreground;

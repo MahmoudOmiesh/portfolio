@@ -30,7 +30,7 @@ const icons: Record<ProfileLink["label"], LucideIcon> = {
   Email: MailIcon,
 };
 
-function anchorProps({ href, newTab }: ProfileLink) {
+export function anchorProps({ href, newTab }: ProfileLink) {
   return newTab ? { href, target: "_blank", rel: "noreferrer noopener" } : { href };
 }
 

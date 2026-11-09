@@ -26,7 +26,7 @@ export const Route = createFileRoute("/projects/$slug")({
 });
 
 function ProjectPage() {
-  const { title, kind, year, article } = findProject(Route.useLoaderData());
+  const { slug, title, kind, year, article } = findProject(Route.useLoaderData());
 
-  return <StoryArticle title={title} heading={kind} details={[year]} article={article} />;
+  return <StoryArticle slug={slug} title={title} heading={kind} details={[year]} article={article} />;
 }

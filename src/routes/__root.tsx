@@ -1,6 +1,7 @@
 import { HeadContent, Link, Outlet, Scripts, createRootRoute } from "@tanstack/react-router";
 
 import { ProfileIcons } from "@/components/profile-links";
+import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
 import { profile } from "@/content/profile";
@@ -61,6 +62,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-dvh flex-col">
+      <SiteHeader />
       <main className="flex-1">{children}</main>
       <footer className="mx-auto mt-24 flex w-full max-w-5xl flex-wrap items-center justify-between gap-3 px-5 pb-16 text-sm text-muted-foreground sm:px-8">
         <p suppressHydrationWarning>

@@ -79,10 +79,7 @@ function Screens({
 
 export const prose: MDXComponents = {
   h2: ({ children, ...props }) => (
-    <h2
-      className="mt-16 mb-2 scroll-mt-12 text-3xl font-extrabold tracking-tighter text-balance text-foreground"
-      {...props}
-    >
+    <h2 className="mt-16 mb-2 text-3xl font-extrabold tracking-tighter text-balance text-foreground" {...props}>
       {children}
     </h2>
   ),

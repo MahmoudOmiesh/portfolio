@@ -30,6 +30,7 @@ function StoryPage() {
 
   return (
     <StoryArticle
+      slug={story.slug}
       title={story.title}
       heading={job.company}
       details={[job.role, job.location, job.period]}
