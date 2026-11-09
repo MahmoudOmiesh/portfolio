@@ -17,7 +17,8 @@ export function Tile({ to, slug, title, cover, loading = "lazy" }: CaseStudy & {
           width={cover.width}
           height={cover.height}
           loading={loading}
-          className="image-outline aspect-2/1 w-full rounded-lg object-cover object-left-top transition-transform duration-200 ease-out group-hover:scale-[1.015] group-focus-visible:scale-[1.015]"
+          style={{ objectPosition: cover.position }}
+          className="image-outline aspect-16/10 w-full rounded-lg object-cover object-top transition-transform duration-200 ease-out group-hover:scale-[1.015] group-focus-visible:scale-[1.015]"
         />
       </div>
       <h4

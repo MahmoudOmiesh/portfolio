@@ -15,8 +15,8 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   return (
-    <div className="mx-auto max-w-5xl px-5 pt-8 sm:px-8 sm:pt-12">
-      <header>
+    <div className="mx-auto max-w-5xl px-5 pt-6 sm:px-8 sm:pt-12">
+      <header className="grid gap-5 sm:gap-10 lg:grid-cols-[auto_1fr] lg:items-baseline-last lg:gap-12">
         <h1 className="text-6xl leading-none font-extrabold tracking-tighter sm:text-8xl lg:text-9xl">
           {profile.name.split(" ").map((word) => (
             <span key={word} className="block">
@@ -24,7 +24,7 @@ function Home() {
             </span>
           ))}
         </h1>
-        <div className="mt-10 flex flex-col gap-5 text-lg lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+        <div className="flex flex-col gap-4 text-lg sm:gap-5">
           <p className="max-w-md">{profile.about}</p>
           <ProfileLinks aria-label="Profiles" className="font-medium" />
         </div>
@@ -55,7 +55,7 @@ function Home() {
         ))}
       </Section>
 
-      <section aria-labelledby="cta" className="mt-28">
+      <section aria-labelledby="cta" className="mt-14 sm:mt-28">
         <p id="cta" className="mb-3 text-lg text-muted-foreground">
           {profile.cta.text}
         </p>
@@ -83,7 +83,7 @@ function Section({
 }) {
   return (
     <section aria-labelledby={id}>
-      <h2 id={id} className="mt-28 mb-1 text-3xl font-extrabold tracking-tighter">
+      <h2 id={id} className="mt-14 mb-1 text-3xl font-extrabold tracking-tighter sm:mt-28">
         {title}
       </h2>
       <List>{children}</List>
@@ -106,7 +106,7 @@ function Row({
   return (
     <li>
       <Separator />
-      <div className="grid gap-6 py-10 md:grid-cols-3 md:gap-8">
+      <div className="grid gap-4 py-8 md:grid-cols-3 md:gap-8 md:py-10">
         <div>
           <h3 className="text-lg font-bold">{heading}</h3>
           <div className="text-sm text-muted-foreground tabular-nums">

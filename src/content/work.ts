@@ -5,7 +5,7 @@ import * as Sputnik from "./work/sputnik.mdx";
 
 export type Article = typeof FirstImpact;
 
-export type Cover = { src: string; width: number; height: number };
+export type Cover = { src: string; width: number; height: number; position?: string };
 
 type Story = {
   slug: string;
@@ -35,13 +35,13 @@ export const jobs: Job[] = [
       {
         slug: "firstimpact",
         title: "The FirstImpact platform",
-        cover: { src: "/firstimpact/intake.webp", width: 1815, height: 1266 },
+        cover: { src: "/firstimpact/intake.webp", width: 1815, height: 1266, position: "bottom" },
         article: FirstImpact,
       },
       {
         slug: "firstimpact-review-tool",
         title: "The note review tool",
-        cover: { src: "/firstimpact/formal-review.webp", width: 1983, height: 1386 },
+        cover: { src: "/firstimpact/formal-review.webp", width: 1983, height: 1386, position: "50% 92%" },
         article: FirstImpactReviewTool,
       },
     ],
@@ -72,7 +72,7 @@ export const jobs: Job[] = [
       {
         slug: "sputnik",
         title: "The Sputnik Academy platform",
-        cover: { src: "/sputnik/course-viewer.webp", width: 2400, height: 1988 },
+        cover: { src: "/sputnik/course-viewer.webp", width: 2400, height: 1988, position: "50% 4%" },
         article: Sputnik,
       },
     ],

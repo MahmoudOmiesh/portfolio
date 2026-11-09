@@ -26,7 +26,7 @@ export function StoryArticle({
     <article className="mx-auto max-w-5xl px-5 pt-8 sm:px-8 sm:pt-12">
       <h1
         style={{ viewTransitionName: `title-${slug}` }}
-        className="w-fit text-5xl leading-none font-extrabold tracking-tighter text-balance sm:text-7xl"
+        className="w-fit text-5xl leading-[1.08] font-extrabold tracking-tighter text-balance sm:text-7xl sm:leading-none"
       >
         {title}
       </h1>
