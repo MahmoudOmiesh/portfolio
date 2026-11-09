@@ -10,16 +10,21 @@ export function Tile({ to, slug, title, cover, loading = "lazy" }: CaseStudy & {
       params={{ slug }}
       className="group block transition-transform duration-150 ease-out active:scale-[0.985]"
     >
-      <div className="overflow-hidden rounded-lg">
-        <img
-          src={cover.src}
-          alt=""
-          width={cover.width}
-          height={cover.height}
-          loading={loading}
-          style={{ objectPosition: cover.position }}
-          className="image-outline aspect-16/10 w-full rounded-lg object-cover object-top transition-transform duration-200 ease-out group-hover:scale-[1.015] group-focus-visible:scale-[1.015]"
-        />
+      <div className="image-outline overflow-hidden rounded-lg">
+        <div
+          style={{ "--zoom": cover.phone?.zoom ?? 1, "--origin": cover.phone?.origin ?? "center" }}
+          className="max-sm:origin-(--origin) max-sm:scale-(--zoom)"
+        >
+          <img
+            src={cover.src}
+            alt=""
+            width={cover.width}
+            height={cover.height}
+            loading={loading}
+            style={{ objectPosition: cover.position }}
+            className="block aspect-16/10 w-full object-cover object-top transition-transform duration-200 ease-out group-hover:scale-[1.015] group-focus-visible:scale-[1.015]"
+          />
+        </div>
       </div>
       <h4
         style={{ viewTransitionName: `title-${slug}` }}
