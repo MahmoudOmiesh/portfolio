@@ -1,4 +1,5 @@
-import { HeadContent, Link, Outlet, Scripts, createRootRoute } from "@tanstack/react-router";
+import { HeadContent, Link, Outlet, Scripts, createRootRoute, useLocation } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
 
 import { ProfileIcons } from "@/components/profile-links";
 import { SiteHeader } from "@/components/site-header";
@@ -60,6 +61,16 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 }
 
 function Layout({ children }: { children: React.ReactNode }) {
+  const pathname = useLocation({ select: (location) => location.pathname });
+  const main = useRef<HTMLElement>(null);
+  const previousPath = useRef(pathname);
+
+  useEffect(() => {
+    if (pathname === previousPath.current) return;
+    previousPath.current = pathname;
+    main.current?.focus({ preventScroll: true });
+  }, [pathname]);
+
   return (
     <div className="flex min-h-dvh flex-col">
       <a
@@ -69,7 +80,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         Skip to content
       </a>
       <SiteHeader />
-      <main id="main" className="flex-1">
+      <main ref={main} id="main" tabIndex={-1} className="flex-1 outline-none">
         {children}
       </main>
       <footer className="mx-auto mt-24 flex w-full max-w-5xl flex-wrap items-center justify-between gap-3 px-5 pb-16 text-sm text-muted-foreground sm:px-8">
