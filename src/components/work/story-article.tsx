@@ -1,10 +1,12 @@
-import { ChevronDownIcon } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { ArrowLeftIcon, ChevronDownIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { Separator } from "@/components/ui/separator";
 import { prose } from "@/components/work/prose";
 import { Tile } from "@/components/work/tile";
 import { caseStudies } from "@/content/case-studies";
+import { profile } from "@/content/profile";
 import type { Article } from "@/content/work";
 
 export function StoryArticle({
@@ -23,7 +25,17 @@ export function StoryArticle({
   const next = caseStudies[(caseStudies.findIndex((study) => study.slug === slug) + 1) % caseStudies.length];
 
   return (
-    <article className="mx-auto max-w-5xl px-5 pt-8 sm:px-8 sm:pt-12">
+    <article className="mx-auto max-w-5xl px-5 pt-6 sm:px-8 sm:pt-10">
+      <Link
+        to="/"
+        className="group mb-10 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground sm:mb-14"
+      >
+        <ArrowLeftIcon
+          aria-hidden
+          className="size-4 transition-transform duration-150 ease-out group-hover:-translate-x-0.5"
+        />
+        {profile.name}
+      </Link>
       <h1
         style={{ viewTransitionName: `title-${slug}` }}
         className="w-fit text-5xl leading-[1.08] font-extrabold tracking-tighter text-balance sm:text-7xl sm:leading-none"
@@ -32,7 +44,7 @@ export function StoryArticle({
       </h1>
 
       <div className="mt-10 grid gap-6 md:grid-cols-3 md:gap-8">
-        <aside className="text-sm text-muted-foreground md:sticky md:top-24 md:self-start">
+        <aside className="text-sm text-muted-foreground md:sticky md:top-8 md:self-start">
           <p className="text-lg font-bold text-foreground">{heading}</p>
           {details.map((detail) => (
             <p key={detail}>{detail}</p>
