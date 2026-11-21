@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useRef, type RefObject } from "react";
-
-import { threshold, useCanvas } from "@/components/canvas";
+import { ease, useCanvas, type Frame } from "@/components/canvas";
+import { threshold } from "@/components/dither";
 
 const cell = 7;
 
@@ -21,19 +20,12 @@ const envelope = [
 
 const radius = Math.hypot(envelope[0].length, envelope.length) / 2;
 
-function paintEnvelope(
-  canvas: HTMLCanvasElement,
-  context: CanvasRenderingContext2D,
-  still: boolean,
-  target: RefObject<number>,
-) {
-  const pointer = { x: -Infinity, y: -Infinity };
+function paintEnvelope(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D) {
   let columns = 0;
   let rows = 0;
   let levels = new Float32Array();
   let glow = new Float32Array();
   let gathered = 0;
-  let last = 0;
 
   function envelopeCell(x: number, y: number) {
     const left = Math.floor((columns - envelope[0].length) / 2);
@@ -44,19 +36,15 @@ function paintEnvelope(
     return row[x - left] === "X" ? "line" : "body";
   }
 
-  function frame(now: number) {
+  function frame({ now, elapsed, pointer, props: open }: Frame<boolean>) {
     const style = getComputedStyle(canvas);
     const brand = style.getPropertyValue("--brand").trim();
-    const box = canvas.getBoundingClientRect();
-    const px = (pointer.x - box.left) / cell;
-    const py = (pointer.y - box.top) / cell;
-    const t = still ? 0 : now / 4000;
-    const elapsed = Math.min(64, now - last);
-    const ease = (duration: number) => (still ? 1 : 1 - Math.exp(-elapsed / duration));
-    const fade = still ? 0 : Math.exp(-elapsed / 140);
+    const px = (pointer?.x ?? -Infinity) / cell;
+    const py = (pointer?.y ?? -Infinity) / cell;
+    const t = now / 4000;
+    const fade = 1 - ease(elapsed, 140);
 
-    last = now;
-    gathered += (target.current - gathered) * ease(160);
+    gathered += ((open ? 1 : 0) - gathered) * ease(elapsed, 160);
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     for (let y = 0; y < rows; y++)
@@ -69,9 +57,9 @@ function paintEnvelope(
         const wave =
           (Math.sin(x * 0.18 + t * 1.3) + Math.sin(y * 0.22 - t) + Math.sin((x + y) * 0.1 + t * 0.7)) / 6 + 0.5;
 
-        const near = still ? 0 : Math.max(0, 1 - Math.hypot(x - px, y - py) / 3.5);
+        const near = Math.max(0, 1 - Math.hypot(x - px, y - py) / 3.5);
 
-        levels[index] += (want - levels[index]) * ease(90);
+        levels[index] += (want - levels[index]) * ease(elapsed, 90);
         glow[index] = Math.max(near, glow[index] * fade);
 
         const level = levels[index];
@@ -103,49 +91,13 @@ function paintEnvelope(
     context.setTransform(ratio, 0, 0, ratio, 0, 0);
     levels = new Float32Array(columns * rows);
     glow = new Float32Array(columns * rows);
-    frame(performance.now());
   }
 
-  function move(event: PointerEvent) {
-    pointer.x = event.clientX;
-    pointer.y = event.clientY;
-  }
-
-  function leave() {
-    pointer.x = pointer.y = -Infinity;
-  }
-
-  const resizer = new ResizeObserver(resize);
-
-  resizer.observe(canvas);
-  canvas.addEventListener("pointermove", move);
-  canvas.addEventListener("pointerleave", leave);
-
-  return {
-    frame,
-    dispose() {
-      resizer.disconnect();
-      canvas.removeEventListener("pointermove", move);
-      canvas.removeEventListener("pointerleave", leave);
-    },
-  };
+  return { frame, resize };
 }
 
 export function EnvelopeField({ open, className }: { open: boolean; className?: string }) {
-  const target = useRef(0);
-
-  const { ref, redraw } = useCanvas(
-    useCallback(
-      (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, still: boolean) =>
-        paintEnvelope(canvas, context, still, target),
-      [],
-    ),
-  );
-
-  useEffect(() => {
-    target.current = open ? 1 : 0;
-    redraw();
-  }, [open, redraw]);
+  const ref = useCanvas(paintEnvelope, open);
 
   return <canvas ref={ref} aria-hidden className={className} />;
 }

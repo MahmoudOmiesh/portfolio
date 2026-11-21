@@ -1,0 +1,3 @@
+.agents/
+src/routeTree.gen.ts
+bun.lock

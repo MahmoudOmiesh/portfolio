@@ -1,15 +1,21 @@
 import { cn } from "cn";
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 
 import { EnvelopeField } from "@/components/envelope-field";
 import { SocialLinks } from "@/components/social-links";
 import { buttonVariants } from "@/components/ui/button";
 import { profile } from "@/content/profile";
 
-const year = new Date().getFullYear();
+const subscribe = () => () => {};
 
 export function SiteFooter() {
   const [open, setOpen] = useState(false);
+
+  const year = useSyncExternalStore(
+    subscribe,
+    () => new Date().getFullYear(),
+    () => null,
+  );
 
   return (
     <footer className="mx-auto mt-32 w-full max-w-5xl px-5 pb-10 sm:mt-40 sm:px-8">
@@ -34,8 +40,8 @@ export function SiteFooter() {
         <EnvelopeField open={open} className="h-52 w-full text-foreground max-md:hidden" />
       </div>
       <div className="mt-16 flex items-center justify-between gap-4 text-sm text-muted-foreground sm:mt-20">
-        <p suppressHydrationWarning>
-          &copy; {year} {profile.copyright}
+        <p>
+          &copy; {year ?? __BUILD_YEAR__} {profile.copyright}
         </p>
         <SocialLinks className="-mr-2 flex gap-1" />
       </div>

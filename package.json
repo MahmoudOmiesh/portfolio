@@ -5,12 +5,14 @@
   "scripts": {
     "dev": "vite dev --port 3000",
     "build": "vite build",
+    "start": "cd .output && NODE_ENV=production PORT=${PORT:-4317} bun server/index.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "lint": "oxlint && oxfmt --check",
     "check": "bun run typecheck && bun run lint",
-    "resume": "tectonic -X compile resume/resume.tex --outdir public",
-    "og": "bun scripts/og.tsx"
+    "resume": "tectonic -X compile resume/resume.tex --outdir public && (pdffonts public/resume.pdf | grep -q XCharter-Bold || (echo 'resume.pdf fell back to Computer Modern: keep the ifPDFTeX block in resume.tex' >&2 && exit 1))",
+    "og": "bun scripts/og.tsx",
+    "shot": "bun scripts/shot.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
@@ -48,6 +50,7 @@
     "mdast-util-to-string": "^4.0.0",
     "oxfmt": "^0.72.0",
     "oxlint": "^1.87.0",
+    "playwright-core": "^1.65.1",
     "satori": "^0.63.2",
     "typescript": "^6.0.2",
     "unist-util-visit": "^5.2.0",

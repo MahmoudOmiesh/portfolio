@@ -10,6 +10,7 @@ import { profile } from "./src/content/profile";
 
 export default defineConfig({
   resolve: { tsconfigPaths: true },
+  define: { __BUILD_YEAR__: new Date().getFullYear() },
   plugins: [
     { enforce: "pre", ...mdx({ remarkPlugins: [remarkHeadings] }) },
     tailwindcss(),

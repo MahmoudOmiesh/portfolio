@@ -1,4 +1,4 @@
-import { threshold } from "@/components/canvas";
+import { threshold } from "@/components/dither";
 
 export const width = 180;
 export const height = 60;

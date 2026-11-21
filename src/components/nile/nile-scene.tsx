@@ -1,4 +1,4 @@
-import { useCanvas } from "@/components/canvas";
+import { ease, useCanvas, type Frame } from "@/components/canvas";
 import { localHour } from "@/components/local-time";
 
 import { drawScene, height, width } from "./scene";
@@ -13,54 +13,34 @@ function hourUnder(fraction: number) {
   return 6 + (Math.acos((0.5 - fraction) / 0.42) / Math.PI) * 12;
 }
 
-function paintNile(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, still: boolean) {
+function paintNile(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D) {
   const image = context.createImageData(width, height);
   let hour = localHour();
-  let scrub: number | undefined;
-  let last = 0;
+  let drawn = -Infinity;
 
-  function draw(now: number) {
-    const gap = turn(hour, scrub ?? localHour());
+  function scrubbed(pointer: Frame<undefined>["pointer"]) {
+    if (!pointer) return undefined;
 
-    hour = still ? hour + gap : (hour + gap * (1 - Math.exp(-Math.min(64, now - last) / 180)) + 24) % 24;
-    last = now;
-    drawScene(image.data, hour, still ? 0 : Date.now() / 1000);
-    context.putImageData(image, 0, 0);
+    const visible = Math.min(1, canvas.clientWidth / canvas.clientHeight / (width / height));
+
+    return hourUnder(0.5 + (pointer.x / canvas.clientWidth - 0.5) * visible);
   }
-
-  function move(event: PointerEvent) {
-    const box = canvas.getBoundingClientRect();
-    const visible = Math.min(1, box.width / box.height / (width / height));
-
-    scrub = hourUnder(0.5 + ((event.clientX - box.left) / box.width - 0.5) * visible);
-
-    if (still) draw(performance.now());
-  }
-
-  function leave() {
-    scrub = undefined;
-
-    if (still) draw(performance.now());
-  }
-
-  canvas.addEventListener("pointermove", move);
-  canvas.addEventListener("pointerleave", leave);
-  const minute = still ? setInterval(() => draw(performance.now()), 60_000) : undefined;
 
   return {
-    frame(now: number) {
-      if (Math.abs(turn(hour, scrub ?? localHour())) > 0.01 || now - last >= 80) draw(now);
-    },
-    dispose() {
-      canvas.removeEventListener("pointermove", move);
-      canvas.removeEventListener("pointerleave", leave);
-      clearInterval(minute);
+    frame({ now, elapsed, pointer }: Frame<undefined>) {
+      const gap = turn(hour, scrubbed(pointer) ?? localHour());
+
+      if (Math.abs(gap) <= 0.01 && now - drawn < 80) return;
+      hour = (hour + gap * ease(elapsed, 180) + 24) % 24;
+      drawn = now;
+      drawScene(image.data, hour, (performance.timeOrigin + now) / 1000);
+      context.putImageData(image, 0, 0);
     },
   };
 }
 
 export function NileScene({ className }: { className?: string }) {
-  const { ref } = useCanvas(paintNile);
+  const ref = useCanvas(paintNile, undefined);
 
   return <canvas ref={ref} width={width} height={height} aria-hidden className={className} />;
 }

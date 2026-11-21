@@ -1,3 +1,0 @@
-{
-  "ignore": { "files": ["tools/**", ".output/**", ".claude/**", ".agents/**"] }
-}
