@@ -1,3 +1,5 @@
+import { threshold } from "@/components/canvas";
+
 export const width = 180;
 export const height = 60;
 
@@ -17,11 +19,8 @@ const mix = (a: Rgb, b: Rgb, amount: number): Rgb => [
 
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
 
-const bayer = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5].map((value) => (value + 0.5) / 16);
-
 function dither(color: Rgb, x: number, y: number, levels: number): Rgb {
-  const threshold = bayer[(y & 3) * 4 + (x & 3)];
-  const step = (value: number) => Math.min(255, (Math.floor((value / 255) * levels + threshold) * 255) / levels);
+  const step = (value: number) => Math.min(255, (Math.floor((value / 255) * levels + threshold(x, y)) * 255) / levels);
 
   return [step(color[0]), step(color[1]), step(color[2])];
 }
