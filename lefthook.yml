@@ -5,9 +5,19 @@ pre-commit:
       glob: "*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}"
       run: bun oxlint --fix --no-error-on-unmatched-pattern {staged_files}
       stage_fixed: true
+    - name: typecheck
+      glob: "*.{ts,tsx,mts,cts,mdx}"
+      run: bun run typecheck
     - name: resume
       glob: "resume/resume.tex"
       run: bun run resume && git add public/resume.pdf
+    - name: og
+      glob:
+        - "src/components/nile/scene.ts"
+        - "src/components/dither.ts"
+        - "src/content/profile.ts"
+        - "scripts/og.tsx"
+      run: bun run og && git add src/assets/opengraph-image.png public/favicon.svg public/favicon.ico
     - name: oxfmt
       run: bun oxfmt --write --no-error-on-unmatched-pattern {staged_files}
       stage_fixed: true
