@@ -3,8 +3,6 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/schibsted-grotesk";
 
-@custom-variant dark (@media (prefers-color-scheme: dark));
-
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: "Schibsted Grotesk Variable", system-ui, sans-serif;
@@ -80,7 +78,6 @@
     --border: #2a2a27;
     --input: #2a2a27;
     --brand: #8f7bff;
-    --ring: var(--brand);
   }
 }
 
@@ -130,6 +127,5 @@
     animation-duration: 0s !important;
     transition-duration: 0s !important;
     transition-delay: 0s !important;
-    scroll-behavior: auto !important;
   }
 }
