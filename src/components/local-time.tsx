@@ -5,8 +5,8 @@ import { profile } from "@/content/profile";
 const { place, timeZone } = profile.location;
 const format = new Intl.DateTimeFormat("en-GB", { timeZone, hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
 
-export function localHour(date = new Date()) {
-  const [hour, minute] = format.format(date).split(":").map(Number);
+export function localHour() {
+  const [hour, minute] = format.format(Date.now()).split(":").map(Number);
 
   return hour + minute / 60;
 }

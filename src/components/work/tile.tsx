@@ -3,7 +3,13 @@ import { ArrowRightIcon } from "lucide-react";
 
 import type { CaseStudy } from "@/content/case-studies";
 
-export function Tile({ to, slug, title, cover, loading = "lazy" }: CaseStudy & { loading?: "eager" | "lazy" }) {
+export function Tile({
+  to,
+  slug,
+  title,
+  cover,
+  loading = "lazy",
+}: Pick<CaseStudy, "to" | "slug" | "title" | "cover"> & { loading?: "eager" | "lazy" }) {
   return (
     <Link
       to={to}
