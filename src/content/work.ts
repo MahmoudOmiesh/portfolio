@@ -32,7 +32,7 @@ type Job = {
 export const jobs: Job[] = [
   {
     company: "FirstImpact Med",
-    role: "Full Stack Developer",
+    role: "Software Engineer",
     location: "Remote, USA",
     period: "Mar 2026 to present",
     description:
@@ -66,7 +66,7 @@ export const jobs: Job[] = [
   },
   {
     company: "Logibytes",
-    role: "Part-time Frontend Developer",
+    role: "Part-time Software Engineer",
     location: "Remote, Saudi Arabia",
     period: "Feb 2026 to present",
     description:
@@ -82,7 +82,7 @@ export const jobs: Job[] = [
   },
   {
     company: "Sputnik Academy",
-    role: "Fullstack Intern",
+    role: "Software Engineering Intern",
     location: "Remote, Egypt",
     period: "Mar to Aug 2025",
     description: "I worked on an online learning platform for kids during my internship.",
