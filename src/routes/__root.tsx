@@ -1,8 +1,7 @@
 import { HeadContent, Link, Outlet, Scripts, createRootRoute, useLocation } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 
-import { ProfileIcons } from "@/components/profile-links";
-import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
 import { profile } from "@/content/profile";
@@ -10,7 +9,6 @@ import { profile } from "@/content/profile";
 import appCss from "../styles.css?url";
 
 const { title, description } = profile.meta;
-const year = new Date().getFullYear();
 
 export const Route = createRootRoute({
   head: () => ({
@@ -29,7 +27,8 @@ export const Route = createRootRoute({
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico" },
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
     ],
   }),
   shellComponent: RootDocument,
@@ -79,16 +78,10 @@ function Layout({ children }: { children: React.ReactNode }) {
       >
         Skip to content
       </a>
-      <SiteHeader />
       <main ref={main} id="main" tabIndex={-1} className="flex-1 outline-none">
         {children}
       </main>
-      <footer className="mx-auto mt-24 flex w-full max-w-5xl flex-wrap items-center justify-between gap-3 px-5 pb-16 text-sm text-muted-foreground sm:px-8">
-        <p suppressHydrationWarning>
-          &copy; {year} {profile.copyright}
-        </p>
-        <ProfileIcons aria-label="Footer" />
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

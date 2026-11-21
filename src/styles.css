@@ -89,7 +89,7 @@
     @apply border-border outline-ring;
   }
   html {
-    @apply scroll-pt-24 font-sans antialiased;
+    @apply scroll-pt-8 font-sans antialiased;
   }
   body {
     @apply bg-background text-foreground;
@@ -129,6 +129,7 @@
   ::after {
     animation-duration: 0s !important;
     transition-duration: 0s !important;
+    transition-delay: 0s !important;
     scroll-behavior: auto !important;
   }
 }

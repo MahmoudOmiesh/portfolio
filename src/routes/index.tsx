@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { ProfileLinks } from "@/components/profile-links";
-import { Separator } from "@/components/ui/separator";
+import { LocalTime } from "@/components/local-time";
+import { NileScene } from "@/components/nile/nile-scene";
+import { SocialLinks } from "@/components/social-links";
 import { Tile } from "@/components/work/tile";
 import { profile } from "@/content/profile";
 import { projects } from "@/content/projects";
@@ -15,19 +16,19 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   return (
-    <div className="mx-auto max-w-5xl px-5 pt-6 sm:px-8 sm:pt-12">
-      <header className="grid gap-5 sm:gap-10 lg:grid-cols-[auto_1fr] lg:items-baseline-last lg:gap-12">
-        <h1 className="text-6xl leading-none font-extrabold tracking-tighter sm:text-8xl lg:text-9xl">
-          {profile.name.split(" ").map((word) => (
-            <span key={word} className="block">
-              {word}
-            </span>
-          ))}
-        </h1>
-        <div className="flex flex-col gap-4 text-lg sm:gap-5">
-          <p className="max-w-md">{profile.about}</p>
-          <ProfileLinks aria-label="Profiles" className="font-medium" />
+    <div className="mx-auto max-w-5xl px-5 pt-5 sm:px-8 sm:pt-12">
+      <header>
+        <NileScene className="aspect-3/1 w-full rounded-xl object-cover max-sm:aspect-2/1 bg-muted [image-rendering:pixelated]" />
+        <div className="mt-8 flex items-end justify-between gap-4 sm:mt-10">
+          <div>
+            <h1 className="text-3xl leading-tight font-bold tracking-tight sm:text-4xl">{profile.name}</h1>
+            <p className="mt-1 text-muted-foreground">
+              {profile.role} · <LocalTime />
+            </p>
+          </div>
+          <SocialLinks className="-mr-2 flex gap-1" />
         </div>
+        <p className="mt-6 max-w-xl text-xl text-pretty">{profile.about}</p>
       </header>
 
       <Section id="work" title="Work" list="ol">
@@ -54,18 +55,6 @@ function Home() {
           </Row>
         ))}
       </Section>
-
-      <section aria-labelledby="cta" className="mt-14 sm:mt-28">
-        <p id="cta" className="mb-3 text-lg text-muted-foreground">
-          {profile.cta.text}
-        </p>
-        <a
-          href={`mailto:${profile.email}`}
-          className="text-5xl leading-none font-extrabold tracking-tighter underline decoration-brand decoration-4 underline-offset-8 sm:text-7xl"
-        >
-          {profile.cta.button}
-        </a>
-      </section>
     </div>
   );
 }
@@ -83,11 +72,10 @@ function Section({
 }) {
   return (
     <section aria-labelledby={id}>
-      <h2 id={id} className="mt-14 mb-1 text-3xl font-extrabold tracking-tighter sm:mt-28">
+      <h2 id={id} className="mt-24 mb-8 text-sm font-medium text-muted-foreground sm:mt-32 sm:mb-10">
         {title}
       </h2>
-      <List>{children}</List>
-      <Separator />
+      <List className="flex flex-col gap-16 md:gap-24">{children}</List>
     </section>
   );
 }
@@ -104,20 +92,17 @@ function Row({
   children: React.ReactNode;
 }) {
   return (
-    <li>
-      <Separator />
-      <div className="grid gap-4 py-8 md:grid-cols-3 md:gap-8 md:py-10">
-        <div>
-          <h3 className="text-lg font-bold">{heading}</h3>
-          <div className="text-sm text-muted-foreground tabular-nums">
-            {details.map((detail) => (
-              <p key={detail}>{detail}</p>
-            ))}
-          </div>
-          <p className="mt-4 max-w-sm text-base text-muted-foreground">{description}</p>
+    <li className="grid gap-4 md:grid-cols-3 md:gap-8">
+      <div>
+        <h3 className="text-lg font-bold">{heading}</h3>
+        <div className="text-sm text-muted-foreground tabular-nums">
+          {details.map((detail) => (
+            <p key={detail}>{detail}</p>
+          ))}
         </div>
-        <div className="flex flex-col gap-10 md:col-span-2">{children}</div>
+        <p className="mt-4 max-w-sm text-base text-muted-foreground">{description}</p>
       </div>
+      <div className="flex flex-col gap-10 md:col-span-2">{children}</div>
     </li>
   );
 }

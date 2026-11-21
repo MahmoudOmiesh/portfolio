@@ -2,6 +2,8 @@ const email = "mahmoud@omiesh.dev";
 
 export const profile = {
   name: "Mahmoud Omiesh",
+  role: "Software engineer",
+  location: { place: "Egypt", timeZone: "Africa/Cairo" },
   url: "https://www.omiesh.dev",
   meta: {
     title: "Mahmoud Omiesh | Software Engineer",
@@ -10,13 +12,12 @@ export const profile = {
   },
   about:
     "I build web apps, and I like owning a feature from start to finish, from the database to the last detail on screen. I'm open to remote roles, or to relocating for the right one.",
-  links: [
-    { label: "GitHub", href: "https://github.com/MahmoudOmiesh", newTab: true },
-    { label: "LinkedIn", href: "https://linkedin.com/in/mahmoud-omiesh", newTab: true },
-    { label: "Résumé", href: "/resume.pdf", newTab: true },
-    { label: "Email", href: `mailto:${email}`, newTab: false },
-  ],
+  links: {
+    github: "https://github.com/MahmoudOmiesh",
+    linkedin: "https://linkedin.com/in/mahmoud-omiesh",
+    resume: "/resume.pdf",
+  },
   email,
-  cta: { text: "Hiring, or curious about any of this?", button: "Email me" },
+  cta: "Hiring, or curious about any of this?",
   copyright: "Mahmoud A. Omiesh. All rights reserved.",
 } as const;
