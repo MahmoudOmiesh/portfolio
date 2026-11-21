@@ -1,4 +1,4 @@
-const email = "mahmoud.a.omiesh@gmail.com";
+const email = "mahmoud@omiesh.dev";
 
 export const profile = {
   name: "Mahmoud Omiesh",
