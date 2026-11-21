@@ -104,19 +104,26 @@ export function drawScene(pixels: Uint8ClampedArray, hour: number, seconds: numb
   const elevation = Math.sin(angle);
   const [top, bottom] = sky(elevation);
 
-  for (let y = 0; y < height; y++)
+  const surface = mix(top, bottom, 0.55);
+
+  for (let y = 0; y < horizon; y++) {
+    const color = mix(top, bottom, (y / horizon) ** 1.6);
+
+    for (let x = 0; x < width; x++) plot(x, y, dither(color, x, y, 14));
+  }
+
+  for (let y = horizon; y < height; y++) {
+    const depth = (y - horizon) / (height - horizon);
+    const water = mix(surface, deep, 0.45 + depth * 0.45);
+    const lit = mix(water, bottom, 0.6);
+
     for (let x = 0; x < width; x++) {
-      if (y < horizon) plot(x, y, dither(mix(top, bottom, (y / horizon) ** 1.6), x, y, 14));
-      else {
-        const depth = (y - horizon) / (height - horizon);
-        const water = mix(mix(top, bottom, 0.55), deep, 0.45 + depth * 0.45);
+      const glint =
+        Math.sin(x * 0.5 + seconds * 1.6 + y * 2.3) * Math.sin(x * 0.13 - seconds * 0.7) > 0.6 + depth * 0.3;
 
-        const glint =
-          Math.sin(x * 0.5 + seconds * 1.6 + y * 2.3) * Math.sin(x * 0.13 - seconds * 0.7) > 0.6 + depth * 0.3;
-
-        plot(x, y, dither(glint ? mix(water, bottom, 0.6) : water, x, y, 10));
-      }
+      plot(x, y, dither(glint ? lit : water, x, y, 10));
     }
+  }
 
   if (elevation < 0.05)
     for (const star of stars) {
