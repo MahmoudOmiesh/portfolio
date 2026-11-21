@@ -5,6 +5,9 @@ pre-commit:
       glob: "*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}"
       run: bun oxlint --fix --no-error-on-unmatched-pattern {staged_files}
       stage_fixed: true
+    - name: resume
+      glob: "resume/resume.tex"
+      run: bun run resume && git add public/resume.pdf
     - name: oxfmt
       run: bun oxfmt --write --no-error-on-unmatched-pattern {staged_files}
       stage_fixed: true

@@ -15,6 +15,7 @@ Before editing files for a substantial task:
 
 # Portfolio
 
+- The résumé source is `resume/resume.tex`. Edit it here, not in Overleaf. `bun run resume` builds it into `public/resume.pdf` with tectonic, and the pre-commit hook does the same whenever the source is staged. Keep the `\ifPDFTeX` block: tectonic runs XeTeX, and `fontenc` there swaps XCharter for Computer Modern.
 - Serve a build with `cd .output && NODE_ENV=production bun server/index.mjs`. Without `NODE_ENV=production` every page returns 500.
 - Don't change site copy unless asked.
 - Screenshots use made-up demo data, never real people or customers. Export them as webp at 2x.

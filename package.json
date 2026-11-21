@@ -8,7 +8,8 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "lint": "oxlint && oxfmt --check",
-    "check": "bun run typecheck && bun run lint"
+    "check": "bun run typecheck && bun run lint",
+    "resume": "tectonic -X compile resume/resume.tex --outdir public"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

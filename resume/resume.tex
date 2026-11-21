@@ -1,0 +1,90 @@
+\documentclass[11pt]{article}       % set main text size
+\usepackage[letterpaper,                % set paper size to letterpaper. change to a4paper for resumes outside of North America
+top=0.5in,                          % specify top page margin
+bottom=0.5in,                       % specify bottom page margin
+left=0.5in,                         % specify left page margin
+right=0.5in]{geometry}              % specify right page margin
+
+\usepackage{XCharter}               % set font. comment this line out if you want to use the default LaTeX font Computer Modern
+\usepackage{iftex}
+\ifPDFTeX
+\usepackage[T1]{fontenc}            % output encoding
+\usepackage[utf8]{inputenc}         % input encoding
+\input{glyphtounicode}              % ensure PDF output will be all-Unicode and machine-readable
+\pdfgentounicode=1
+\fi
+\usepackage{enumitem}               % enable lists for bullet points: itemize and \item
+\usepackage[hidelinks]{hyperref}    % format hyperlinks
+\usepackage{titlesec}               % enable section title customization
+\raggedright                        % disable text justification
+\pagestyle{empty}                   % disable page numbering
+
+% format section headings: bolding, size, white space above and below
+\titleformat{\section}{\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule\vspace{-6.5pt}]
+
+% format bullet points: size, white space above and below, white space between bullets
+\renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$}
+\setlist[itemize]{itemsep=-2pt, leftmargin=12pt, topsep=7pt} %%% Test various topsep values to fix vertical spacing errors
+
+% resume starts here
+\begin{document}
+
+\centerline{\Huge Mahmoud Omiesh}
+
+\vspace{5pt}
+
+\centerline{\href{mailto:mahmoud@omiesh.dev}{mahmoud@omiesh.dev} | \href{https://omiesh.dev}{omiesh.dev} | \href{https://github.com/MahmoudOmiesh}{github.com/MahmoudOmiesh}}
+
+\vspace{-10pt}
+
+\section*{Experience}
+\textbf{Software Engineer,} \href{https://firstimpactmed.com/}{FirstImpact Med}, USA (Remote) \hfill Mar 2026 -- Present \\
+\vspace{-9pt}
+\begin{itemize}
+    \item One of two main developers on a telemedicine platform that gets injury patients from an AI intake chat to a doctor-signed report in 24 hours instead of a few days (TanStack Start, tRPC, Drizzle, Inngest)
+    \item Built the doctor portal where doctors edit and sign the note the AI drafted from the intake instead of writing it from scratch, and wrote most of the Python plugin that files it in the clinic's EHR
+    \item Built the lien billing system that tracks what law firms owe from the doctor's signature to settlement months later, designed to replace the billing team's spreadsheet with scheduled follow-ups and a ledger
+    \item Built the law firm portal, where firms invite patients with a link and an ID scan, open their cases, and follow each report and lien themselves instead of waiting to hear from the clinic
+    \item Built an AI tool in one month that checks visit notes before doctors sign them, now used by the medical assistants and doctors of a clinic with 30+ providers and about 3,000 visits a month
+    \item Built a release gate for the AI review rules, so each saved version must pass evals for missed findings, false alarms, and invented quotes before it replaces the live one
+    \item Built monthly AI reports that audit 10\% of each doctor's signed notes and track their repeated mistakes as new, persisting, or improving, so the clinic can see how each doctor's notes change over time
+\end{itemize}
+
+\textbf{Software Engineer (Part-time),} \href{https://logibytes.sa/en/}{Logibytes}, Saudi Arabia (Remote) \hfill Feb 2026 -- Present \\
+\vspace{-9pt}
+\begin{itemize}
+    \item Sole frontend developer of an Arabic and English fleet portal for drivers, vehicles, inspections, live tracking, and approvals, built in about 3 months. A 60-truck client is piloting it to replace paper
+    \item Built a live fleet map and a day replay that splits each truck's GPS history into drives and stops
+    \item Built most of the merchant portal frontend, where stores connect Zid or Salla through OAuth, book shipments in a 6-step form with live rates, and buy shipping credit
+\end{itemize}
+
+\textbf{Software Engineering Intern,} \href{https://www.linkedin.com/company/sputnik-academy/}{Sputnik Academy}, Egypt (Remote) \hfill Mar 2025 -- Aug 2025 \\
+\vspace{-9pt}
+\begin{itemize}
+    \item Built the cart, coupons, and Paymob checkout for a course platform in a team of 4, pricing orders on the server and granting access only after a verified payment callback
+    \item Integrated Mux video streaming with signed playback tokens and per-lesson progress tracking
+\end{itemize}
+
+\vspace{-18.5pt}
+\section*{Projects}
+\textbf{Inscribe} \hfill \href{https://inscribe-notes.vercel.app/}{inscribe-notes.vercel.app} | \href{https://github.com/MahmoudOmiesh/Inscribe}{source} \\
+\vspace{-9pt}
+\begin{itemize}
+    \item Built a local-first Next.js note app that saves each edit with its pending sync operation in one IndexedDB transaction, so offline edits upload when the connection returns
+    \item Wrote its rich text editor without an editor library. It intercepts browser input and applies 20 edit types as transactions, with a cleanup pass that keeps nested lists valid
+\end{itemize}
+
+\vspace{-18.5pt}
+\section*{Skills}
+\textbf{Languages:} TypeScript, JavaScript, Python, Go, C++, SQL \\
+\textbf{Web:} React, Next.js, TanStack Start, TanStack Query, Tailwind CSS, i18next \\
+\textbf{Backend:} Node.js, PostgreSQL, tRPC, Hono, Drizzle, Prisma, Redis, Inngest, OpenTelemetry, Sentry \\
+\textbf{AI:} Claude API, Vercel AI SDK, Pinecone \\
+
+\vspace{-6.5pt}
+
+\section*{Education}
+\textbf{Tanta University} -- Bachelor of Computer Science \hfill Expected June 2027 \\
+Ranked first in class \hfill GPA 3.82/4.00 \\
+
+\end{document}
