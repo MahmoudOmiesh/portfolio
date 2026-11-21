@@ -16,7 +16,7 @@ Before editing files for a substantial task:
 # Portfolio
 
 - The résumé source is `resume/resume.tex`. Edit it here, not in Overleaf. `bun run resume` builds it into `public/resume.pdf` with tectonic, and the pre-commit hook does the same whenever the source is staged. Keep the `\ifPDFTeX` block: tectonic runs XeTeX, and `fontenc` there swaps XCharter for Computer Modern.
-- The hero is a pixel-art Nile scene drawn by `src/components/nile/scene.ts`, a pure renderer that follows the time in `profile.location`. `bun run og` renders `public/opengraph-image.png` from it at sunset, plus `public/favicon.svg` and `public/favicon.ico`, with headless Chrome and ImageMagick. Set `CHROME` to the binary when `chromium` is not on the path. Rerun it after changing the scene, the name or the role.
+- The hero is a pixel-art Nile scene drawn by `src/components/nile/scene.ts`, a pure renderer that follows the time in `profile.location`. `bun run og` renders `public/opengraph-image.png` from it at sunset with Satori, plus `public/favicon.svg` and `public/favicon.ico`. Rerun it after changing the scene, the name or the role.
 - Serve a build with `cd .output && NODE_ENV=production bun server/index.mjs`. Without `NODE_ENV=production` every page returns 500.
 - Don't change site copy unless asked.
 - Screenshots use made-up demo data, never real people or customers. Export them as webp at 2x.
