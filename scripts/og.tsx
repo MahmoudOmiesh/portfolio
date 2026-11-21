@@ -58,7 +58,7 @@ const card = await satori(
   { width: 1200, height: 630, fonts: [font(400), font(700)] },
 );
 
-writeFileSync("public/opengraph-image.png", new Resvg(card).render().asPng());
+writeFileSync("src/assets/opengraph-image.png", new Resvg(card).render().asPng());
 
 const crown = ["..XXX..", ".XXXXX.", "XX.X.XX", "X..X..X"];
 

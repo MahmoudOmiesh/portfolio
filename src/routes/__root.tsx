@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
 import { profile } from "@/content/profile";
 
+import ogImage from "../assets/opengraph-image.png?url";
 import appCss from "../styles.css?url";
 
 const { title, description } = profile.meta;
@@ -20,7 +21,7 @@ export const Route = createRootRoute({
       { name: "description", content: description },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: profile.name },
-      { property: "og:image", content: `${profile.url}/opengraph-image.png` },
+      { property: "og:image", content: `${profile.url}${ogImage}` },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { name: "twitter:card", content: "summary_large_image" },
