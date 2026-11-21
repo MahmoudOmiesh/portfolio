@@ -5,9 +5,11 @@ import type {} from "mdast-util-mdxjs-esm";
 import { toString } from "mdast-util-to-string";
 import { visit } from "unist-util-visit";
 
+export type Heading = { id: string; text: string };
+
 export function remarkHeadings() {
   return (tree: Root) => {
-    const headings: { id: string; text: string }[] = [];
+    const headings: Heading[] = [];
 
     visit(tree, "heading", (node) => {
       if (node.depth !== 2) return;
