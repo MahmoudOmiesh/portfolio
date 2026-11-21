@@ -38,9 +38,7 @@ function Home() {
               <Tile
                 key={story.slug}
                 to="/work/$slug"
-                slug={story.slug}
-                title={story.title}
-                cover={story.cover}
+                {...story}
                 loading={jobIndex === 0 && storyIndex === 0 ? "eager" : "lazy"}
               />
             ))}
@@ -51,7 +49,7 @@ function Home() {
       <Section id="projects" title="Projects" list="ul">
         {projects.map((project) => (
           <Row key={project.slug} heading={project.kind} details={[project.year]} description={project.summary}>
-            <Tile to="/projects/$slug" slug={project.slug} title={project.title} cover={project.cover} />
+            <Tile to="/projects/$slug" {...project} />
           </Row>
         ))}
       </Section>

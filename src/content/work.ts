@@ -1,10 +1,3 @@
-import * as FirstImpact from "./work/firstimpact.mdx";
-import * as FirstImpactReviewTool from "./work/firstimpact-review-tool.mdx";
-import * as Logibytes from "./work/logibytes.mdx";
-import * as Sputnik from "./work/sputnik.mdx";
-
-export type Article = typeof FirstImpact;
-
 export type Cover = {
   src: string;
   width: number;
@@ -17,7 +10,6 @@ type Story = {
   slug: string;
   title: string;
   cover: Cover;
-  article: Article;
 };
 
 type Job = {
@@ -48,7 +40,6 @@ export const jobs: Job[] = [
           position: "bottom",
           phone: { zoom: 3.2, origin: "0% 70%" },
         },
-        article: FirstImpact,
       },
       {
         slug: "firstimpact-review-tool",
@@ -60,7 +51,6 @@ export const jobs: Job[] = [
           position: "50% 92%",
           phone: { zoom: 1.6, origin: "0% 30%" },
         },
-        article: FirstImpactReviewTool,
       },
     ],
   },
@@ -76,7 +66,6 @@ export const jobs: Job[] = [
         slug: "logibytes",
         title: "The fleet and merchant portals",
         cover: { src: "/logibytes/live-map.webp", width: 2352, height: 1672, phone: { zoom: 2.2, origin: "0% 0%" } },
-        article: Logibytes,
       },
     ],
   },
@@ -97,12 +86,7 @@ export const jobs: Job[] = [
           position: "50% 4%",
           phone: { zoom: 1.45, origin: "90% 0%" },
         },
-        article: Sputnik,
       },
     ],
   },
 ];
-
-export const storiesBySlug = new Map<string, { story: Story; job: Job }>(
-  jobs.flatMap((job) => job.stories.map((story) => [story.slug, { story, job }])),
-);

@@ -1,5 +1,4 @@
-import * as Inscribe from "./projects/inscribe.mdx";
-import type { Article, Cover } from "./work";
+import type { Cover } from "./work";
 
 type Project = {
   slug: string;
@@ -8,7 +7,6 @@ type Project = {
   year: string;
   summary: string;
   cover: Cover;
-  article: Article;
 };
 
 export const projects: Project[] = [
@@ -19,8 +17,5 @@ export const projects: Project[] = [
     year: "2025",
     summary: "A local-first note-taking app, with a custom text editor",
     cover: { src: "/inscribe/cover.webp", width: 2400, height: 1500, phone: { zoom: 1.6, origin: "76% 30%" } },
-    article: Inscribe,
   },
 ];
-
-export const projectsBySlug = new Map(projects.map((project) => [project.slug, project]));

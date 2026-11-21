@@ -5,24 +5,13 @@ import { useEffect, useRef, useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { prose } from "@/components/work/prose";
 import { Tile } from "@/components/work/tile";
-import { caseStudies } from "@/content/case-studies";
+import { articles, type Article } from "@/content/articles";
+import { caseStudies, type CaseStudy } from "@/content/case-studies";
 import { profile } from "@/content/profile";
-import type { Article } from "@/content/work";
 
-export function StoryArticle({
-  slug,
-  title,
-  heading,
-  details,
-  article: { default: Content, headings },
-}: {
-  slug: string;
-  title: string;
-  heading: string;
-  details: string[];
-  article: Article;
-}) {
-  const next = caseStudies[(caseStudies.findIndex((study) => study.slug === slug) + 1) % caseStudies.length];
+export function StoryArticle({ study: { slug, path, title, heading, details } }: { study: CaseStudy }) {
+  const { default: Content, headings } = articles[`.${path}.mdx`];
+  const next = caseStudies[(caseStudies.findIndex((study) => study.path === path) + 1) % caseStudies.length];
 
   return (
     <article className="mx-auto max-w-5xl px-5 pt-6 sm:px-8 sm:pt-10">
@@ -49,8 +38,12 @@ export function StoryArticle({
           {details.map((detail) => (
             <p key={detail}>{detail}</p>
           ))}
-          <SectionNav headings={headings} />
-          <SectionMenu headings={headings} />
+          {headings.length > 0 && (
+            <>
+              <SectionNav headings={headings} />
+              <SectionMenu headings={headings} />
+            </>
+          )}
         </aside>
 
         <div className="text-lg text-foreground/80 md:col-span-2">
@@ -88,8 +81,6 @@ function SectionNav({ headings }: { headings: Article["headings"] }) {
     return () => window.removeEventListener("scroll", update);
   }, [headings]);
 
-  if (headings.length === 0) return null;
-
   return (
     <nav aria-label="Sections" className="mt-8 hidden md:block">
       <ul className="space-y-2 border-l">
@@ -111,8 +102,6 @@ function SectionNav({ headings }: { headings: Article["headings"] }) {
 
 function SectionMenu({ headings }: { headings: Article["headings"] }) {
   const ref = useRef<HTMLDetailsElement>(null);
-
-  if (headings.length === 0) return null;
 
   return (
     <details ref={ref} className="group mt-6 border-y md:hidden">
