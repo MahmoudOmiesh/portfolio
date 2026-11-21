@@ -1,16 +1,29 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
-const bayer = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5].map((value) => (value + 0.5) / 16);
+export type Frame<Props> = {
+  now: number;
+  elapsed: number;
+  pointer: { x: number; y: number } | undefined;
+  props: Props;
+};
 
-export const threshold = (x: number, y: number) => bayer[(y & 3) * 4 + (x & 3)];
+type Painter<Props> = { frame: (frame: Frame<Props>) => void; resize?: () => void };
 
-type Painter = { frame: (now: number) => void; dispose?: () => void };
+export const ease = (elapsed: number, duration: number) => 1 - Math.exp(-elapsed / duration);
 
-export function useCanvas(
-  setup: (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, still: boolean) => Painter,
+export function useCanvas<Props>(
+  setup: (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D) => Painter<Props>,
+  props: Props,
 ) {
   const ref = useRef<HTMLCanvasElement>(null);
-  const paint = useRef<(now: number) => void>(undefined);
+  const init = useRef(setup);
+  const latest = useRef(props);
+  const redraw = useRef<() => void>(undefined);
+
+  useEffect(() => {
+    latest.current = props;
+    redraw.current?.();
+  }, [props]);
 
   useEffect(() => {
     const canvas = ref.current;
@@ -18,32 +31,68 @@ export function useCanvas(
 
     if (!canvas || !context) return;
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const { frame, dispose } = setup(canvas, context, still);
+    const { frame, resize } = init.current(canvas, context);
+    let pointer: Frame<Props>["pointer"];
     let handle = 0;
+    let last = 0;
+
+    function draw(now: number) {
+      frame(
+        still
+          ? { now: 0, elapsed: Infinity, pointer, props: latest.current }
+          : { now, elapsed: Math.min(64, now - last), pointer, props: latest.current },
+      );
+      last = now;
+    }
 
     function loop(now: number) {
-      frame(now);
+      draw(now);
       handle = requestAnimationFrame(loop);
     }
 
-    const observer = new IntersectionObserver((entries) => {
+    function redrawStill() {
+      if (still) draw(performance.now());
+    }
+
+    function move(event: PointerEvent) {
+      pointer = { x: event.offsetX, y: event.offsetY };
+      redrawStill();
+    }
+
+    function leave() {
+      pointer = undefined;
+      redrawStill();
+    }
+
+    const intersection = new IntersectionObserver((entries) => {
       cancelAnimationFrame(handle);
 
       if (entries.at(-1)?.isIntersecting && !still) handle = requestAnimationFrame(loop);
     });
 
-    paint.current = frame;
-    frame(performance.now());
-    observer.observe(canvas);
+    const resizer = new ResizeObserver(() => {
+      resize?.();
+      draw(performance.now());
+    });
+
+    const minute = still ? setInterval(redrawStill, 60_000) : undefined;
+
+    redraw.current = redrawStill;
+    intersection.observe(canvas);
+    resizer.observe(canvas);
+    canvas.addEventListener("pointermove", move);
+    canvas.addEventListener("pointerleave", leave);
 
     return () => {
-      observer.disconnect();
+      intersection.disconnect();
+      resizer.disconnect();
       cancelAnimationFrame(handle);
-      dispose?.();
+      clearInterval(minute);
+      canvas.removeEventListener("pointermove", move);
+      canvas.removeEventListener("pointerleave", leave);
+      redraw.current = undefined;
     };
-  }, [setup]);
+  }, []);
 
-  const redraw = useCallback(() => paint.current?.(performance.now()), []);
-
-  return { ref, redraw };
+  return ref;
 }
